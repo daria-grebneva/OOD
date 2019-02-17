@@ -1,5 +1,6 @@
 #pragma once
 #include "Observer.h"
+#include "WindDirection.h"
 #include <algorithm>
 #include <climits>
 #include <iostream>
@@ -12,6 +13,8 @@ struct SWeatherInfo
 	double humidity = 0;
 	double pressure = 0;
 	std::string stationName;
+	double windSpeed = 0;
+	CWindDirection windDirection = 0;
 };
 
 class CDisplay : public IObserver<SWeatherInfo>
@@ -27,10 +30,13 @@ private:
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
+		std::cout << "Current Wind Speed " << data.windSpeed << std::endl;
+		std::cout << "Current Wind Direction " << data.windDirection << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 };
 
+template <class T>
 class CStats
 {
 
@@ -84,10 +90,17 @@ private:
 		humidifyData.Display();
 		std::cout << "Pressure: " << std::endl;
 		pressureData.Display();
+		std::cout << "Wind Speed: " << std::endl;
+		windSpeed.Display();
+		std::cout << "Wind Direction: " << std::endl;
+		windDirection.Display();
 	}
-	CStats temperatureData;
-	CStats humidifyData;
-	CStats pressureData;
+
+	CStats<double> temperatureData;
+	CStats<double> humidifyData;
+	CStats<double> pressureData;
+	CStats<double> windSpeed;
+	CStats<CWindDirection> windDirection;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
@@ -109,16 +122,28 @@ public:
 		return m_pressure;
 	}
 
+	double GetWindSpeed() const
+	{
+		return m_windSpeed;
+	}
+
+	CWindDirection GetWindDirection() const
+	{
+		return m_windDirection;
+	}
+
 	void MeasurementsChanged()
 	{
 		NotifyObservers();
 	}
 
-	void SetMeasurements(double temp, double humidity, double pressure)
+	void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, CWindDirection windDirection)
 	{
 		m_humidity = humidity;
 		m_temperature = temp;
 		m_pressure = pressure;
+		m_windSpeed = windSpeed;
+		m_windDirection = windDirection;
 
 		MeasurementsChanged();
 	}
@@ -141,6 +166,8 @@ protected:
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
 		info.stationName = GetStationName();
+		info.windSpeed = GetWindSpeed();
+		info.windDirection = GetWindDirection();
 		return info;
 	}
 
@@ -149,4 +176,6 @@ private:
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	std::string m_stationName;
+	double m_windSpeed = 0;
+	CWindDirection m_windDirection = 0;
 };

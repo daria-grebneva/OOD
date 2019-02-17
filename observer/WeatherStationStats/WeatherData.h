@@ -3,15 +3,15 @@
 #include <algorithm>
 #include <climits>
 #include <iostream>
+#include <string>
 #include <vector>
-
-using namespace std;
 
 struct SWeatherInfo
 {
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
+	std::string stationName;
 };
 
 class CDisplay : public IObserver<SWeatherInfo>
@@ -23,6 +23,7 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
+		std::cout << data.stationName << std::endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
@@ -76,6 +77,7 @@ private:
 		humidifyData.Update(data.humidity);
 		pressureData.Update(data.pressure);
 
+		std::cout << data.stationName << std::endl;
 		std::cout << "Temperature: " << std::endl;
 		temperatureData.Display();
 		std::cout << "Humidify: " << std::endl;
@@ -121,6 +123,16 @@ public:
 		MeasurementsChanged();
 	}
 
+	void SetStationName(std::string const& name)
+	{
+		m_stationName = name;
+	}
+
+	std::string GetStationName() const
+	{
+		return m_stationName;
+	}
+
 protected:
 	SWeatherInfo GetChangedData() const override
 	{
@@ -128,6 +140,7 @@ protected:
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
+		info.stationName = GetStationName();
 		return info;
 	}
 
@@ -135,4 +148,5 @@ private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
+	std::string m_stationName;
 };

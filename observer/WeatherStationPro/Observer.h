@@ -11,13 +11,10 @@
 передаваемого Наблюдателю в метод Update
 */
 template <typename T>
-class IObservable;
-
-template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data, const IObservable<T>& observable) = 0;
+	virtual void Update(T const& data) = 0;
 	virtual ~IObserver() = default;
 };
 
@@ -30,7 +27,7 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T>& observer, unsigned int priority = 0) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, unsigned int priority) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T>& observer) = 0;
 };
@@ -58,7 +55,7 @@ public:
 		auto priorities = m_priorities;
 		for (auto current : priorities)
 		{
-			(current.second)->Update(data, *this);
+			(current.second)->Update(data);
 		}
 	}
 
