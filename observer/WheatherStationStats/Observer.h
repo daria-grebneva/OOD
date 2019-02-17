@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <map>
 #include <set>
 
 /*
@@ -26,7 +27,7 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T>& observer) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, unsigned int priority = 0) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T>& observer) = 0;
 };
@@ -38,23 +39,37 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType& observer) override
+	void RegisterObserver(ObserverType& observer, unsigned int priority) override
 	{
-		m_observers.insert(&observer);
+		if (m_observers.count(&observer) > 0)
+		{
+			RemoveObserver(observer);
+		}
+		m_observers.emplace(&observer);
+		m_priorities.emplace(priority, &observer);
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		for (auto& observer : m_observers)
+		auto priorities = m_priorities;
+		for (auto current : priorities)
 		{
-			observer->Update(data);
+			(current.second)->Update(data);
 		}
 	}
 
 	void RemoveObserver(ObserverType& observer) override
 	{
 		m_observers.erase(&observer);
+		for (auto current : m_priorities)
+		{
+			if (current.second == &observer)
+			{
+				m_priorities.erase(current.first);
+				break;
+			}
+		}
 	}
 
 protected:
@@ -64,5 +79,5 @@ protected:
 
 private:
 	std::set<ObserverType*> m_observers;
+	std::multimap<unsigned int, ObserverType*> m_priorities;
 };
-#pragma once
