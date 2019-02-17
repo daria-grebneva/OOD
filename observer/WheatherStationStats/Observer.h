@@ -65,3 +65,4 @@ protected:
 private:
 	std::set<ObserverType*> m_observers;
 };
+#pragma once

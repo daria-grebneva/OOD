@@ -24,7 +24,7 @@
     <ClInclude Include="Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherData.h">
+    <ClInclude Include="WheatherData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
