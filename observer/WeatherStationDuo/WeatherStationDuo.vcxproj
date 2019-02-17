@@ -20,10 +20,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{8E2FFDBE-4F82-4AD2-999E-AEED62720DA6}</ProjectGuid>
+    <ProjectGuid>{8519A751-E335-405C-92F6-0A86B25AF78C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WheatherStationStats</RootNamespace>
+    <RootNamespace>WeatherStationDuo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>WeatherStationDuo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -150,7 +151,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="WheatherData.h" />
+    <ClInclude Include="WeatherData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
