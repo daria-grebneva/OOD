@@ -1,4 +1,7 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 class CWindDirection
 {
 public:
@@ -6,30 +9,21 @@ public:
 
 	CWindDirection(unsigned int direction)
 	{
-		if (direction > 360)
-		{
-			direction = direction % 360;
-		}
+		m_x += cos(direction * M_PI / 180);
+		m_y += sin(direction * M_PI / 180);
+		double deg = atan2(m_y, m_x) * 180 / M_PI;
 
-		m_direction = direction;
+		m_direction = (deg < 0) ? (360 + deg) : deg;
 	}
-
-	operator unsigned int() const
+	
+	operator double() const
 	{
 		return m_direction;
 	}
 
-	CWindDirection operator+(CWindDirection& second)
-	{
-		auto result = second.m_direction + this->m_direction;
-		if ((second.m_direction - this->m_direction) > 180
-			|| (this->m_direction - second.m_direction) > 180)
-		{
-			result = result - 180;
-		}
-		return result;
-	}
 
 private:
-	unsigned int m_direction = 0;
+	double m_x = 0;
+	double m_y = 0;
+	double m_direction = 0;
 };
