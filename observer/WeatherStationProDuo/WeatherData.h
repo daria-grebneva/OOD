@@ -75,20 +75,20 @@ private:
 	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo>& observable) override
 	{
 		temperatureData.Update(data.temperature);
-		humidifyData.Update(data.humidity);
+		humidityData.Update(data.humidity);
 		pressureData.Update(data.pressure);
 
 		std::cout << data.stationName << std::endl;
 		std::cout << "Temperature: " << std::endl;
 		temperatureData.Display();
-		std::cout << "Humidify: " << std::endl;
-		humidifyData.Display();
+		std::cout << "Humidity: " << std::endl;
+		humidityData.Display();
 		std::cout << "Pressure: " << std::endl;
 		pressureData.Display();
 	}
 
 	CStats<double> temperatureData;
-	CStats<double> humidifyData;
+	CStats<double> humidityData;
 	CStats<double> pressureData;
 };
 

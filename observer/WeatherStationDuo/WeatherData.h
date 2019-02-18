@@ -21,7 +21,7 @@ private:
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo>& observable) override
+	void Update(SWeatherInfo const& data) override
 	{
 		std::cout << data.stationName << std::endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
@@ -71,22 +71,22 @@ private:
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo>& observable) override
+	void Update(SWeatherInfo const& data) override
 	{
 		temperatureData.Update(data.temperature);
-		humidifyData.Update(data.humidity);
+		humidityData.Update(data.humidity);
 		pressureData.Update(data.pressure);
 
 		std::cout << data.stationName << std::endl;
 		std::cout << "Temperature: " << std::endl;
 		temperatureData.Display();
-		std::cout << "Humidify: " << std::endl;
-		humidifyData.Display();
+		std::cout << "Humidity: " << std::endl;
+		humidityData.Display();
 		std::cout << "Pressure: " << std::endl;
 		pressureData.Display();
 	}
 	CStats temperatureData;
-	CStats humidifyData;
+	CStats humidityData;
 	CStats pressureData;
 };
 

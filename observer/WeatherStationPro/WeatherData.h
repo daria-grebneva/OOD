@@ -79,15 +79,15 @@ private:
 	void Update(SWeatherInfo const& data) override
 	{
 		temperatureData.Update(data.temperature);
-		humidifyData.Update(data.humidity);
+		humidityData.Update(data.humidity);
 		pressureData.Update(data.pressure);
 		windSpeed.Update(data.windSpeed);
 		windDirection.Update(data.windDirection);
 
 		std::cout << "Temperature: " << std::endl;
 		temperatureData.Display();
-		std::cout << "Humidify: " << std::endl;
-		humidifyData.Display();
+		std::cout << "Humidity: " << std::endl;
+		humidityData.Display();
 		std::cout << "Pressure: " << std::endl;
 		pressureData.Display();
 		std::cout << "Wind Speed: " << std::endl;
@@ -96,7 +96,7 @@ private:
 		windDirection.Display();
 	}
 	CStats<double> temperatureData;
-	CStats<double> humidifyData;
+	CStats<double> humidityData;
 	CStats<double> pressureData;
 	CStats<double> windSpeed;
 	CStats<CWindDirection> windDirection;

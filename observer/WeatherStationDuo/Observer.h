@@ -10,14 +10,12 @@
 ѕараметром шаблона €вл€етс€ тип аргумента,
 передаваемого Ќаблюдателю в метод Update
 */
-template <typename T>
-class IObservable;
 
 template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data, const IObservable<T>& observable) = 0;
+	virtual void Update(T const& data) = 0;
 	virtual ~IObserver() = default;
 };
 
@@ -58,7 +56,7 @@ public:
 		auto priorities = m_priorities;
 		for (auto current : priorities)
 		{
-			(current.second)->Update(data, *this);
+			(current.second)->Update(data);
 		}
 	}
 
