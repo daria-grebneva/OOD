@@ -30,7 +30,7 @@
     <ClInclude Include="WeatherData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherDataProDuo.h">
+    <ClInclude Include="WeatherDataPro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

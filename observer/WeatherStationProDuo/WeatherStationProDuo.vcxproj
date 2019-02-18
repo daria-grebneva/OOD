@@ -151,7 +151,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WeatherData.h" />
-    <ClInclude Include="WeatherDataProDuo.h" />
+    <ClInclude Include="WeatherDataPro.h" />
     <ClInclude Include="WindDirection.h" />
   </ItemGroup>
   <ItemGroup>

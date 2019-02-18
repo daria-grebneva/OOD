@@ -1,23 +1,23 @@
 #pragma once
 #include "stdafx.h"
-#include "WindDirection.h"
 #include "Observer.h"
 #include "WeatherData.h"
+#include "WindDirection.h"
 
-struct SWeatherInfoProDuo : public SWeatherInfo
+struct SWeatherInfoPro : public SWeatherInfo
 {
 	double windSpeed = 0;
 	CWindDirection windDirection = 0;
 };
 
-class CDisplayProDuo : public IObserver<SWeatherInfoProDuo>
+class CDisplayPro : public IObserver<SWeatherInfoPro>
 {
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfoProDuo const& data, const IObservable<SWeatherInfoProDuo>& observable) override
+	void Update(SWeatherInfoPro const& data, const IObservable<SWeatherInfoPro>& observable) override
 	{
 		std::cout << data.stationName << std::endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
@@ -29,14 +29,14 @@ private:
 	}
 };
 
-class CStatsDisplayProDuo : public IObserver<SWeatherInfoProDuo>
+class CStatsDisplayPro : public IObserver<SWeatherInfoPro>
 {
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfoProDuo const& data, const IObservable<SWeatherInfoProDuo>& observable) override
+	void Update(SWeatherInfoPro const& data, const IObservable<SWeatherInfoPro>& observable) override
 	{
 		temperatureData.Update(data.temperature);
 		humidifyData.Update(data.humidity);
@@ -64,7 +64,7 @@ private:
 	CStats<CWindDirection> windDirection;
 };
 
-class CWeatherDataProDuo : public CObservable<SWeatherInfoProDuo>
+class CWeatherDataPro : public CObservable<SWeatherInfoPro>
 {
 public:
 	// Температура в градусах Цельсия
@@ -120,9 +120,9 @@ public:
 	}
 
 protected:
-	SWeatherInfoProDuo GetChangedData() const override
+	SWeatherInfoPro GetChangedData() const override
 	{
-		SWeatherInfoProDuo info;
+		SWeatherInfoPro info;
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
@@ -140,4 +140,3 @@ private:
 	double m_windSpeed = 0;
 	CWindDirection m_windDirection = 0;
 };
-
