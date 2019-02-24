@@ -51,9 +51,10 @@ public:
 	}
 	void Display()
 	{
-		std::cout << "	max : " << m_max << std::endl;
-		std::cout << "	min : " << m_min << std::endl;
-		std::cout << "	average : " << m_average << std::endl;
+		std::cout << "Max Temp " << m_max << std::endl;
+		std::cout << "Min Temp " << m_min << std::endl;
+		std::cout << "Average Temp " << m_average << std::endl;
+		std::cout << "----------------" << std::endl;
 	}
 
 private:
