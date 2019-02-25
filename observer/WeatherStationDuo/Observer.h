@@ -4,6 +4,10 @@
 #include <map>
 #include <set>
 
+
+template <typename T>
+class IObservable;
+
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс,
 желающий получать уведомления от соответствующего IObservable
@@ -14,7 +18,7 @@ template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data) = 0;
+	virtual void Update(T const& data, const IObservable<T>& obs) = 0;
 	virtual ~IObserver() = default;
 };
 
@@ -50,7 +54,7 @@ public:
 		auto priorities = m_priorities;
 		for (auto current : priorities)
 		{
-			(current.second)->Update(data);
+			(current.second)->Update(data, *this);
 		}
 	}
 
