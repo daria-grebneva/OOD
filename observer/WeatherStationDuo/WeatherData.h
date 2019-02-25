@@ -1,17 +1,9 @@
 #pragma once
 #include "Observer.h"
 #include "Stats.h"
+#include "WeatherInfo.h"
 #include <algorithm>
-#include <string>
 #include <vector>
-
-struct SWeatherInfo
-{
-	double temperature = 0;
-	double humidity = 0;
-	double pressure = 0;
-	std::string stationName;
-};
 
 class CWeatherData : public CObservable<SWeatherInfo>
 {
