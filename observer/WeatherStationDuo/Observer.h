@@ -4,7 +4,6 @@
 #include <map>
 #include <set>
 
-
 template <typename T>
 class IObservable;
 
