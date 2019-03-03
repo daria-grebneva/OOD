@@ -19,33 +19,29 @@ private:
 	{
 		if (&obs == &m_in) //сравнивать указания на один и тот же объект
 		{
-			inTemperatureData.Update(data.temperature);
-			inHumidityData.Update(data.humidity);
-			inPressureData.Update(data.pressure);
-
-			std::cout << data.stationName << std::endl;
-			std::cout << "Temperature: " << std::endl;
-			inTemperatureData.Display();
-			std::cout << "Humidity: " << std::endl;
-			inHumidityData.Display();
-			std::cout << "Pressure: " << std::endl;
-			inPressureData.Display();
+			ProcessData(inTemperatureData, inHumidityData, inPressureData, data);
 		}
 		else if (&obs == &m_out)
 		{
-			outTemperatureData.Update(data.temperature);
-			outHumidityData.Update(data.humidity);
-			outPressureData.Update(data.pressure);
-
-			std::cout << data.stationName << std::endl;
-			std::cout << "Temperature: " << std::endl;
-			outTemperatureData.Display();
-			std::cout << "Humidity: " << std::endl;
-			outHumidityData.Display();
-			std::cout << "Pressure: " << std::endl;
-			outPressureData.Display();
+			ProcessData(outTemperatureData, outHumidityData, outPressureData, data);
 		}
 	}
+
+	void ProcessData(CStats temperatureData, CStats humidityData, CStats pressureData, SWeatherInfo const& data)
+	{
+		temperatureData.Update(data.temperature);
+		humidityData.Update(data.humidity);
+		pressureData.Update(data.pressure);
+
+		std::cout << data.stationName << std::endl;
+		std::cout << "Temperature: " << std::endl;
+		temperatureData.Display();
+		std::cout << "Humidity: " << std::endl;
+		humidityData.Display();
+		std::cout << "Pressure: " << std::endl;
+		pressureData.Display();
+	}
+
 	CStats inTemperatureData;
 	CStats inHumidityData;
 	CStats inPressureData;
