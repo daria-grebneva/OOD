@@ -2,7 +2,7 @@
 #include "CondimentDecorator.h"
 #include "LiquorType.h"
 
-// Ликер
+// Сироп
 class CLiquor : public CCondimentDecorator
 {
 public:
