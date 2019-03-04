@@ -10,20 +10,20 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		temperatureData.Update(data.temperature);
-		humidityData.Update(data.humidity);
-		pressureData.Update(data.pressure);
+		m_temperatureData.Update(data.temperature);
+		m_humidityData.Update(data.humidity);
+		m_pressureData.Update(data.pressure);
 
 		std::cout << data.stationName << std::endl;
 		std::cout << "Temperature: " << std::endl;
-		temperatureData.Display();
+		m_temperatureData.Display();
 		std::cout << "Humidity: " << std::endl;
-		humidityData.Display();
+		m_humidityData.Display();
 		std::cout << "Pressure: " << std::endl;
-		pressureData.Display();
+		m_pressureData.Display();
 	}
 
-	CStats<double> temperatureData;
-	CStats<double> humidityData;
-	CStats<double> pressureData;
+	CStats<double> m_temperatureData;
+	CStats<double> m_humidityData;
+	CStats<double> m_pressureData;
 };

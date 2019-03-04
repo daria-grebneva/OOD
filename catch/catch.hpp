@@ -2254,7 +2254,7 @@ void handleExpression(ExprLhs<T> const& expr)
 	handleExpression(expr.makeUnaryExpr());
 }
 
-struct Decomposer
+struct stationNames
 {
 	template <typename T>
 	auto operator<=(T const& lhs) -> ExprLhs<T const&>
@@ -2562,7 +2562,7 @@ public:
 		INTERNAL_CATCH_TRY                                                                                                                                      \
 		{                                                                                                                                                       \
 			CATCH_INTERNAL_SUPPRESS_PARENTHESES_WARNINGS                                                                                                        \
-			catchAssertionHandler.handleExpr(Catch::Decomposer() <= __VA_ARGS__);                                                                               \
+			catchAssertionHandler.handleExpr(Catch::stationNames() <= __VA_ARGS__);                                                                               \
 			CATCH_INTERNAL_UNSUPPRESS_PARENTHESES_WARNINGS                                                                                                      \
 		}                                                                                                                                                       \
 		INTERNAL_CATCH_CATCH(catchAssertionHandler)                                                                                                             \

@@ -23,6 +23,7 @@ private:
 		std::cout << "Current Pressure " << data.pressure << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
+
 	CWeatherData& m_in;
 	CWeatherData& m_out;
 };

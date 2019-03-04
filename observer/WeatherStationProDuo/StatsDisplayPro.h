@@ -10,28 +10,28 @@ private:
 	*/
 	void Update(SWeatherInfoPro const& data) override
 	{
-		temperatureData.Update(data.temperature);
-		humidityData.Update(data.humidity);
-		pressureData.Update(data.pressure);
-		windSpeed.Update(data.windSpeed);
-		windDirection.Update(data.windDirection);
+		m_temperatureData.Update(data.temperature);
+		m_humidityData.Update(data.humidity);
+		m_pressureData.Update(data.pressure);
+		m_windSpeed.Update(data.windSpeed);
+		m_windDirection.Update(data.windDirection);
 
 		std::cout << data.stationName << std::endl;
 		std::cout << "Temperature: " << std::endl;
-		temperatureData.Display();
+		m_temperatureData.Display();
 		std::cout << "Humidity: " << std::endl;
-		humidityData.Display();
+		m_humidityData.Display();
 		std::cout << "Pressure: " << std::endl;
-		pressureData.Display();
+		m_pressureData.Display();
 		std::cout << "Wind Speed: " << std::endl;
-		windSpeed.Display();
+		m_windSpeed.Display();
 		std::cout << "Wind Direction: " << std::endl;
-		windDirection.Display();
+		m_windDirection.Display();
 	}
 
-	CStats<double> temperatureData;
-	CStats<double> humidityData;
-	CStats<double> pressureData;
-	CStats<double> windSpeed;
-	CStats<CWindDirection> windDirection;
+	CStats<double> m_temperatureData;
+	CStats<double> m_humidityData;
+	CStats<double> m_pressureData;
+	CStats<double> m_windSpeed;
+	CStats<CWindDirection> m_windDirection;
 };

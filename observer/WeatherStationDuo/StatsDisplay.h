@@ -19,11 +19,11 @@ private:
 	{
 		if (&obs == &m_in) //сравнивать указания на один и тот же объект
 		{
-			ProcessData(inTemperatureData, inHumidityData, inPressureData, data);
+			ProcessData(m_inTemperatureData, m_inHumidityData, m_inPressureData, data);
 		}
 		else if (&obs == &m_out)
 		{
-			ProcessData(outTemperatureData, outHumidityData, outPressureData, data);
+			ProcessData(m_outTemperatureData, m_outHumidityData, m_outPressureData, data);
 		}
 	}
 
@@ -42,13 +42,13 @@ private:
 		pressureData.Display();
 	}
 
-	CStats inTemperatureData;
-	CStats inHumidityData;
-	CStats inPressureData;
+	CStats m_inTemperatureData;
+	CStats m_inHumidityData;
+	CStats m_inPressureData;
 
-	CStats outTemperatureData;
-	CStats outHumidityData;
-	CStats outPressureData;
+	CStats m_outTemperatureData;
+	CStats m_outHumidityData;
+	CStats m_outPressureData;
 
 	CWeatherData& m_in;
 	CWeatherData& m_out;
