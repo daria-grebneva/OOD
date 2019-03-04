@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Beverage.h" />
     <ClInclude Include="Beverages.h" />
+    <ClInclude Include="BlackTea.h" />
     <ClInclude Include="Capuccino.h" />
     <ClInclude Include="Chocolate.h" />
     <ClInclude Include="ChocolateCrumbs.h" />
@@ -158,6 +159,8 @@
     <ClInclude Include="CondimentDecorator.h" />
     <ClInclude Include="Condiments.h" />
     <ClInclude Include="Cream.h" />
+    <ClInclude Include="GreenTea.h" />
+    <ClInclude Include="HerbalTea.h" />
     <ClInclude Include="IBeverage.h" />
     <ClInclude Include="IceCubes.h" />
     <ClInclude Include="IceCubeType.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="Milkshake.h" />
     <ClInclude Include="MilkshakePortionType.h" />
     <ClInclude Include="PortionType.h" />
+    <ClInclude Include="RedTea.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Syrup.h" />
     <ClInclude Include="SyrupType.h" />

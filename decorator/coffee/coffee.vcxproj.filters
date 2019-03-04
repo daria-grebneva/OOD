@@ -96,6 +96,18 @@
     <ClInclude Include="LiquorType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BlackTea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedTea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HerbalTea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenTea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

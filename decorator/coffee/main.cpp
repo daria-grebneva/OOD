@@ -149,16 +149,16 @@ void DialogWithUser()
 		switch (teaChoice)
 		{
 		case 1:
-			beverage = make_unique<CTea>(TeaSort::Red);
+			beverage = make_unique<CRedTea>();
 			break;
 		case 2:
-			beverage = make_unique<CTea>(TeaSort::Green);
+			beverage = make_unique<CGreenTea>();
 			break;
 		case 3:
-			beverage = make_unique<CTea>(TeaSort::Black);
+			beverage = make_unique<CBlackTea>();
 			break;
 		case 4:
-			beverage = make_unique<CTea>(TeaSort::Herbal);
+			beverage = make_unique<CHerbalTea>();
 			break;
 
 		default:
