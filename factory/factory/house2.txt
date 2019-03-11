@@ -1,0 +1,5 @@
+info
+rectangle 450 400 500 400 black black
+perimeter
+area
+draw

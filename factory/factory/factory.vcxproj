@@ -72,19 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\!sdk\SFML\include;E:\!sdk\boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\!sdk\SFML\lib\$(PlatformTarget);E:\!sdk\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\!sdk\SFML\include;E:\!sdk\boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\!sdk\SFML\lib\$(PlatformTarget);E:\!sdk\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\!sdk\boost_1_69_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\!sdk\boost_1_69_0\stage\x32;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\!sdk\SFML\include;E:\!sdk\boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\!sdk\SFML\lib\$(PlatformTarget);E:\!sdk\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\!sdk\boost_1_69_0\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\!sdk\boost_1_69_0\stage\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\!sdk\SFML\include;E:\!sdk\boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\!sdk\SFML\lib\$(PlatformTarget);E:\!sdk\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -94,11 +98,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\!sdk\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\!sdk\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -108,12 +118,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\!sdk\boost_1_69_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\!sdk\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\!sdk\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -125,13 +140,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\!sdk\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\!sdk\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -143,37 +164,63 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\!sdk\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\!sdk\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CCanvas.h" />
+    <ClInclude Include="CCircle.h" />
+    <ClInclude Include="CEllipse.h" />
+    <ClInclude Include="CLineSegment.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="CPainter.h" />
     <ClInclude Include="CPoint.h" />
+    <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="CShape.h" />
+    <ClInclude Include="CShapeFactory.h" />
+    <ClInclude Include="CSolidShape.h" />
+    <ClInclude Include="CTriangle.h" />
     <ClInclude Include="CUtils.h" />
-    <ClInclude Include="Designer.h" />
+    <ClInclude Include="CDesigner.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="ICanvasDrawable.h" />
+    <ClInclude Include="IPainter.h" />
+    <ClInclude Include="IShape.h" />
     <ClInclude Include="IShapeFactory.h" />
-    <ClInclude Include="PictureDraft.h" />
-    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ISolidShape.h" />
+    <ClInclude Include="CPictureDraft.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp" />
+    <ClCompile Include="CCircle.cpp" />
+    <ClCompile Include="CEllipse.cpp" />
+    <ClCompile Include="CLineSegment.cpp" />
+    <ClCompile Include="CPainter.cpp" />
     <ClCompile Include="CPoint.cpp" />
+    <ClCompile Include="CRectangle.cpp" />
+    <ClCompile Include="CShape.cpp" />
+    <ClCompile Include="CShapeFactory.cpp" />
+    <ClCompile Include="CSolidShape.cpp" />
+    <ClCompile Include="CTriangle.cpp" />
     <ClCompile Include="CUtils.cpp" />
-    <ClCompile Include="Designer.cpp" />
+    <ClCompile Include="CDesigner.cpp" />
     <ClCompile Include="ICanvasDrawable.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PictureDraft.cpp" />
-    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="CPictureDraft.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

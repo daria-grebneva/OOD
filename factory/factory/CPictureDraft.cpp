@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "PictureDraft.h"
+#include "CPictureDraft.h"
 using namespace std;
 
 bool CPictureDraft::IsEmpty() const

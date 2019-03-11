@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "Designer.h"
+#include "CDesigner.h"
+#include "CPictureDraft.h"
 #include "IShapeFactory.h"
-#include "PictureDraft.h"
 
 using namespace std;
 
