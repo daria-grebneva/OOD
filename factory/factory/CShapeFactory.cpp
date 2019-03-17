@@ -22,84 +22,7 @@ std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& descriptio
 	return std::unique_ptr<CShape>();
 }
 
-void CShapeFactory::ShowUsage(std::istream& args)
-{
-	std::cout << "To create a circle: " << CREATE_CIRCLE << "\n"
-			  << "To create a ellipse: " << CREATE_ELLIPSE << "\n"
-			  << "To create a rectangle: " << CREATE_RECTANGLE << "\n"
-			  << "To create a triangle: " << CREATE_TRIANGLE << "\n"
-			  << "To create a line: " << CREATE_LINE << "\n"
-			  << "To get min shape perimeter: " << GET_MIN_PERIMETER << "\n"
-			  << "To get max shape area: " << GET_MAX_AREA << "\n"
-			  << "To draw shapes: " << DRAW << "\n"
-			  << "To show usage: " << SHOW_USAGE << "\n";
-}
-
-void CShapeFactory::CheckIsEmptyShapesArray() const
-{
-	if (m_savedShapes.empty())
-	{
-		throw std::logic_error("Shapes array is empty");
-	}
-}
-
-void CShapeFactory::DrawShapes(std::istream&)
-{
-	CheckIsEmptyShapesArray();
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGTH), "Shapes");
-	CCanvas canvas(window);
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-		}
-		window.clear(sf::Color::White);
-		for (auto& shape : m_savedShapes)
-		{
-			shape->Draw(canvas);
-		}
-		window.display();
-	}
-}
-
-void CShapeFactory::GetMinPerimeterShape(std::istream& args) const
-{
-	CheckIsEmptyShapesArray();
-
-	auto it = std::min_element(m_savedShapes.begin(), m_savedShapes.end(),
-		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
-			return shape1->GetPerimeter() < shape2->GetPerimeter();
-		});
-
-	if (it != m_savedShapes.end())
-	{
-		std::cout << "MIN PERIMETER: " << std::endl;
-		std::cout << (*it)->ToString() << std::endl;
-	}
-}
-
-void CShapeFactory::GetMaxAreaShape(std::istream& args) const
-{
-	CheckIsEmptyShapesArray();
-
-	auto it = std::max_element(m_savedShapes.begin(), m_savedShapes.end(),
-		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
-			return shape1->GetArea() < shape2->GetArea();
-		});
-	if (it != m_savedShapes.end())
-	{
-		std::cout << "MAX AREA: " << std::endl;
-		std::cout << (*it)->ToString() << std::endl;
-	}
-}
-
-void CShapeFactory::CreateCircle(std::istream& args)
+std::unique_ptr<CCircle> CShapeFactory::CreateCircle(std::istream& args)
 {
 	Color fillColor;
 	Color outlineColor;
@@ -114,8 +37,7 @@ void CShapeFactory::CreateCircle(std::istream& args)
 			throw std::invalid_argument("Radius less than 0");
 		}
 
-		auto circlePtr = std::make_shared<CCircle>(center, radius, outlineColor, fillColor);
-		m_savedShapes.push_back(std::move(circlePtr));
+		return std::make_unique<CCircle>(center, radius, outlineColor, fillColor);
 	}
 	else
 	{
@@ -123,7 +45,7 @@ void CShapeFactory::CreateCircle(std::istream& args)
 	}
 }
 
-void CShapeFactory::CreateEllipse(std::istream& args)
+std::unique_ptr<CEllipse> CShapeFactory::CreateEllipse(std::istream& args)
 {
 	Color fillColor;
 	Color outlineColor;
@@ -139,8 +61,7 @@ void CShapeFactory::CreateEllipse(std::istream& args)
 			throw std::invalid_argument("Radius less than 0");
 		}
 
-		auto ellipsePtr = std::make_shared<CEllipse>(center, horizontalRadius, verticalRadius, outlineColor, fillColor);
-		m_savedShapes.push_back(std::move(ellipsePtr));
+		return std::make_unique<CEllipse>(center, horizontalRadius, verticalRadius, outlineColor, fillColor);
 	}
 	else
 	{
@@ -148,7 +69,7 @@ void CShapeFactory::CreateEllipse(std::istream& args)
 	}
 }
 
-void CShapeFactory::CreateLine(std::istream& args)
+std::unique_ptr<CLineSegment> CShapeFactory::CreateLine(std::istream& args)
 {
 	Color outlineColor;
 	CPoint start;
@@ -157,8 +78,7 @@ void CShapeFactory::CreateLine(std::istream& args)
 	if (args >> start.x >> start.y >> end.x >> end.y >> outlineColor)
 	{
 
-		auto linePtr = std::make_shared<CLineSegment>(start, end, outlineColor);
-		m_savedShapes.push_back(std::move(linePtr));
+		return std::make_unique<CLineSegment>(start, end, outlineColor);
 	}
 	else
 	{
@@ -166,7 +86,7 @@ void CShapeFactory::CreateLine(std::istream& args)
 	}
 }
 
-void CShapeFactory::CreateRectangle(std::istream& args)
+std::unique_ptr<CRectangle> CShapeFactory::CreateRectangle(std::istream& args)
 {
 	Color fillColor;
 	Color outlineColor;
@@ -186,8 +106,7 @@ void CShapeFactory::CreateRectangle(std::istream& args)
 			throw std::invalid_argument("Height less than 0");
 		}
 
-		auto rectanglePtr = std::make_shared<CRectangle>(leftTop, width, height, outlineColor, fillColor);
-		m_savedShapes.push_back(std::move(rectanglePtr));
+		return std::make_unique<CRectangle>(leftTop, width, height, outlineColor, fillColor);
 	}
 	else
 	{
@@ -195,7 +114,7 @@ void CShapeFactory::CreateRectangle(std::istream& args)
 	}
 }
 
-void CShapeFactory::CreateTriangle(std::istream& args)
+std::unique_ptr<CTriangle> CShapeFactory::CreateTriangle(std::istream& args)
 {
 	Color fillColor;
 	Color outlineColor;
@@ -205,8 +124,7 @@ void CShapeFactory::CreateTriangle(std::istream& args)
 
 	if (args >> vertex1.x >> vertex1.y >> vertex2.x >> vertex2.y >> vertex3.x >> vertex3.y >> outlineColor >> fillColor)
 	{
-		auto trianglePtr = std::make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
-		m_savedShapes.push_back(std::move(trianglePtr));
+		return std::make_unique<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
 	}
 	else
 	{
