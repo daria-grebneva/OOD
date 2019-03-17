@@ -51,7 +51,7 @@ void CCanvas::DrawEllipse(double left, double top, double width, double height, 
 	sf::CircleShape ellipse(horizontalRadius);
 	ellipse.setPosition(static_cast<float>(left), static_cast<float>(top));
 	ellipse.setOutlineColor(sf::Color(sf::Uint32(lineColor)));
-	ellipse.setOutlineThickness(1);
+	ellipse.setOutlineThickness(THICKNESS);
 	ellipse.setScale(1.f, verticalRadius / horizontalRadius);
 
 	m_window.draw(ellipse);
@@ -72,7 +72,9 @@ void CCanvas::FillEllipse(double left, double top, double width, double height, 
 	auto verticalRadius = static_cast<float>(height / 2.f);
 	sf::CircleShape ellipse(horizontalRadius);
 
-	ellipse.setPosition(static_cast<float>(left), static_cast<float>(top));
+	ellipse.setPosition(left, top);
 	ellipse.setFillColor(sf::Color(sf::Uint32(fillColor)));
+	ellipse.setScale(1.f, verticalRadius / horizontalRadius);
+
 	m_window.draw(ellipse);
 }

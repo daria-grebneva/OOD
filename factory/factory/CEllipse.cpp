@@ -30,6 +30,6 @@ void CEllipse::Draw(ICanvas& canvas) const
 {
 	auto width = m_horizontalRadius * 2.f;
 	auto height = m_verticalRadius * 2.f;
-	canvas.FillEllipse((m_center.x - m_horizontalRadius), (m_center.y - m_verticalRadius), width, height, CUtils::ColorToHex(GetFillColor()));
 	canvas.DrawEllipse((m_center.x - m_horizontalRadius), (m_center.y - m_verticalRadius), width, height, CUtils::ColorToHex(GetOutlineColor()));
+	canvas.FillEllipse((m_center.x - m_horizontalRadius), (m_center.y - m_verticalRadius), width, height, CUtils::ColorToHex(GetFillColor()));
 }

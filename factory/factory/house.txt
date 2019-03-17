@@ -28,4 +28,4 @@ line 720 569 890 569 brown
 line 720 570 890 570 brown
 line 720 571 890 571 brown
 regular-polygon 700 350 60 6 yellow yellow
-ellipse 400 400 30 5 black black
+ellipse 200 300 60 15 black black
