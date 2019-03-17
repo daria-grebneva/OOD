@@ -26,18 +26,6 @@ const double CEllipse::GetVerticalRadius() const
 	return m_verticalRadius;
 }
 
-std::string CEllipse::ToString() const
-{
-	std::ostringstream strm;
-	strm << std::fixed << std::setprecision(PRECISION);
-	strm << "perimeter:" << GetPerimeter() << " area:" << GetArea()
-		 << " fill color:" << GetFillColor() << " outline color:" << GetOutlineColor()
-		 << " center.x:" << m_center.x << " center.y:" << m_center.y
-		 << " horisontal radius:" << m_horizontalRadius << " vertical radius:" << m_verticalRadius << std::endl;
-
-	return strm.str();
-}
-
 void CEllipse::Draw(ICanvas& canvas) const
 {
 	auto width = m_horizontalRadius * 2.f;

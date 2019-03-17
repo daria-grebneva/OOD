@@ -10,6 +10,7 @@ enum class Color
 	BROWN,
 	LIGHT_BROWN,
 	LIGHT_BLUE,
+	YELLOW
 };
 
 const std::map<std::string, Color> STR_TO_COLOR = {
@@ -18,6 +19,7 @@ const std::map<std::string, Color> STR_TO_COLOR = {
 	{ "brown", Color::BROWN },
 	{ "light-brown", Color::LIGHT_BROWN },
 	{ "light-blue", Color::LIGHT_BLUE },
+	{ "yellow", Color::YELLOW },
 };
 
 const std::map<Color, std::string> COLOR_TO_STR = {
@@ -26,6 +28,7 @@ const std::map<Color, std::string> COLOR_TO_STR = {
 	{ Color::BROWN, "brown" },
 	{ Color::LIGHT_BROWN, "light-brown" },
 	{ Color::LIGHT_BLUE, "light-blue" },
+	{ Color::YELLOW, "yellow" },
 };
 
 inline std::istream& operator>>(std::istream& str, Color& color)

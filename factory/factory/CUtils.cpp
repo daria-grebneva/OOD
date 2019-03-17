@@ -24,6 +24,9 @@ const uint32_t CUtils::ColorToHex(const Color& str)
 	case (Color::LIGHT_BLUE):
 		color = "c6e5e5ff";
 		break;
+	case (Color::YELLOW):
+		color = "ffff00ff";
+		break;
 	default:
 		break;
 	}

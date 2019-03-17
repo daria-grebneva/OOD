@@ -45,11 +45,11 @@ void CCanvas::DrawCircle(const CPoint& center, double radius, uint32_t lineColor
 
 void CCanvas::DrawEllipse(double left, double top, double width, double height, uint32_t lineColor)
 {
-	double horizontalRadius = width / 2;
-	double verticalRadius = height / 2;
+	auto horizontalRadius = static_cast<float>(width / 2.f);
+	auto verticalRadius = static_cast<float>(height / 2.f);
 
 	sf::CircleShape ellipse(horizontalRadius);
-	ellipse.setPosition(left, top);
+	ellipse.setPosition(static_cast<float>(left), static_cast<float>(top));
 	ellipse.setOutlineColor(sf::Color(sf::Uint32(lineColor)));
 	ellipse.setOutlineThickness(1);
 	ellipse.setScale(1.f, verticalRadius / horizontalRadius);
@@ -68,11 +68,11 @@ void CCanvas::FillCircle(const CPoint& center, double radius, uint32_t fillColor
 
 void CCanvas::FillEllipse(double left, double top, double width, double height, uint32_t fillColor)
 {
-	double horizontalRadius = width / 2;
-	double verticalRadius = height / 2;
+	auto horizontalRadius = static_cast<float>(width / 2.f);
+	auto verticalRadius = static_cast<float>(height / 2.f);
 	sf::CircleShape ellipse(horizontalRadius);
 
-	ellipse.setPosition(left, top);
+	ellipse.setPosition(static_cast<float>(left), static_cast<float>(top));
 	ellipse.setFillColor(sf::Color(sf::Uint32(fillColor)));
 	m_window.draw(ellipse);
 }

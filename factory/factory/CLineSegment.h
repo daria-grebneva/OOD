@@ -8,9 +8,6 @@ class CLineSegment : public CShape
 public:
 	CLineSegment(const CPoint& start, const CPoint& end, const Color& color);
 	~CLineSegment() = default;
-	double GetArea() const override;
-	double GetPerimeter() const override;
-	std::string ToString() const override;
 	CPoint GetStartPoint() const;
 	CPoint GetEndPoint() const;
 	void Draw(ICanvas& canvas) const;

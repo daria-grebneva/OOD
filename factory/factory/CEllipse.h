@@ -11,7 +11,6 @@ public:
 	const CPoint GetCenter() const;
 	const double GetHorizontalRadius() const;
 	const double GetVerticalRadius() const;
-	std::string ToString() const override;
 	void Draw(ICanvas& canvas) const;
 
 private:

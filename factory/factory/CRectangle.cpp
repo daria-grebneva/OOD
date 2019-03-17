@@ -11,16 +11,6 @@ CRectangle::CRectangle(const CPoint& leftTop, double width, double height, const
 {
 }
 
-double CRectangle::GetArea() const
-{
-	return m_width * m_height;
-}
-
-double CRectangle::GetPerimeter() const
-{
-	return 2.0 * (m_width + m_height);
-}
-
 CPoint CRectangle::GetLeftTop() const
 {
 	return m_leftTop;
@@ -67,16 +57,4 @@ void CRectangle::Draw(ICanvas& canvas) const
 	canvas.DrawLine(points[1], points[2], outlineColor);
 	canvas.DrawLine(points[2], points[3], outlineColor);
 	canvas.DrawLine(points[3], points[0], outlineColor);
-}
-
-std::string CRectangle::ToString() const
-{
-	std::ostringstream strm;
-	strm << std::fixed << std::setprecision(PRECISION);
-	strm << "perimeter:" << GetPerimeter() << " area:" << GetArea()
-		 << " fill color:" << GetFillColor() << " outline color:" << GetOutlineColor()
-		 << " widht:" << m_width << " height:" << m_height
-		 << " left top vertex: { " << m_leftTop.x << ", " << m_leftTop.y << " }" << std::endl;
-
-	return strm.str();
 }

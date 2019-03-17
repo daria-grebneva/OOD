@@ -1,6 +1,6 @@
 #pragma once
-#include "IShape.h"
-class ISolidShape : public virtual IShape
+#include "CShape.h"
+class ISolidShape : public virtual CShape
 {
 public:
 	ISolidShape() = default;

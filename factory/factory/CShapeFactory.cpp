@@ -12,7 +12,7 @@ std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string& descriptio
 	auto it = m_action.find(action);
 	if (it != m_action.end())
 	{
-		it->second(stream);
+		return it->second(stream);
 	}
 	else
 	{
@@ -41,7 +41,24 @@ std::unique_ptr<CCircle> CShapeFactory::CreateCircle(std::istream& args)
 	}
 	else
 	{
-		throw std::invalid_argument("Incorrect argument for cicle creating");
+		throw std::invalid_argument("Incorrect argument for circle creating");
+	}
+}
+
+std::unique_ptr<CLineSegment> CShapeFactory::CreateLine(std::istream& args)
+{
+	Color outlineColor;
+	CPoint start;
+	CPoint end;
+
+	if (args >> start.x >> start.y >> end.x >> end.y >> outlineColor)
+	{
+
+		return std::make_unique<CLineSegment>(start, end, outlineColor);
+	}
+	else
+	{
+		throw std::invalid_argument("Incorrect argument for line creating");
 	}
 }
 
@@ -69,20 +86,22 @@ std::unique_ptr<CEllipse> CShapeFactory::CreateEllipse(std::istream& args)
 	}
 }
 
-std::unique_ptr<CLineSegment> CShapeFactory::CreateLine(std::istream& args)
+std::unique_ptr<CRegularPolygon> CShapeFactory::CreateRegularPolygon(std::istream& args)
 {
+	Color fillColor;
 	Color outlineColor;
-	CPoint start;
-	CPoint end;
+	CPoint center;
+	float radius;
+	size_t vertexCount;
 
-	if (args >> start.x >> start.y >> end.x >> end.y >> outlineColor)
+	if (args >> center.x >> center.y >> radius >> vertexCount >> outlineColor >> fillColor)
 	{
 
-		return std::make_unique<CLineSegment>(start, end, outlineColor);
+		return std::make_unique<CRegularPolygon>(center, radius, vertexCount, outlineColor, fillColor);
 	}
 	else
 	{
-		throw std::invalid_argument("Incorrect argument for line creating");
+		throw std::invalid_argument("Incorrect argument for regular polygon creating");
 	}
 }
 

@@ -1,12 +1,14 @@
 #pragma once
-#include "IShape.h"
+#include "Color.h"
+#include "ICanvas.h"
 
-class CShape : public virtual IShape
+class CShape
 {
 public:
 	CShape(const Color& color);
-	~CShape() = default;
-	Color GetOutlineColor() const override;
+	virtual ~CShape() = default;
+	Color GetOutlineColor() const;
+	virtual void Draw(ICanvas& canvas) const = 0;
 
 private:
 	Color m_outlineColor;

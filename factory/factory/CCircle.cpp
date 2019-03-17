@@ -10,16 +10,6 @@ CCircle::CCircle(const CPoint& center, double radius, const Color& outlineColor,
 {
 }
 
-double CCircle::GetArea() const
-{
-	return M_PI * pow(m_radius, QUADRATIC_DEGREE);
-}
-
-double CCircle::GetPerimeter() const
-{
-	return M_PI * m_radius;
-}
-
 CPoint CCircle::GetCenter() const
 {
 	return m_center;
@@ -28,18 +18,6 @@ CPoint CCircle::GetCenter() const
 double CCircle::GetRadius() const
 {
 	return m_radius;
-}
-
-std::string CCircle::ToString() const
-{
-	std::ostringstream strm;
-	strm << std::fixed << std::setprecision(PRECISION);
-	strm << "perimeter:" << GetPerimeter() << " area:" << GetArea()
-		 << " fill color:" << GetFillColor() << " outline color:" << GetOutlineColor()
-		 << " center.x:" << m_center.x << " center.y:" << m_center.y
-		 << " radius:" << m_radius << std::endl;
-
-	return strm.str();
 }
 
 void CCircle::Draw(ICanvas& canvas) const

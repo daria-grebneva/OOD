@@ -1,16 +1,14 @@
 #pragma once
 #include "CShape.h"
 #include "Color.h"
-#include "ISolidShape.h"
 
-class CSolidShape : public ISolidShape
-	, public CShape
+class CSolidShape : public CShape
 {
 public:
 	CSolidShape(const Color& outlineColor, const Color& fillColor);
 	virtual ~CSolidShape() = default;
-	Color GetOutlineColor() const override;
-	Color GetFillColor() const override;
+	Color GetOutlineColor() const;
+	Color GetFillColor() const;
 
 private:
 	Color m_fillColor;

@@ -3,8 +3,9 @@
 const std::string CREATE_CIRCLE = "circle";
 const std::string CREATE_RECTANGLE = "rectangle";
 const std::string CREATE_TRIANGLE = "triangle";
-const std::string CREATE_LINE = "line";
+const std::string CREATE_REGULAR_POLYGON = "regular-polygon";
 const std::string CREATE_ELLIPSE = "ellipse";
+const std::string CREATE_LINE = "line";
 const std::string GET_MIN_PERIMETER = "perimeter";
 const std::string GET_MAX_AREA = "area";
 const std::string DRAW = "draw";

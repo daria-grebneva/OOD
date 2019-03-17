@@ -1,4 +1,3 @@
-info
 rectangle 450 400 500 400 peach peach
 rectangle 850 230 50 150 brown brown
 triangle 385 450 715 200 1015 450 light-brown light-brown
@@ -9,7 +8,7 @@ circle 840 15 45 light-blue light-blue
 circle 890 10 45 light-blue light-blue
 rectangle 480 550 120 200 brown brown
 circle 575 645 7 peach black
-rectangle 720 530 170 130 peach peach
+rectangle 720 530 170 130 yellow yellow
 line 720 529 890 529 brown
 line 720 530 890 530 brown
 line 720 531 890 531 brown
@@ -28,6 +27,5 @@ line 811 660 811 530 brown
 line 720 569 890 569 brown
 line 720 570 890 570 brown
 line 720 571 890 571 brown
-perimeter
-area
-draw
+regular-polygon 700 350 60 6 yellow yellow
+ellipse 400 400 30 5 black black

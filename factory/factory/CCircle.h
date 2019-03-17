@@ -10,9 +10,6 @@ public:
 		const Color& outlineColor,
 		const Color& fillColor);
 	~CCircle() = default;
-	double GetArea() const override;
-	double GetPerimeter() const override;
-	std::string ToString() const override;
 	CPoint GetCenter() const;
 	double GetRadius() const;
 	void Draw(ICanvas& canvas) const;
