@@ -57,9 +57,9 @@ bool CInsertImageCommand::CheckWrongExtension(const std::string& extensionFile)
 	return (extensionFile != ".png" && extensionFile != ".jpg" && extensionFile != ".gif" && extensionFile != ".webp");
 }
 
-void CInsertImageCommand::SetImage(CHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& tmpDirectoryName)
+void CInsertImageCommand::SetImage(CHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& directory)
 {
-	boost::filesystem::path imagesDirectory = boost::filesystem::path(tmpDirectoryName);
+	boost::filesystem::path imagesDirectory = boost::filesystem::path(directory);
 	boost::filesystem::create_directory(imagesDirectory);
 
 	std::string extension = boost::filesystem::extension(path);
