@@ -10,7 +10,7 @@ CDeleteItemCommand::CDeleteItemCommand(std::vector<CDocumentItem>& items, size_t
 
 CDeleteItemCommand::~CDeleteItemCommand()
 {
-	/*auto image = m_item->GetImage();
+	auto image = m_item->GetImage();
 	if (m_executed && image)
 	{
 		boost::system::error_code errorCode;
@@ -19,7 +19,7 @@ CDeleteItemCommand::~CDeleteItemCommand()
 		{
 			std::cout << errorCode.message() << std::endl;
 		}
-	}*/
+	}
 }
 
 void CDeleteItemCommand::DoExecute()
