@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
-CResizeImageCommand::CResizeImageCommand(int& currentWidth, int width, int& currentHeight, int height)
+CResizeImageCommand::CResizeImageCommand(int& currentWidth, int& width, int& currentHeight, int& height)
 	: m_currentHeight(currentHeight)
 	, m_currentWidth(currentWidth)
 	, m_height(height)
@@ -11,8 +11,8 @@ CResizeImageCommand::CResizeImageCommand(int& currentWidth, int width, int& curr
 
 void CResizeImageCommand::DoExecute()
 {
-	m_currentHeight = m_height;
-	m_currentWidth = m_width;
+	std::swap(m_currentHeight, m_height);
+	std::swap(m_currentWidth, m_width);
 }
 
 void CResizeImageCommand::DoUnexecute()
