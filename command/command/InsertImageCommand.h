@@ -6,7 +6,7 @@
 class CInsertImageCommand : public CAbstractCommand
 {
 public:
-	CInsertImageCommand(CHistory& history, std::vector<CDocumentItem>& items, const boost::filesystem::path& path, int width, int height,
+	CInsertImageCommand(IHistory& history, std::vector<CDocumentItem>& items, const boost::filesystem::path& path, int width, int height,
 		const std::string& tmpDirectoryName,
 		boost::optional<size_t> position = boost::none);
 
@@ -20,5 +20,5 @@ private:
 	boost::optional<size_t> m_position;
 	std::shared_ptr<IImage> m_image;
 
-	void SetImage(CHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& tmpDirectoryName);
+	void SetImage(IHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& tmpDirectoryName);
 };

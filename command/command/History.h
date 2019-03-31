@@ -1,8 +1,7 @@
 #pragma once
+#include "IHistory.h"
 
-#include "ICommand_fwd.h"
-
-class CHistory
+class CHistory : public IHistory
 {
 public:
 	CHistory();

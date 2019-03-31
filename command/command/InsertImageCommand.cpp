@@ -2,7 +2,7 @@
 #include "InsertImageCommand.h"
 #include "Image.h"
 
-CInsertImageCommand::CInsertImageCommand(CHistory& history, std::vector<CDocumentItem>& items, const boost::filesystem::path& path, int width, int height, const std::string& tmpDirectoryName, boost::optional<size_t> position)
+CInsertImageCommand::CInsertImageCommand(IHistory& history, std::vector<CDocumentItem>& items, const boost::filesystem::path& path, int width, int height, const std::string& tmpDirectoryName, boost::optional<size_t> position)
 	: m_items(items)
 	, m_position(position)
 
@@ -57,7 +57,7 @@ bool CInsertImageCommand::CheckWrongExtension(const std::string& extensionFile)
 	return (extensionFile != ".png" && extensionFile != ".jpg" && extensionFile != ".gif" && extensionFile != ".webp");
 }
 
-void CInsertImageCommand::SetImage(CHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& directory)
+void CInsertImageCommand::SetImage(IHistory& history, const boost::filesystem::path& path, int width, int height, const std::string& directory)
 {
 	boost::filesystem::path imagesDirectory = boost::filesystem::path(directory);
 	boost::filesystem::create_directory(imagesDirectory);

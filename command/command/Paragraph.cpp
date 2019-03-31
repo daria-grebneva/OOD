@@ -3,7 +3,7 @@
 #include "ChangeStringCommand.h"
 #include "ParagraphImpl.h"
 
-CParagraph::CParagraph(CHistory& history, const std::string& text)
+CParagraph::CParagraph(IHistory& history, const std::string& text)
 	: m_history(history)
 	, m_text(text)
 {
