@@ -16,4 +16,6 @@ public:
 private:
 	std::deque<ICommandPtr> m_commands;
 	size_t m_nextCommandIndex = 0;
+
+	const size_t SIZE_DEPTH = 10;
 };

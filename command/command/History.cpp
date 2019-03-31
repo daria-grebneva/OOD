@@ -53,6 +53,12 @@ void CHistory::AddAndExecuteCommand(ICommandPtr&& command)
 		// резервируем место по добавляемую команду
 		m_commands.emplace_back(nullptr); // может выбросить исключение, но мы еще ничего не трогали
 
+		if (m_nextCommandIndex == SIZE_DEPTH)
+		{
+			m_commands.pop_front();
+			--m_nextCommandIndex;
+		}
+
 		try
 		{
 			command->Execute(); // может выбросить исключение
