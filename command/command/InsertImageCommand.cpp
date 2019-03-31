@@ -73,8 +73,8 @@ void CInsertImageCommand::SetImage(CHistory& history, const boost::filesystem::p
 	std::string fileName = boost::filesystem::unique_path().string() + extension;
 
 	boost::filesystem::path imagesPath = imagesDirectory.stem();
-	imagesPath = imagesPath / boost::filesystem::path(fileName);
+	imagesPath /= boost::filesystem::path(fileName);
 
-	boost::filesystem::copy_file(path, (imagesDirectory = imagesDirectory / boost::filesystem::path(fileName)));
-	m_image = std::make_shared<CImage>(history, imagesPath, width, height);
+	boost::filesystem::copy_file(path, (imagesDirectory /= boost::filesystem::path(fileName)));
+	m_image = std::make_shared<CImage>(history, imagesPath.generic_string(), width, height);
 }

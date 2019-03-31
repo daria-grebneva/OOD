@@ -22,11 +22,11 @@ private:
 	std::vector<CConstDocumentItem> m_items;
 
 	const std::vector<std::pair<std::string, std::string>> ESCAPES = {
+		{ "&", "&amp;" },
 		{ "\"", "&quot;" },
 		{ "\'", "&apos;" },
 		{ "<", "&lt;" },
 		{ ">", "&gt;" },
-		{ "&", "&amp;" },
 	};
 
 	void ProccessEscapes(std::string& text) const;
