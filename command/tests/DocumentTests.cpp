@@ -69,7 +69,7 @@ TEST_CASE("CDocument", "[CDocument]")
 	SECTION("check insert image")
 	{
 		CEditorList editor;
-		std::string path = ("E:/1.jpg");
+		std::string path = (IMAGE_PATH);
 		boost::algorithm::trim_left(path);
 		const boost::filesystem::path imgPath = boost::filesystem::path(path);
 		document.InsertImage(imgPath, 100, 100, 0);
@@ -204,7 +204,6 @@ TEST_CASE("CDocument", "[CDocument]")
 			std::cout << errorCode.message() << std::endl;
 		}
 	}
-
 
 	SECTION("check escapes on saving")
 	{
