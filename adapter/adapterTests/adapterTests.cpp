@@ -9,6 +9,7 @@ TEST_CASE("CModernRendererAdapter", "[CModernRendererAdapter]")
 		modern_graphics_lib::CModernGraphicsRenderer renderer(strstm);
 		app::CModernRendererAdapter adapter(renderer);
 
+		adapter.BeginDraw();
 		adapter.MoveTo(5, 15);
 
 		REQUIRE(strstm.str() == "<draw>\n");
@@ -20,9 +21,11 @@ TEST_CASE("CModernRendererAdapter", "[CModernRendererAdapter]")
 		modern_graphics_lib::CModernGraphicsRenderer renderer(strstm);
 		app::CModernRendererAdapter adapter(renderer);
 
+		adapter.BeginDraw();
 		adapter.MoveTo(5, 15);
 		adapter.LineTo(10, 30);
+		adapter.EndDraw();
 
-		REQUIRE(strstm.str() == "<draw>\n  <line fromX=\"5\" fromY=\"15\" toX=\"10\" toY=\"30\"/>\n");
+		REQUIRE(strstm.str() == "<draw>\n  <line fromX=\"5\" fromY=\"15\" toX=\"10\" toY=\"30\"/>\n</draw>\n");
 	}
 }

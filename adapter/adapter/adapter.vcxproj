@@ -73,26 +73,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>E:\!sdk\boost_1_66_0;E:\!sdk\SFML\include;$(LIB_PATH)boost_1_66_0;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\!sdk\boost_1_66_0\stage\lib;E:\!sdk\SFML\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\!sdk\boost_1_69_0;C:\!sdk\sfml\include;$(LIB_PATH)boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\!sdk\boost_1_69_0\stage\$(PlatformTarget);C:\!sdk\sfml\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>E:\!sdk\boost_1_66_0;E:\!sdk\SFML\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>E:\!sdk\boost_1_66_0\stage\lib;E:\!sdk\SFML\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\!sdk\boost_1_69_0;C:\!sdk\sfml\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\!sdk\boost_1_69_0\stage\$(PlatformTarget);C:\!sdk\sfml\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>E:\!sdk\boost_1_66_0;E:\!sdk\SFML\include;$(LIB_PATH)boost_1_66_0;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\!sdk\boost_1_66_0\stage\lib;E:\!sdk\SFML\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\!sdk\boost_1_69_0;C:\!sdk\sfml\include;$(LIB_PATH)boost_1_66_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\!sdk\boost_1_69_0\stage\$(PlatformTarget);C:\!sdk\sfml\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>E:\!sdk\boost_1_66_0;E:\!sdk\SFML\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>E:\!sdk\boost_1_66_0\stage\lib;E:\!sdk\SFML\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\!sdk\boost_1_69_0;C:\!sdk\sfml\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\!sdk\boost_1_69_0\stage\$(PlatformTarget);C:\!sdk\sfml\lib\$(PlatformTarget);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,7 +109,7 @@
       <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+      <Command>xcopy "C:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +127,7 @@
       <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+      <Command>xcopy "C:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,7 +149,7 @@
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+      <Command>xcopy "C:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -171,11 +171,16 @@
       <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "E:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
+      <Command>xcopy "C:\!sdk\SFML\bin\$(PlatformTarget)\$(Configuration)" "$(TargetDir)" /Y /E /I </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="adapter.h" />
+    <ClInclude Include="graphics_lib.h" />
+    <ClInclude Include="graphics_lib_pro.h" />
+    <ClInclude Include="modern_graphics_lib.h" />
+    <ClInclude Include="modern_graphics_lib_pro.h" />
+    <ClInclude Include="shape_drawing_lib.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -187,6 +192,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
