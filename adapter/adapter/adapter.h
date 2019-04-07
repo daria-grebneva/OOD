@@ -71,8 +71,11 @@ void PaintPictureOnModernGraphicsRenderer()
 	// Подсказка: используйте паттерн "Адаптер"
 
 	CModernRendererAdapter adapter(renderer);
+
 	shape_drawing_lib::CCanvasPainter painter(adapter);
 
+	adapter.BeginDraw();
 	PaintPicture(painter);
+	adapter.EndDraw();
 }
 } // namespace app
