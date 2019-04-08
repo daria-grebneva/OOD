@@ -1,72 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="graphics_lib::ICanvas" Collapsed="true">
-    <Position X="3" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="shape_drawing_lib::ICanvasDrawable">
-    <Position X="3.25" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="shape_drawing_lib::CTriangle">
-    <Position X="0.75" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAOAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="shape_drawing_lib::CRectangle">
-    <Position X="5.75" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAwABAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="shape_drawing_lib::CCanvasPainter">
-    <Position X="7.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAIAAAIAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="modern_graphics_lib::CModernGraphicsRenderer">
-    <Position X="7.75" Y="2.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>gAAABAAAAAAAAAQAAAABAAgAABAAAAAAAEAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="app::CModernRendererAdapter">
     <Position X="0.75" Y="1.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>gAAAEAAAAAAAAAAGAAABAAAAAAAIAAQAAAAAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="graphics_lib_pro::ICanvas">
-    <Position X="10" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAgAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="graphics_lib_pro::CCanvas">
-    <Position X="5.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAAAgAAAAAAAA=</HashCode>
-      <FileName>adapter.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="modern_graphics_lib_pro::CPoint">
-    <Position X="9.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
       <FileName>adapter.h</FileName>
     </TypeIdentifier>
   </Class>
