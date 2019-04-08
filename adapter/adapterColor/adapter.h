@@ -7,8 +7,8 @@
 // Пространство имен приложения (доступно для модификации)
 namespace app
 {
-class CModernRendererAdapter : public graphics_lib_pro::ICanvas,
-	private modern_graphics_lib_pro::CModernGraphicsRenderer
+class CModernRendererAdapter : public graphics_lib_pro::ICanvas
+	, private modern_graphics_lib_pro::CModernGraphicsRenderer
 {
 public:
 	CModernRendererAdapter(std::ostream& strm)
@@ -37,9 +37,9 @@ public:
 
 	void SetColor(uint32_t rgbColor) override
 	{
-		m_rgbColor.r = ((rgbColor >> 16) & 0xFF) / 255.f;
-		m_rgbColor.g = ((rgbColor >> 8) & 0xFF) / 255.f;
-		m_rgbColor.b = (rgbColor & 0xFF) / 255.f;
+		m_rgbColor.r = static_cast<float>(((rgbColor >> 16) & 0xFF) / 255.0);
+		m_rgbColor.g = static_cast<float>(((rgbColor >> 8) & 0xFF) / 255.0);
+		m_rgbColor.b = static_cast<float>((rgbColor & 0xFF) / 255.0);
 		m_rgbColor.a = 1.0;
 	}
 
