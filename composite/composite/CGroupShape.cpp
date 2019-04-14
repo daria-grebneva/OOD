@@ -19,7 +19,7 @@ CGroupShape::CGroupShape()
 			fun(*shape->GetLineStyle());
 		}
 	};
-	m_groupOutlineStyle = std::make_shared<CGroupLineStyle>(lineEnumerator);
+	m_groupLineStyle = std::make_shared<CGroupLineStyle>(lineEnumerator);
 
 }
 
@@ -66,12 +66,12 @@ void CGroupShape::SetFrame(const RectD & rect)
 
 std::shared_ptr<ILineStyle> CGroupShape::GetLineStyle()
 {
-	return m_groupOutlineStyle;
+	return m_groupLineStyle;
 }
 
 std::shared_ptr<const ILineStyle> CGroupShape::GetLineStyle() const
 {
-	return m_groupOutlineStyle;
+	return m_groupLineStyle;
 }
 
 std::shared_ptr<IStyle> CGroupShape::GetFillStyle()

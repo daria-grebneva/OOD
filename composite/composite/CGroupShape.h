@@ -1,5 +1,6 @@
 #pragma once
 #include "IGroupShape.h"
+#include "ILineStyle.h"
 #include "CGroupFillStyle.h"
 #include "CGroupLineStyle.h"
 
@@ -20,14 +21,15 @@ public:
 	std::shared_ptr<IGroupShape> GetGroup() override;
 	std::shared_ptr<const IGroupShape> GetGroup() const override;
 
-	size_t GetShapesCount()const;// override;
+	size_t GetShapesCount()const override;
 	void InsertShape(const std::shared_ptr<IShape> & shape, size_t position = std::numeric_limits<size_t>::max()) override;
 	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
-	void Draw(ICanvas & canvas)const override;
+	void Draw(ICanvas & canvas) const override;
+
 private:
 	std::vector<std::shared_ptr<IShape>> m_shapes;
 
 	std::shared_ptr<IStyle> m_groupFillStyle;
-	std::shared_ptr<ILineStyle> m_groupOutlineStyle;
+	std::shared_ptr<ILineStyle> m_groupLineStyle;
 };

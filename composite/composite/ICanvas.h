@@ -17,6 +17,6 @@ public:
 	//virtual void FillShape(std::vector<PointD> const& points) = 0;
 	//virtual void LineShape(std::vector<PointD> const& points) = 0;
 
-	virtual ~ICanvas() = 0;
+	//virtual ~ICanvas() = 0;
 
 };

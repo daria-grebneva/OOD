@@ -56,14 +56,6 @@ void CCanvas::DrawTriangle(PointD const& p1, PointD const& p2, PointD const& p3)
 	FillPolygon({p1 , p2, p3});
 }
 
-void CCanvas::DrawTriangle(PointD const& p1, PointD const& p2, PointD const& p3)
-{
-	DrawLine(p1, p2);
-	DrawLine(p2, p3);
-	DrawLine(p1, p3);
-	FillPolygon({ p1 , p2, p3 });
-}
-
 void CCanvas::DrawRectangle(PointD const& leftTop, double width, double height)
 {
 	std::vector<PointD> points = {
@@ -76,7 +68,7 @@ void CCanvas::DrawRectangle(PointD const& leftTop, double width, double height)
 	FillPolygon(points);
 
 	DrawLine(leftTop, { leftTop.x + width, leftTop.y });
-	DrawLine({ leftTop.x + width, leftTop.y }, { leftTop.x + width, leftTop.y + height };
+	DrawLine({ leftTop.x + width, leftTop.y }, { leftTop.x + width, leftTop.y + height });
 	DrawLine({ leftTop.x + width, leftTop.y + height }, { leftTop.x, leftTop.y + height });
 	DrawLine({ leftTop.x, leftTop.y + height }, leftTop);
 }

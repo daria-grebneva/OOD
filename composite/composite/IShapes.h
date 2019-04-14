@@ -3,6 +3,8 @@
 #include <memory>
 #include <limits>
 
+class IShape;
+
 class IShapes
 {
 public:

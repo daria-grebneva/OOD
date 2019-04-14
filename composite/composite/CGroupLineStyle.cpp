@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CGroupLineStyle.h"
+#include "CShape.h"
 
 
 CGroupLineStyle::CGroupLineStyle(LineEnumerator & enumerator)
@@ -36,7 +37,7 @@ void CGroupLineStyle::Enable(bool enable)
 
 boost::optional<RGBAColor> CGroupLineStyle::GetColor()const
 {
-	boost::optional<RGBAColor> color = RGBAColor{ 0x000000 };
+	boost::optional<RGBAColor> color = CShape::ColorToHex("0xFFFFFF");
 
 	auto callback = [&](ILineStyle& style) {
 		if (!color.is_initialized())

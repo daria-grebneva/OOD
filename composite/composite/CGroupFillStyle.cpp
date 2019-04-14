@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CGroupFillStyle.h"
+#include "CShape.h"
 
 
 CGroupFillStyle::CGroupFillStyle(FillEnumerator & enumerator)
@@ -34,7 +35,7 @@ void CGroupFillStyle::Enable(bool enable)
 
 boost::optional<RGBAColor> CGroupFillStyle::GetColor()const
 {
-	boost::optional<RGBAColor> color = RGBAColor{ 0x000000 };
+	boost::optional<RGBAColor> color = CShape::ColorToHex( "0xFFFFFF" );
 
 	auto callback = [&](IStyle& style) {
 		if (!color.is_initialized())

@@ -3,7 +3,7 @@
 
 CShape::CShape()
 	: m_fillStyle(std::make_shared<CFillStyle>(true, RGBAColor{ 0xFFFFFF }))
-	, m_lineStyle(std::make_shared<CLineStyle>(true, RGBAColor{ 0xFFFF00 }, 2.f))
+	, m_lineStyle(std::make_shared<CLineStyle>(true, RGBAColor{ 0xFFFF00 }, 2))
 {
 }
 
@@ -37,11 +37,35 @@ std::shared_ptr<const IGroupShape> CShape::GetGroup() const
 	return nullptr;
 }
 
+RGBAColor CShape::GetLineColor() const
+{
+	return (m_lineStyle->IsEnabled() ? m_lineStyle->GetColor().get() : ColorToHex("000000ff"));
+}
+
+RGBAColor CShape::GetFillColor() const
+{
+	return (m_fillStyle->IsEnabled() ? m_fillStyle->GetColor().get() : ColorToHex("000000ff"));
+}
+
+float CShape::GetLineThikness() const
+{
+	return (m_lineStyle->IsEnabled() ? m_lineStyle->GetLineThikness().get() : 0);
+}
+
 void CShape::Draw(ICanvas & canvas) const
 {
-	canvas.SetLineThickness(m_lineStyle->IsEnabled() ? m_lineStyle->GetLineThikness().get() : 0);
-	canvas.SetLineColor(m_lineStyle->IsEnabled() ? m_lineStyle->GetColor().get() : RGBAColor{ 0x000000 });
-	canvas.SetFillColor(m_fillStyle->IsEnabled() ? m_fillStyle->GetColor().get() : RGBAColor{ 0x000000 });
+	canvas.SetLineColor(GetLineColor());
+	canvas.SetFillColor(GetFillColor());
+	canvas.SetLineThickness(GetLineThikness());
 
-	DrawBehavior(canvas);
+	DrawFigure(canvas);
+}
+
+RGBAColor CShape::ColorToHex(const std::string color)
+{
+	uint32_t x;
+	std::stringstream ss;
+	ss << std::hex << color;
+	ss >> x;
+	return x;
 }
