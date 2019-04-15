@@ -23,14 +23,18 @@ void CCanvas::SetFillColor(RGBAColor const& color)
 
 void CCanvas::DrawLine(const PointD& startPoint, const PointD& endPoint)
 {
-	sf::Vertex vertices[] = {
-		sf::Vertex(sf::Vector2f(static_cast<float>(startPoint.x), static_cast<float>(startPoint.y)),
-		sf::Color(sf::Uint32(m_lineColor))),
+	for (size_t i = 0; i < m_lineThickness; ++i)
+	{
+		sf::Vertex vertices[] = {
+			sf::Vertex(sf::Vector2f(static_cast<float>(startPoint.x + i), static_cast<float>(startPoint.y + i)),
+				sf::Color(sf::Uint32(m_lineColor))),
 
-		sf::Vertex(sf::Vector2f(static_cast<float>(endPoint.x), static_cast<float>(endPoint.y)),
-		sf::Color(sf::Uint32(m_lineColor)))
-	};
-	m_window.draw(vertices, static_cast<size_t>(m_lineThickness), sf::Lines);
+			sf::Vertex(sf::Vector2f(static_cast<float>(endPoint.x + i), static_cast<float>(endPoint.y + i)),
+				sf::Color(sf::Uint32(m_lineColor)))
+		};
+
+		m_window.draw(vertices, static_cast<size_t>(m_lineThickness), sf::Lines);
+	}
 }
 
 void CCanvas::DrawEllipse(double left, double top, double width, double height)
@@ -53,7 +57,7 @@ void CCanvas::DrawTriangle(PointD const& p1, PointD const& p2, PointD const& p3)
 	DrawLine(p1, p2);
 	DrawLine(p2, p3);
 	DrawLine(p1, p3);
-	FillPolygon({p1 , p2, p3});
+	FillPolygon({ p1, p2, p3 });
 }
 
 void CCanvas::DrawRectangle(PointD const& leftTop, double width, double height)
