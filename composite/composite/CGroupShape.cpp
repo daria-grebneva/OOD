@@ -51,13 +51,36 @@ RectD CGroupShape::GetFrame()
 
 void CGroupShape::SetFrame(const RectD& rect)
 {
-	auto frame = GetFrame();
+	auto oldFrame = GetFrame();
 
 	for (auto& shape : m_shapes)
 	{
-		auto newFrame = shape->GetFrame();
-		shape->SetFrame({ rect.left + (newFrame.left - frame.left) / frame.width * rect.width, rect.top + (newFrame.top - frame.top) / frame.height * rect.height, newFrame.width * rect.width / frame.width, newFrame.height * rect.height / frame.height });
+		auto oldShapeFrame = shape->GetFrame();
+		shape->SetFrame({ GetNewLeftCoord(rect, oldShapeFrame, oldFrame),
+			GetNewTopCoord(rect, oldShapeFrame, oldFrame),
+			GetNewWidth(rect, oldShapeFrame, oldFrame),
+			GetNewHeight(rect, oldShapeFrame, oldFrame) });
 	}
+}
+
+double CGroupShape::GetNewLeftCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
+{
+	return (rect.left + ((oldShapeFrame.left - oldFrame.left) / oldFrame.width) * rect.width);
+}
+
+double CGroupShape::GetNewTopCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
+{
+	return (rect.top + ((oldShapeFrame.top - oldFrame.top) / oldFrame.height) * rect.height);
+}
+
+double CGroupShape::GetNewWidth(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
+{
+	return (oldShapeFrame.width * rect.width / oldFrame.width);
+}
+
+double CGroupShape::GetNewHeight(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
+{
+	return (oldShapeFrame.height * rect.height / oldFrame.height);
 }
 
 std::shared_ptr<ILineStyle> CGroupShape::GetLineStyle()
