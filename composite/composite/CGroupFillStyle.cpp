@@ -2,13 +2,12 @@
 #include "CGroupFillStyle.h"
 #include "CShape.h"
 
-
-CGroupFillStyle::CGroupFillStyle(FillEnumerator & enumerator)
-	: m_enumerator(enumerator)
+CGroupFillStyle::CGroupFillStyle(FillGroup& group)
+	: m_group(group)
 {
 }
 
-boost::optional<bool> CGroupFillStyle::IsEnabled()const
+boost::optional<bool> CGroupFillStyle::IsEnabled() const
 {
 	boost::optional<bool> isEnabled;
 
@@ -23,19 +22,19 @@ boost::optional<bool> CGroupFillStyle::IsEnabled()const
 		}
 	};
 
-	m_enumerator(callback);
+	m_group(callback);
 
 	return isEnabled;
 }
 
 void CGroupFillStyle::Enable(bool enable)
 {
-	m_enumerator([&](IStyle& style) { style.Enable(enable); });
+	m_group([&](IStyle& style) { style.Enable(enable); });
 }
 
-boost::optional<RGBAColor> CGroupFillStyle::GetColor()const
+boost::optional<RGBAColor> CGroupFillStyle::GetColor() const
 {
-	boost::optional<RGBAColor> color = CShape::ColorToHex( "0xFFFFFF" );
+	boost::optional<RGBAColor> color = CShape::ColorToHex("000000ff");
 
 	auto callback = [&](IStyle& style) {
 		if (!color.is_initialized())
@@ -44,12 +43,12 @@ boost::optional<RGBAColor> CGroupFillStyle::GetColor()const
 		}
 	};
 
-	m_enumerator(callback);
+	m_group(callback);
 
 	return color;
 }
 
 void CGroupFillStyle::SetColor(RGBAColor color)
 {
-	m_enumerator([&](IStyle& style) { style.SetColor(color); });
+	m_group([&](IStyle& style) { style.SetColor(color); });
 }

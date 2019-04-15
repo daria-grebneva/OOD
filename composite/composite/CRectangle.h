@@ -5,14 +5,13 @@
 class CRectangle : public CShape
 {
 public:
-	CRectangle(PointD const & leftTop, float width, float height);
+	CRectangle(PointD const& leftTop, double width, double height);
 	RectD GetFrame() override;
-	void SetFrame(const RectD & rect) override;
-	void DrawFigure(ICanvas & canvas) const override;
+	void SetFrame(const RectD& rect) override;
+	void DrawFigure(ICanvas& canvas) const override;
 
 private:
 	PointD m_leftTop;
-	float m_width;
-	float m_height;
+	double m_width;
+	double m_height;
 };
-

@@ -17,8 +17,6 @@ struct Point
 	T y;
 };
 
-
 typedef Rect<double> RectD;
 typedef uint32_t RGBAColor;
 typedef Point<double> PointD;
-

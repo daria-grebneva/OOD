@@ -2,13 +2,12 @@
 #include "CGroupLineStyle.h"
 #include "CShape.h"
 
-
-CGroupLineStyle::CGroupLineStyle(LineEnumerator & enumerator)
-	: m_enumerator(enumerator)
+CGroupLineStyle::CGroupLineStyle(LineGroup& group)
+	: m_group(group)
 {
 }
 
-boost::optional<bool> CGroupLineStyle::IsEnabled()const
+boost::optional<bool> CGroupLineStyle::IsEnabled() const
 {
 	boost::optional<bool> isEnabled;
 
@@ -23,21 +22,21 @@ boost::optional<bool> CGroupLineStyle::IsEnabled()const
 		}
 	};
 
-	m_enumerator(callback);
+	m_group(callback);
 
 	return isEnabled;
 }
 
 void CGroupLineStyle::Enable(bool enable)
 {
-	m_enumerator([&](ILineStyle& style) {
+	m_group([&](ILineStyle& style) {
 		style.Enable(enable);
 	});
 }
 
-boost::optional<RGBAColor> CGroupLineStyle::GetColor()const
+boost::optional<RGBAColor> CGroupLineStyle::GetColor() const
 {
-	boost::optional<RGBAColor> color = CShape::ColorToHex("0xFFFFFF");
+	boost::optional<RGBAColor> color = CShape::ColorToHex("000000ff");
 
 	auto callback = [&](ILineStyle& style) {
 		if (!color.is_initialized())
@@ -46,19 +45,22 @@ boost::optional<RGBAColor> CGroupLineStyle::GetColor()const
 		}
 	};
 
-	m_enumerator(callback);
+	m_group(callback);
 
 	return color;
 }
 
 void CGroupLineStyle::SetColor(RGBAColor color)
 {
-	m_enumerator([&](ILineStyle& style) {
-		style.SetColor(color);
+	m_group([&](ILineStyle& style) {
+		if (style.IsEnabled())
+		{
+			style.SetColor(CShape::ColorToHex("ffff00ff"));
+		}
 	});
 }
 
-boost::optional<float> CGroupLineStyle::GetLineThikness() const
+boost::optional<float> CGroupLineStyle::GetLineThiñkness() const
 {
 	boost::optional<float> outlineThikness;
 
@@ -67,20 +69,20 @@ boost::optional<float> CGroupLineStyle::GetLineThikness() const
 		{
 			outlineThikness = style.IsEnabled();
 		}
-		else if (outlineThikness != style.GetLineThikness())
+		else if (outlineThikness != style.GetLineThiñkness())
 		{
 			outlineThikness = boost::none;
 		}
 	};
 
-	m_enumerator(callback);
+	m_group(callback);
 
 	return outlineThikness;
 }
 
-void CGroupLineStyle::SetLineThikness(float thikness)
+void CGroupLineStyle::SetLineThiñkness(float thikness)
 {
-	m_enumerator([&](ILineStyle& style) {
-		style.SetLineThikness(thikness);
+	m_group([&](ILineStyle& style) {
+		style.SetLineThiñkness(thikness);
 	});
 }

@@ -1,20 +1,21 @@
 #pragma once
 #include "ILineStyle.h"
 
-typedef std::function<void(std::function<void(ILineStyle&)>)> LineEnumerator;
+typedef std::function<void(std::function<void(ILineStyle&)>)> LineGroup;
 
 class CGroupLineStyle : public ILineStyle
 {
 public:
-	CGroupLineStyle(LineEnumerator & enumerator);
-	boost::optional<bool> IsEnabled()const override;
+	CGroupLineStyle(LineGroup& group);
+	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
 
-	boost::optional<RGBAColor> GetColor()const override;
+	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
-	boost::optional<float> GetLineThikness() const override;
-	void SetLineThikness(float thikness) override;
+	boost::optional<float> GetLineThiñkness() const override;
+	void SetLineThiñkness(float thikness) override;
+
 private:
-	LineEnumerator & m_enumerator;
+	LineGroup& m_group;
 };

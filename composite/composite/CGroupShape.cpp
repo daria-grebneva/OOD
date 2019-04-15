@@ -1,33 +1,33 @@
 #include "stdafx.h"
 #include "CGroupShape.h"
-#include <functional>
 #include <algorithm>
+#include <functional>
 
 CGroupShape::CGroupShape()
 {
-	FillEnumerator fillStyleEnumerator = [this](std::function<void(IStyle&)> fun) {
-		for (auto && shape : m_shapes)
+	FillGroup fillStyleGroup = [this](std::function<void(IStyle&)> func) {
+		for (auto&& shape : m_shapes)
 		{
-			fun(*shape->GetFillStyle());
+			func(*shape->GetFillStyle());
 		}
 	};
-	m_groupFillStyle = std::make_shared<CGroupFillStyle>(fillStyleEnumerator);
 
-	LineEnumerator lineEnumerator = [this](std::function<void(ILineStyle&)> fun) {
-		for (auto && shape : m_shapes)
+	m_groupFillStyle = std::make_shared<CGroupFillStyle>(fillStyleGroup);
+
+	LineGroup lineStyleGroup = [this](std::function<void(ILineStyle&)> func) {
+		for (auto&& shape : m_shapes)
 		{
-			fun(*shape->GetLineStyle());
+			func(*shape->GetLineStyle());
 		}
 	};
-	m_groupLineStyle = std::make_shared<CGroupLineStyle>(lineEnumerator);
-
+	m_groupLineStyle = std::make_shared<CGroupLineStyle>(lineStyleGroup);
 }
 
 RectD CGroupShape::GetFrame()
 {
 	if (m_shapes.empty())
 	{
-		throw std::runtime_error("Coollection empty");
+		throw std::runtime_error("group is empty");
 	}
 
 	auto firstFrame = m_shapes.front()->GetFrame();
@@ -45,23 +45,19 @@ RectD CGroupShape::GetFrame()
 		maxX = std::max(maxX, frame.left + frame.width);
 		maxY = std::max(maxY, frame.top + frame.height);
 	}
+
 	return RectD{ minX, minY, maxX - minX, maxY - minY };
 }
 
-void CGroupShape::SetFrame(const RectD & rect)
+void CGroupShape::SetFrame(const RectD& rect)
 {
-	auto oldFrame = GetFrame();
+	auto frame = GetFrame();
 
-	for (auto & shape : m_shapes)
+	for (auto& shape : m_shapes)
 	{
-		auto shapeFrame = shape->GetFrame();
-		shape->SetFrame({ rect.left + (shapeFrame.left - oldFrame.left) / oldFrame.width * rect.width
-			, rect.top + (shapeFrame.top - oldFrame.top) / oldFrame.height * rect.height
-			, shapeFrame.width * rect.width / oldFrame.width
-			, shapeFrame.height * rect.height / oldFrame.height });
+		auto newFrame = shape->GetFrame();
+		shape->SetFrame({ rect.left + (newFrame.left - frame.left) / frame.width * rect.width, rect.top + (newFrame.top - frame.top) / frame.height * rect.height, newFrame.width * rect.width / frame.width, newFrame.height * rect.height / frame.height });
 	}
-
-
 }
 
 std::shared_ptr<ILineStyle> CGroupShape::GetLineStyle()
@@ -94,12 +90,12 @@ std::shared_ptr<const IGroupShape> CGroupShape::GetGroup() const
 	return std::make_shared<CGroupShape>(*this);
 }
 
-size_t CGroupShape::GetShapesCount()const
+size_t CGroupShape::GetShapesCount() const
 {
 	return m_shapes.size();
 }
 
-void CGroupShape::InsertShape(const std::shared_ptr<IShape> & shape, size_t position)
+void CGroupShape::InsertShape(const std::shared_ptr<IShape>& shape, size_t position)
 {
 	if (position >= GetShapesCount())
 	{
@@ -115,7 +111,7 @@ std::shared_ptr<IShape> CGroupShape::GetShapeAtIndex(size_t index)
 {
 	if (index >= GetShapesCount())
 	{
-		throw std::out_of_range("Index out of range");
+		throw std::out_of_range("shape out of range");
 	}
 	return m_shapes[index];
 }
@@ -124,13 +120,13 @@ void CGroupShape::RemoveShapeAtIndex(size_t index)
 {
 	if (index >= GetShapesCount())
 	{
-		throw std::out_of_range("Index out of range");
+		throw std::out_of_range("shape out of range");
 	}
 
 	m_shapes.erase(m_shapes.begin() + index);
 }
 
-void CGroupShape::Draw(ICanvas & canvas) const
+void CGroupShape::Draw(ICanvas& canvas) const
 {
 	for (auto const& shape : m_shapes)
 	{

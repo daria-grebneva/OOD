@@ -4,6 +4,6 @@
 class ILineStyle : public IStyle
 {
 public:
-	virtual boost::optional<float> GetLineThikness() const = 0;
-	virtual void SetLineThikness(float thikness) = 0;
+	virtual boost::optional<float> GetLineThiñkness() const = 0;
+	virtual void SetLineThiñkness(float thikness) = 0;
 };
