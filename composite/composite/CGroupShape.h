@@ -4,7 +4,7 @@
 #include "CGroupFillStyle.h"
 #include "CGroupLineStyle.h"
 
-class CGroupShape : public IGroupShape, std::enable_shared_from_this<CGroupShape>
+class CGroupShape : public IGroupShape
 {
 public:
 	CGroupShape();
