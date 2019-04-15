@@ -30,11 +30,11 @@ RectD CGroupShape::GetFrame()
 		throw std::runtime_error("group is empty");
 	}
 
-	auto firstFrame = m_shapes.front()->GetFrame();
-	double minX = firstFrame.left;
-	double minY = firstFrame.top;
-	double maxX = firstFrame.left + firstFrame.width;
-	double maxY = firstFrame.top + firstFrame.height;
+	auto frame = m_shapes.front()->GetFrame();
+	double minX = frame.left;
+	double minY = frame.top;
+	double maxX = frame.left + frame.width;
+	double maxY = frame.top + frame.height;
 
 	for (size_t i = 1; i < GetShapesCount(); ++i)
 	{
