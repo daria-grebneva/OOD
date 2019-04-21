@@ -100,7 +100,7 @@ void CMultiGumballMachine::RemoveQuarter()
 	{
 		--m_quartersCount;
 
-		std::cout << "Quarter returned\n";
+		m_out << "Quarter returned\n";
 	}
 }
 
