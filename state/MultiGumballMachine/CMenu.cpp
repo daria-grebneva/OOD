@@ -45,7 +45,7 @@ void CMenu::TurnCrank()
 
 void CMenu::ToString()
 {
-	m_GumballMachine->ToString();
+	std::cout << m_GumballMachine->ToString() << std::endl;
 	std::cout << m_out.str() << std::endl;
 }
 
