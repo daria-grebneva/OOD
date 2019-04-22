@@ -53,18 +53,22 @@ void CMultiGumballMachine::ReleaseBall()
 		--m_gumBallsCount;
 	}
 }
+
 void CMultiGumballMachine::SetSoldOutState()
 {
 	m_state = &m_soldOutState;
 }
+
 void CMultiGumballMachine::SetNoQuarterState()
 {
 	m_state = &m_noQuarterState;
 }
+
 void CMultiGumballMachine::SetSoldState()
 {
 	m_state = &m_soldState;
 }
+
 void CMultiGumballMachine::SetHasQuarterState()
 {
 	m_state = &m_hasQuarterState;
