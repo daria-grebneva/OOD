@@ -48,4 +48,8 @@ void CSoldOutState::Refill(unsigned gumBallsCount)
 	{
 		m_gumballMachine.SetNoQuarterState();
 	}
+	if (m_gumballMachine.GetQuartersCount() != 0)
+	{
+		m_gumballMachine.SetHasQuarterState();
+	}
 }

@@ -3,7 +3,7 @@
 
 using namespace std;
 CMenu::CMenu(std::stringstream& output)
-	: m_GumballMachine(make_unique<CMultiGumballMachine>(10, output))
+	: m_GumballMachine(make_unique<CMultiGumballMachine>(0, output))
 	, m_out(output)
 {
 	InitializeItems();

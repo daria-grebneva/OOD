@@ -105,7 +105,14 @@ public:
 	void Refill(unsigned numBalls)
 	{
 		m_gumBallsCount = numBalls;
-		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+		if (m_gumBallsCount > 0)
+		{
+			m_state = State::NoQuarter;
+		}
+		if (m_quartersCount > 0)
+		{
+			m_state = State::HasQuarter;
+		}
 	}
 
 	std::string ToString() const
