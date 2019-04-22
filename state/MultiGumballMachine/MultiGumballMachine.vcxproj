@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CHasQuarterState.h" />
+    <ClInclude Include="CMenu.h" />
     <ClInclude Include="CMultiGumballMachine.h" />
     <ClInclude Include="CNoQuarterState.h" />
     <ClInclude Include="CSoldOutState.h" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CHasQuarterState.cpp" />
+    <ClCompile Include="CMenu.cpp" />
     <ClCompile Include="CMultiGumballMachine.cpp" />
     <ClCompile Include="CNoQuarterState.cpp" />
     <ClCompile Include="CSoldOutState.cpp" />
