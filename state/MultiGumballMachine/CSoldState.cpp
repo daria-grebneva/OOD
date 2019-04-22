@@ -25,13 +25,8 @@ void CSoldState::TurnCrank()
 void CSoldState::Dispense()
 {
 	m_gumballMachine.ReleaseBall();
-	m_gumballMachine.RemoveQuarter();
 
-	if ((m_gumballMachine.GetBallCount() == 0) && (m_gumballMachine.GetQuartersCount() == 0))
-	{
-		m_gumballMachine.SetSoldOutState();
-	}
-	else if (m_gumballMachine.GetBallCount() == 0)
+	if (m_gumballMachine.GetBallCount() == 0)
 	{
 		m_out << "Oops, out of gumballs\n";
 		m_gumballMachine.SetSoldOutState();

@@ -31,6 +31,10 @@ void CHasQuarterState::EjectQuarter()
 void CHasQuarterState::TurnCrank()
 {
 	m_out << "You turned...\n";
+	if (m_gumballMachine.GetQuartersCount() != 0)
+	{
+		m_gumballMachine.RemoveQuarter();
+	}
 	m_gumballMachine.SetSoldState();
 }
 

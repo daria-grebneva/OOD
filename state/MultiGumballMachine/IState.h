@@ -9,5 +9,5 @@ struct IState
 	virtual void Dispense() = 0;
 	virtual std::string ToString() const = 0;
 	virtual ~IState() = default;
-	virtual void Refill(unsigned) = 0;
+	virtual void Refill(unsigned gumBallsCount) = 0;
 };

@@ -53,6 +53,7 @@ public:
 			while (m_quartersCount != 0)
 			{
 				RemoveQuarter();
+				m_out << "Quarter returned\n";
 			}
 
 			m_state = State::NoQuarter;
@@ -64,7 +65,18 @@ public:
 			m_out << "Sorry you already turned the crank\n";
 			break;
 		case State::SoldOut:
-			m_out << "You can't eject, you haven't inserted a quarter yet\n";
+			if (m_quartersCount == 0)
+			{
+				m_out << "You can't eject, you haven't inserted a quarter yet\n";
+			}
+			else
+			{
+				while (m_quartersCount != 0)
+				{
+					RemoveQuarter();
+					m_out << "Quarter returned\n";
+				}
+			}
 			break;
 		}
 	}
@@ -120,11 +132,7 @@ private:
 			--m_gumBallsCount;
 			RemoveQuarter();
 
-			if ((m_gumBallsCount == 0) && (m_quartersCount == 0))
-			{
-				m_state = State::SoldOut;
-			}
-			else if (m_gumBallsCount == 0)
+			if (m_gumBallsCount == 0)
 			{
 				m_out << "Oops, out of gumballs\n";
 				m_state = State::SoldOut;
@@ -167,8 +175,6 @@ private:
 		if (m_quartersCount != 0)
 		{
 			--m_quartersCount;
-
-			m_out << "Quarter returned\n";
 		}
 	}
 

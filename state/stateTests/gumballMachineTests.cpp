@@ -28,7 +28,77 @@ void CheckStateOutput(const CGumballMachine& machine, unsigned gumBalls, std::st
 
 std::string turnACrankState = "waiting for turn of crank";
 std::string soldOutState = "sold out";
-std::string quarterState = "waiting for quarter";
+std::string waitingQuarterState = "waiting for quarter";
+
+TEST_CASE("CNoQuarterState", "[CNoQuarterState]")
+{
+	std::stringstream out;
+	unsigned gumballsNumber = 10;
+
+	SECTION("check insert quarter")
+	{
+		CGumballMachine machine(gumballsNumber, out);
+		machine.InsertQuarter();
+		REQUIRE(out.str() == "You inserted a quarter\n");
+		CheckStateOutput(machine, gumballsNumber, turnACrankState);
+	}
+
+	SECTION("check eject quarter")
+	{
+		CGumballMachine machine(gumballsNumber, out);
+		machine.EjectQuarter();
+		REQUIRE(out.str() == "You haven't inserted a quarter\n");
+		CheckStateOutput(machine, gumballsNumber, waitingQuarterState);
+	}
+
+	SECTION("check turn crank")
+	{
+		CGumballMachine machine(gumballsNumber, out);
+		machine.TurnCrank();
+		REQUIRE(out.str() == "You turned but there's no quarter\nYou need to pay first\n");
+		CheckStateOutput(machine, gumballsNumber, waitingQuarterState);
+	}
+}
+
+TEST_CASE("CHasQuarterState", "[CHasQuarterState]")
+{
+	std::stringstream out;
+	unsigned gumballsNumber = 10;
+
+	CGumballMachine machine(gumballsNumber, out);
+	machine.InsertQuarter();
+
+	SECTION("check insert quarter")
+	{
+		machine.InsertQuarter();
+		REQUIRE(out.str() == "You inserted a quarter\nYou can't insert another quarter\n");
+		CheckStateOutput(machine, gumballsNumber, turnACrankState);
+	}
+
+	SECTION("check eject quarter")
+	{
+		machine.EjectQuarter();
+		REQUIRE(out.str() == "You inserted a quarter\nQuarter returned\n");
+		CheckStateOutput(machine, gumballsNumber, waitingQuarterState);
+	}
+
+	SECTION("check turn crank")
+	{
+		machine.TurnCrank();
+		REQUIRE(out.str() == "You inserted a quarter\nYou turned...\nA gumball comes rolling out the slot...\n");
+		CheckStateOutput(machine, gumballsNumber - 1, waitingQuarterState);
+	}
+
+	SECTION("check turn crank with a last gumball")
+	{
+		std::stringstream out;
+		CGumballMachine machine(1, out);
+		machine.InsertQuarter();
+		machine.TurnCrank();
+		REQUIRE(out.str() == "You inserted a quarter\nYou turned...\nA gumball comes rolling out the slot...\nOops, out of gumballs\n");
+		CheckStateOutput(machine, 0, soldOutState);
+	}
+}
 
 TEST_CASE("CSoldOutState", "[CSoldOutState]")
 {
@@ -57,65 +127,5 @@ TEST_CASE("CSoldOutState", "[CSoldOutState]")
 		machine.TurnCrank();
 		REQUIRE(out.str() == "You turned but there's no gumballs\nNo gumball dispensed\n");
 		CheckStateOutput(machine, gumballsNumber, soldOutState);
-	}
-}
-
-TEST_CASE("CNoQuarterState", "[CNoQuarterState]")
-{
-	std::stringstream out;
-	unsigned gumballsNumber = 10;
-
-	SECTION("check insert quarter")
-	{
-		CGumballMachine machine(gumballsNumber, out);
-		machine.InsertQuarter();
-		REQUIRE(out.str() == "You inserted a quarter\n");
-		CheckStateOutput(machine, gumballsNumber, turnACrankState);
-	}
-
-	SECTION("check eject quarter")
-	{
-		CGumballMachine machine(gumballsNumber, out);
-		machine.EjectQuarter();
-		REQUIRE(out.str() == "You haven't inserted a quarter\n");
-		CheckStateOutput(machine, gumballsNumber, quarterState);
-	}
-
-	SECTION("check turn crank")
-	{
-		CGumballMachine machine(gumballsNumber, out);
-		machine.TurnCrank();
-		REQUIRE(out.str() == "You turned but there's no quarter\nYou need to pay first\n");
-		CheckStateOutput(machine, gumballsNumber, quarterState);
-	}
-}
-
-TEST_CASE("CHasQuarterState", "[CHasQuarterState]")
-{
-	std::stringstream out;
-	unsigned gumballsNumber = 10;
-
-	CGumballMachine machine(gumballsNumber, out);
-	machine.InsertQuarter();
-
-	SECTION("check insert quarter")
-	{
-		machine.InsertQuarter();
-		REQUIRE(out.str() == "You inserted a quarter\nYou can't insert another quarter\n");
-		CheckStateOutput(machine, gumballsNumber, turnACrankState);
-	}
-
-	SECTION("check eject quarter")
-	{
-		machine.EjectQuarter();
-		REQUIRE(out.str() == "You inserted a quarter\nQuarter returned\n");
-		CheckStateOutput(machine, gumballsNumber, quarterState);
-	}
-
-	SECTION("check turn crank")
-	{
-		machine.TurnCrank();
-		REQUIRE(out.str() == "You inserted a quarter\nYou turned...\nA gumball comes rolling out the slot...\n");
-		CheckStateOutput(machine, gumballsNumber - 1, quarterState);
 	}
 }

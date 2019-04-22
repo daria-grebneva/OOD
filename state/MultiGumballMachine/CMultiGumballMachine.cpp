@@ -99,8 +99,6 @@ void CMultiGumballMachine::RemoveQuarter()
 	if (m_quartersCount != 0)
 	{
 		--m_quartersCount;
-
-		m_out << "Quarter returned\n";
 	}
 }
 

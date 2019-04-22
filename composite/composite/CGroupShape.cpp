@@ -20,6 +20,7 @@ CGroupShape::CGroupShape()
 			func(*shape->GetLineStyle());
 		}
 	};
+
 	m_groupLineStyle = std::make_shared<CGroupLineStyle>(lineStyleGroup);
 }
 
@@ -27,7 +28,7 @@ RectD CGroupShape::GetFrame()
 {
 	if (m_shapes.empty())
 	{
-		throw std::runtime_error("group is empty");
+		return RectD{ 0, 0, 0, 0 };
 	}
 
 	auto frame = m_shapes.front()->GetFrame();
