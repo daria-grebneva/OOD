@@ -1,12 +1,11 @@
 #pragma once
+#include "IShapes.h"
 #include "IStyle.h"
-
-typedef std::function<void(std::function<void(IStyle&)>)> FillGroup;
 
 class CGroupFillStyle : public IStyle
 {
 public:
-	CGroupFillStyle(FillGroup& group);
+	CGroupFillStyle(std::shared_ptr<const IShapes> m_shapes);
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
 
@@ -14,5 +13,5 @@ public:
 	void SetColor(RGBAColor color) override;
 
 private:
-	FillGroup& m_group;
+	std::shared_ptr<const IShapes> m_shapes;
 };

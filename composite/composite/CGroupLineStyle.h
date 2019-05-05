@@ -1,12 +1,11 @@
 #pragma once
 #include "ILineStyle.h"
-
-typedef std::function<void(std::function<void(ILineStyle&)>)> LineGroup;
+#include "IShapes.h"
 
 class CGroupLineStyle : public ILineStyle
 {
 public:
-	CGroupLineStyle(LineGroup& group);
+	CGroupLineStyle(std::shared_ptr<const IShapes> m_shapes);
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
 
@@ -17,5 +16,5 @@ public:
 	void SetLineThiñkness(float thikness) override;
 
 private:
-	LineGroup& m_group;
+	std::shared_ptr<const IShapes> m_shapes;
 };

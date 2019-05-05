@@ -2,8 +2,8 @@
 #include "CGroupLineStyle.h"
 #include "CShape.h"
 
-CGroupLineStyle::CGroupLineStyle(LineGroup& group)
-	: m_group(group)
+CGroupLineStyle::CGroupLineStyle(std::shared_ptr<const IShapes> shapes)
+	: m_shapes(move(shapes))
 {
 }
 
@@ -11,78 +11,113 @@ boost::optional<bool> CGroupLineStyle::IsEnabled() const
 {
 	boost::optional<bool> isEnabled;
 
-	auto callback = [&](ILineStyle& style) {
-		if (!isEnabled.is_initialized())
-		{
-			isEnabled = style.IsEnabled();
-		}
-		else if (isEnabled != style.IsEnabled())
-		{
-			isEnabled = boost::none;
-		}
-	};
+	auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
 
-	m_group(callback);
+	isEnabled = style->IsEnabled();
+	if (m_shapes->GetShapesCount() > 1)
+	{
+		for (int i = 1; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
+			if (style->IsEnabled() != isEnabled)
+			{
+				isEnabled = boost::none;
+				break;
+			}
+		}
+	}
 
 	return isEnabled;
 }
 
 void CGroupLineStyle::Enable(bool enable)
 {
-	m_group([&](ILineStyle& style) {
-		style.Enable(enable);
-	});
+	if (m_shapes->GetShapesCount() != 0)
+	{
+		for (int i = 0; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
+			style->Enable(true);
+		}
+	}
 }
 
 boost::optional<RGBAColor> CGroupLineStyle::GetColor() const
 {
 	boost::optional<RGBAColor> color = CShape::ColorToHex("000000ff");
 
-	auto callback = [&](ILineStyle& style) {
-		if (!color.is_initialized())
-		{
-			color = style.GetColor();
-		}
-	};
+	auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
 
-	m_group(callback);
+	if (style->IsEnabled())
+	{
+		color = style->GetColor();
+		if (m_shapes->GetShapesCount() > 1)
+		{
+			for (int i = 1; i < m_shapes->GetShapesCount(); i++)
+			{
+				auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
+
+				if (style->GetColor() != color || !style->IsEnabled())
+				{
+					color = boost::none;
+					break;
+				}
+			}
+		}
+	}
 
 	return color;
 }
 
 void CGroupLineStyle::SetColor(RGBAColor color)
 {
-	m_group([&](ILineStyle& style) {
-		if (style.IsEnabled())
+	if (m_shapes->GetShapesCount() != 0)
+	{
+		for (int i = 0; i < m_shapes->GetShapesCount(); i++)
 		{
-			style.SetColor(CShape::ColorToHex("ffff00ff"));
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			auto style = shape->GetLineStyle();
+			style->SetColor(color);
 		}
-	});
+	}
 }
 
 boost::optional<float> CGroupLineStyle::GetLineThiñkness() const
 {
 	boost::optional<float> outlineThikness;
 
-	auto callback = [&](ILineStyle& style) {
-		if (!outlineThikness.is_initialized())
-		{
-			outlineThikness = style.IsEnabled();
-		}
-		else if (outlineThikness != style.GetLineThiñkness())
-		{
-			outlineThikness = boost::none;
-		}
-	};
+	auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
 
-	m_group(callback);
+	if (style->IsEnabled())
+	{
+		outlineThikness = style->GetLineThiñkness();
+		if (m_shapes->GetShapesCount() > 1)
+		{
+			for (int i = 1; i < m_shapes->GetShapesCount(); i++)
+			{
+				auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
+
+				if (style->GetLineThiñkness() != outlineThikness || !style->IsEnabled())
+				{
+					outlineThikness = boost::none;
+					break;
+				}
+			}
+		}
+	}
 
 	return outlineThikness;
 }
 
 void CGroupLineStyle::SetLineThiñkness(float thikness)
 {
-	m_group([&](ILineStyle& style) {
-		style.SetLineThiñkness(thikness);
-	});
+	if (m_shapes->GetShapesCount() != 0)
+	{
+		for (int i = 0; i < m_shapes->GetShapesCount(); i++)
+		{
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			auto style = shape->GetLineStyle();
+			style->SetLineThiñkness(thikness);
+		}
+	}
 }

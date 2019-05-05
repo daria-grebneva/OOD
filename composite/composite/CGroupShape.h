@@ -1,6 +1,7 @@
 #pragma once
 #include "CGroupFillStyle.h"
 #include "CGroupLineStyle.h"
+#include "CShapes.h"
 #include "IGroupShape.h"
 #include "ILineStyle.h"
 
@@ -22,18 +23,18 @@ public:
 	std::shared_ptr<const IGroupShape> GetGroup() const override;
 
 	size_t GetShapesCount() const override;
-	void InsertShape(const std::shared_ptr<IShape>& shape, size_t position = std::numeric_limits<size_t>::max()) override;
-	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) override;
+	void InsertShape(const std::shared_ptr<IShape>& shape, size_t position) override;
+	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) const override;
 	void RemoveShapeAtIndex(size_t index) override;
 	void Draw(ICanvas& canvas) const override;
 
 private:
-	std::vector<std::shared_ptr<IShape>> m_shapes;
+	std::shared_ptr<CShapes> m_shapes;
 	std::shared_ptr<IStyle> m_groupFillStyle;
 	std::shared_ptr<ILineStyle> m_groupLineStyle;
 
-	double GetNewLeftCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
-	double GetNewTopCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
-	double GetNewWidth(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
-	double GetNewHeight(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
+	static double GetNewLeftCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
+	static double GetNewTopCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
+	static double GetNewWidth(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
+	static double GetNewHeight(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
 };
