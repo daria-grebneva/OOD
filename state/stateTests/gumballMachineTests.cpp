@@ -1,12 +1,4 @@
 #include "stdafx.h"
-#include "../state/CHasQuarterState.cpp"
-#include "../state/CHasQuarterState.h"
-#include "../state/CNoQuarterState.cpp"
-#include "../state/CNoQuarterState.h"
-#include "../state/CSoldOutState.cpp"
-#include "../state/CSoldOutState.h"
-#include "../state/CSoldState.cpp"
-#include "../state/CSoldState.h"
 #include "../state/GumBallMachineWithState.cpp"
 #include "../state/GumBallMachineWithState.h"
 

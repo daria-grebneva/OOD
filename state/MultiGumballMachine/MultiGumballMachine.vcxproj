@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CEditor.h" />
     <ClInclude Include="CHasQuarterState.h" />
     <ClInclude Include="CMenu.h" />
     <ClInclude Include="CMultiGumballMachine.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CEditor.cpp" />
     <ClCompile Include="CHasQuarterState.cpp" />
     <ClCompile Include="CMenu.cpp" />
     <ClCompile Include="CMultiGumballMachine.cpp" />

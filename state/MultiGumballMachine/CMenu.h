@@ -1,10 +1,8 @@
 #pragma once
-#include "CMultiGumballMachine.h"
 
 class CMenu
 {
 public:
-	CMenu(std::stringstream& output);
 	typedef std::function<void(std::istream& args)> Command;
 	void AddItem(const std::string& shortcut, const std::string& description, const Command& command);
 
@@ -16,12 +14,6 @@ public:
 
 private:
 	bool ExecuteCommand(const std::string& command);
-	void InitializeItems();
-	void InsertQuarter();
-	void EjectQuarter();
-	void TurnCrank();
-	void ToString();
-	void Refill(std::istream&);
 
 	struct Item
 	{
@@ -38,6 +30,4 @@ private:
 	};
 	std::vector<Item> m_items;
 	bool m_exit = false;
-	std::unique_ptr<CMultiGumballMachine> m_GumballMachine;
-	std::stringstream& m_out;
 };

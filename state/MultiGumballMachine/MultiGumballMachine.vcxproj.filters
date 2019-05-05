@@ -48,6 +48,9 @@
     <ClInclude Include="CMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
