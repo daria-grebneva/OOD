@@ -55,7 +55,7 @@ void CGroupLineStyle::SetColor(RGBAColor color)
 	}
 }
 
-boost::optional<float> CGroupLineStyle::GetLineThiñkness() const
+boost::optional<float> CGroupLineStyle::GetLineThickness() const
 {
 	boost::optional<float> outlineThikness;
 
@@ -63,13 +63,13 @@ boost::optional<float> CGroupLineStyle::GetLineThiñkness() const
 
 	if (style->IsEnabled())
 	{
-		outlineThikness = style->GetLineThiñkness();
+		outlineThikness = style->GetLineThickness();
 	}
 
 	return outlineThikness;
 }
 
-void CGroupLineStyle::SetLineThiñkness(float thikness)
+void CGroupLineStyle::SetLineThickness(float thikness)
 {
 	if (m_shapes->GetShapesCount() != 0)
 	{
@@ -77,7 +77,7 @@ void CGroupLineStyle::SetLineThiñkness(float thikness)
 		{
 			auto shape = m_shapes->GetShapeAtIndex(i);
 			auto style = shape->GetLineStyle();
-			style->SetLineThiñkness(thikness);
+			style->SetLineThickness(thikness);
 		}
 	}
 }

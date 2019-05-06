@@ -47,16 +47,16 @@ RGBAColor CShape::GetFillColor() const
 	return (m_fillStyle->IsEnabled() ? m_fillStyle->GetColor().get() : ColorToHex("000000ff"));
 }
 
-float CShape::GetLineThiñkness() const
+float CShape::GetLineThickness() const
 {
-	return (m_lineStyle->IsEnabled() ? m_lineStyle->GetLineThiñkness().get() : 0);
+	return (m_lineStyle->IsEnabled() ? m_lineStyle->GetLineThickness().get() : 0);
 }
 
 void CShape::Draw(ICanvas& canvas) const
 {
 	canvas.SetLineColor(GetLineColor());
 	canvas.SetFillColor(GetFillColor());
-	canvas.SetLineThickness(GetLineThiñkness());
+	canvas.SetLineThickness(GetLineThickness());
 
 	DrawFigure(canvas);
 }

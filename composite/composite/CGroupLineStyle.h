@@ -12,8 +12,8 @@ public:
 	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
-	boost::optional<float> GetLineThiñkness() const override;
-	void SetLineThiñkness(float thikness) override;
+	boost::optional<float> GetLineThickness() const override;
+	void SetLineThickness(float thikness) override;
 
 private:
 	std::shared_ptr<const IShapes> m_shapes;

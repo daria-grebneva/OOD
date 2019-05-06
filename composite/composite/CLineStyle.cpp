@@ -28,12 +28,12 @@ void CLineStyle::SetColor(RGBAColor color)
 	m_color = color;
 }
 
-boost::optional<float> CLineStyle::GetLineThiñkness() const
+boost::optional<float> CLineStyle::GetLineThickness() const
 {
 	return m_thickness;
 }
 
-void CLineStyle::SetLineThiñkness(float thikness)
+void CLineStyle::SetLineThickness(float thikness)
 {
 	m_thickness = thikness;
 }

@@ -29,5 +29,5 @@ private:
 	std::shared_ptr<ILineStyle> m_lineStyle;
 	RGBAColor GetLineColor() const;
 	RGBAColor GetFillColor() const;
-	float GetLineThiñkness() const;
+	float GetLineThickness() const;
 };

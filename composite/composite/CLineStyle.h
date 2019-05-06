@@ -13,8 +13,8 @@ public:
 	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
-	boost::optional<float> GetLineThiñkness() const;
-	void SetLineThiñkness(float thikness);
+	boost::optional<float> GetLineThickness() const;
+	void SetLineThickness(float thikness);
 
 private:
 	bool m_enable;
