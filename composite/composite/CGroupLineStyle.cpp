@@ -13,21 +13,7 @@ boost::optional<bool> CGroupLineStyle::IsEnabled() const
 
 	auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
 
-	isEnabled = style->IsEnabled();
-	if (m_shapes->GetShapesCount() > 1)
-	{
-		for (int i = 1; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
-			if (style->IsEnabled() != isEnabled)
-			{
-				isEnabled = boost::none;
-				break;
-			}
-		}
-	}
-
-	return isEnabled;
+	return style->IsEnabled();
 }
 
 void CGroupLineStyle::Enable(bool enable)
@@ -51,19 +37,6 @@ boost::optional<RGBAColor> CGroupLineStyle::GetColor() const
 	if (style->IsEnabled())
 	{
 		color = style->GetColor();
-		if (m_shapes->GetShapesCount() > 1)
-		{
-			for (int i = 1; i < m_shapes->GetShapesCount(); i++)
-			{
-				auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
-
-				if (style->GetColor() != color || !style->IsEnabled())
-				{
-					color = boost::none;
-					break;
-				}
-			}
-		}
 	}
 
 	return color;
@@ -91,19 +64,6 @@ boost::optional<float> CGroupLineStyle::GetLineThiñkness() const
 	if (style->IsEnabled())
 	{
 		outlineThikness = style->GetLineThiñkness();
-		if (m_shapes->GetShapesCount() > 1)
-		{
-			for (int i = 1; i < m_shapes->GetShapesCount(); i++)
-			{
-				auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
-
-				if (style->GetLineThiñkness() != outlineThikness || !style->IsEnabled())
-				{
-					outlineThikness = boost::none;
-					break;
-				}
-			}
-		}
 	}
 
 	return outlineThikness;

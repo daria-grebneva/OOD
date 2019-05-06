@@ -36,10 +36,4 @@ void CTriangle::SetFrame(const RectD& rect)
 void CTriangle::DrawFigure(ICanvas& canvas) const
 {
 	canvas.DrawTriangle(m_p1, m_p2, m_p3);
-	//canvas.FillPolygon(points, CUtils::ColorToHex(GetFillColor()));
-
-	//uint32_t outlineColor = CUtils::ColorToHex(GetOutlineColor());
-	//canvas.DrawLine(points[0], points[1], outlineColor);
-	//canvas.DrawLine(points[1], points[2], outlineColor);
-	//canvas.DrawLine(points[0], points[2], outlineColor);
 }

@@ -13,21 +13,7 @@ boost::optional<bool> CGroupFillStyle::IsEnabled() const
 
 	auto style = m_shapes->GetShapeAtIndex(0)->GetFillStyle();
 
-	isEnabled = style->IsEnabled();
-	if (m_shapes->GetShapesCount() > 1)
-	{
-		for (int i = 1; i < m_shapes->GetShapesCount(); i++)
-		{
-			auto style = m_shapes->GetShapeAtIndex(0)->GetFillStyle();
-			if (style->IsEnabled() != isEnabled)
-			{
-				isEnabled = boost::none;
-				break;
-			}
-		}
-	}
-
-	return isEnabled;
+	return style->IsEnabled();
 }
 
 void CGroupFillStyle::Enable(bool enable)
@@ -50,19 +36,6 @@ boost::optional<RGBAColor> CGroupFillStyle::GetColor() const
 	if (style->IsEnabled())
 	{
 		color = style->GetColor();
-		if (m_shapes->GetShapesCount() > 1)
-		{
-			for (int i = 1; i < m_shapes->GetShapesCount(); i++)
-			{
-				auto style = m_shapes->GetShapeAtIndex(0)->GetFillStyle();
-
-				if (style->GetColor() != color || !style->IsEnabled())
-				{
-					color = boost::none;
-					break;
-				}
-			}
-		}
 	}
 
 	return color;
