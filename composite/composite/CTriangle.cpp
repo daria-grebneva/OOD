@@ -21,16 +21,17 @@ RectD CTriangle::GetFrame()
 
 void CTriangle::SetFrame(const RectD& rect)
 {
-	const auto oldFrame = GetFrame();
-	auto SetNewPoint = [&](PointD& point) {
-		double scaleX = (point.x - oldFrame.left) / oldFrame.width;
-		double scaleY = (point.y - oldFrame.top) / oldFrame.height;
-		point = PointD{ rect.left + rect.width * scaleX, rect.top + rect.height * scaleY };
-	};
+	UpdatePoint(m_p1, rect);
+	UpdatePoint(m_p2, rect);
+	UpdatePoint(m_p3, rect);
+}
 
-	SetNewPoint(m_p1);
-	SetNewPoint(m_p2);
-	SetNewPoint(m_p3);
+void CTriangle::UpdatePoint(PointD& point, const RectD& newFrame)
+{
+	const auto oldFrame = GetFrame();
+	double scaleX = (point.x - oldFrame.left) / oldFrame.width;
+	double scaleY = (point.y - oldFrame.top) / oldFrame.height;
+	point = PointD{ newFrame.left + newFrame.width * scaleX, newFrame.top + newFrame.height * scaleY };
 }
 
 void CTriangle::DrawFigure(ICanvas& canvas) const
