@@ -43,7 +43,7 @@ void CGroupShape::SetFrame(const RectD& rect)
 {
 	auto oldFrame = GetFrame();
 
-	for (int i = 0; i < m_shapes->GetShapesCount(); i++)
+	for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
 	{
 		auto shape = m_shapes->GetShapeAtIndex(i);
 		auto oldShapeFrame = shape->GetFrame();
@@ -126,7 +126,7 @@ void CGroupShape::RemoveShapeAtIndex(size_t index)
 
 void CGroupShape::Draw(ICanvas& canvas) const
 {
-	for (int i = 0; i < m_shapes->GetShapesCount(); i++)
+	for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
 	{
 		auto shape = m_shapes->GetShapeAtIndex(i);
 		shape->Draw(canvas);
