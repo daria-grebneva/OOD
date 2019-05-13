@@ -33,6 +33,7 @@ private:
 	std::shared_ptr<CShapes> m_shapes;
 	std::shared_ptr<IStyle> m_groupFillStyle;
 	std::shared_ptr<ILineStyle> m_groupLineStyle;
+	static bool IsNullFrame(const RectD& frame);
 
 	static double GetNewLeftCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);
 	static double GetNewTopCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame);

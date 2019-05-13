@@ -21,14 +21,14 @@ RectD CTriangle::GetFrame()
 
 void CTriangle::SetFrame(const RectD& rect)
 {
-	UpdatePoint(m_p1, rect);
-	UpdatePoint(m_p2, rect);
-	UpdatePoint(m_p3, rect);
+	const auto oldFrame = GetFrame();
+	UpdatePoint(m_p1, rect, oldFrame);
+	UpdatePoint(m_p2, rect, oldFrame);
+	UpdatePoint(m_p3, rect, oldFrame);
 }
 
-void CTriangle::UpdatePoint(PointD& point, const RectD& newFrame)
+void CTriangle::UpdatePoint(PointD& point, const RectD& newFrame, const RectD& oldFrame)
 {
-	const auto oldFrame = GetFrame();
 	double scaleX = (point.x - oldFrame.left) / oldFrame.width;
 	double scaleY = (point.y - oldFrame.top) / oldFrame.height;
 	point = PointD{ newFrame.left + newFrame.width * scaleX, newFrame.top + newFrame.height * scaleY };
