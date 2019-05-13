@@ -8,7 +8,6 @@ size_t CShapes::GetShapesCount() const
 
 void CShapes::InsertShape(const std::shared_ptr<IShape>& shape, size_t position)
 {
-	std::cout << position << std::endl;
 	if (position >= GetShapesCount())
 	{
 		m_shapes.push_back(shape);
