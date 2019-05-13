@@ -40,7 +40,8 @@ void CGroupFillStyle::Enable(bool enable)
 	{
 		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
 		{
-			auto style = m_shapes->GetShapeAtIndex(0)->GetFillStyle();
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			auto style = shape->GetFillStyle();
 			style->Enable(true);
 		}
 	}

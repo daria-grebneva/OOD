@@ -40,7 +40,8 @@ void CGroupLineStyle::Enable(bool enable)
 	{
 		for (size_t i = 0; i < m_shapes->GetShapesCount(); i++)
 		{
-			auto style = m_shapes->GetShapeAtIndex(0)->GetLineStyle();
+			auto shape = m_shapes->GetShapeAtIndex(i);
+			auto style = shape->GetLineStyle();
 			style->Enable(true);
 		}
 	}
