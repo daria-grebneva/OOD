@@ -3,7 +3,7 @@
 
 CShape::CShape()
 	: m_fillStyle(std::make_shared<CFillStyle>(true, RGBAColor{ 0xFFFFFF }))
-	, m_lineStyle(std::make_shared<CLineStyle>(true, RGBAColor{ 0xFFFF00 }, 2))
+	, m_lineStyle(std::make_shared<CLineStyle>(true, RGBAColor{ 0xFFFF00 }, 0))
 {
 }
 
