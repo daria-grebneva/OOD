@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "CShape.h"
+#include "CUtils.h"
 
 CShape::CShape()
-	: m_fillStyle(std::make_shared<CFillStyle>(true, RGBAColor{ 0xFFFFFF }))
-	, m_lineStyle(std::make_shared<CLineStyle>(true, RGBAColor{ 0xFFFF00 }, 0))
+	: m_fillStyle(std::make_shared<CFillStyle>(true, Colors::WHITE))
+	, m_lineStyle(std::make_shared<CLineStyle>(true, Colors::WHITE, 0))
 {
 }
 
