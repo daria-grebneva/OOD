@@ -16,27 +16,35 @@ RectD CGroupShape::GetFrame()
 	auto rect = RectD{ 0, 0, 0, 0 };
 	if (m_shapes->GetShapesCount() != 0)
 	{
-		auto frame = m_shapes->GetShapeAtIndex(0)->GetFrame();
+		auto firstFrame = m_shapes->GetShapeAtIndex(0)->GetFrame();
 
-		double minX = frame.left;
-		double minY = frame.top;
-		double maxX = frame.left + frame.width;
-		double maxY = frame.top + frame.height;
+		double minX = firstFrame.left;
+		double minY = firstFrame.top;
+		double maxX = firstFrame.left + firstFrame.width;
+		double maxY = firstFrame.top + firstFrame.height;
 
 		for (size_t i = 1; i < GetShapesCount(); ++i)
 		{
 			auto frame = m_shapes->GetShapeAtIndex(i)->GetFrame();
-			minX = std::min(minX, frame.left);
-			minY = std::min(minX, frame.top);
+			if (!IsNullFrame(frame))
+			{
+				minX = (IsNullFrame(firstFrame)) ? frame.left : std::min(minX, frame.left);
+				minY = (IsNullFrame(firstFrame)) ? frame.top : std::min(minX, frame.top);
 
-			maxX = std::max(maxX, frame.left + frame.width);
-			maxY = std::max(maxY, frame.top + frame.height);
+				maxX = std::max(maxX, frame.left + frame.width);
+				maxY = std::max(maxY, frame.top + frame.height);
+			}
 		}
 
 		rect = RectD{ minX, minY, maxX - minX, maxY - minY };
 	}
 
 	return rect;
+}
+
+bool CGroupShape::IsNullFrame(const RectD& frame)
+{
+	return ((frame.height == 0) && (frame.width == 0) && (frame.top == 0) && (frame.left == 0));
 }
 
 void CGroupShape::SetFrame(const RectD& rect)
@@ -56,12 +64,12 @@ void CGroupShape::SetFrame(const RectD& rect)
 
 double CGroupShape::GetNewLeftCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
 {
-	return (rect.left + ((oldShapeFrame.left - oldFrame.left) / oldFrame.width) * rect.width);
+	return (rect.left + ((oldShapeFrame.left - oldFrame.left) * (rect.width / oldFrame.width)));
 }
 
 double CGroupShape::GetNewTopCoord(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)
 {
-	return (rect.top + ((oldShapeFrame.top - oldFrame.top) / oldFrame.height) * rect.height);
+	return (rect.top + ((oldShapeFrame.top - oldFrame.top) * (rect.height / oldFrame.height)));
 }
 
 double CGroupShape::GetNewWidth(const RectD& rect, const RectD& oldShapeFrame, const RectD& oldFrame)

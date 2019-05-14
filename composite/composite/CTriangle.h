@@ -13,7 +13,7 @@ public:
 	void SetFrame(const RectD& rect) override;
 
 private:
-	void UpdatePoint(PointD& point, const RectD& newFrame);
+	void UpdatePoint(PointD& point, const RectD& newFrame, const RectD& oldFrame);
 	PointD m_p1;
 	PointD m_p2;
 	PointD m_p3;
