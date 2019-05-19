@@ -2,15 +2,16 @@
 // Microsoft Visual C++ generated include file.
 // Used by ModelViewController.rc
 //
-#define IDD_MODELVIEWCONTROLLER_DIALOG 102
+#define IDD_MODELVIEWPRESENTER_DIALOG 102
 #define IDR_MAINFRAME 128
-#define IDC_COEFF_A 1000
-#define IDC_COEFF_B 1001
+#define IDC_AMPLITUDE 1000
+#define IDC_FREQUENCE 1001
 #define IDC_COEFF_3 1002
-#define IDC_COEFF_C 1002
+#define IDC_PHASE 1002
 #define IDC_SOLUTION 1003
 #define IDC_SOLUTION2 1004
 #define IDC_EQUATION 1004
+#define IDC_CHART 1005
 
 // Next default values for new objects
 //

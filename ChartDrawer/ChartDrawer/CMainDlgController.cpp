@@ -3,9 +3,9 @@
 #include "CEquationSolver.h"
 #include "CMainDlg.h"
 
-CMainDlgController::CMainDlgController(CEquationSolver& solver, CWnd* parent)
-	: m_solver(solver)
-	, m_dlg(solver, *this, parent)
+CMainDlgController::CMainDlgController(IHarmonicCollection& collection, CWnd* parent)
+	: m_collection(collection)
+	, m_dlg(collection, *this, parent)
 {
 }
 
@@ -19,17 +19,17 @@ void CMainDlgController::ShowDialog()
 	m_dlg.DoModal();
 }
 
-void CMainDlgController::SetCoeffA(double a)
+void CMainDlgController::SetAmplitude(int index, double a)
 {
-	m_solver.SetQuadraticCoeff(a);
+	m_collection.GetHarmonic(index)->SetAmplitude(a);
 }
 
-void CMainDlgController::SetCoeffB(double b)
+void CMainDlgController::SetFrequence(int index, double b)
 {
-	m_solver.SetLinearCoeff(b);
+	m_collection.GetHarmonic(index)->SetFrequency(b);
 }
 
-void CMainDlgController::SetCoeffC(double c)
+void CMainDlgController::SetPhase(int index, double c)
 {
-	m_solver.SetConstantCoeff(c);
+	m_collection.GetHarmonic(index)->SetPhase(c);
 }

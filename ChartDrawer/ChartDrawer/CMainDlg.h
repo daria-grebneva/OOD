@@ -1,15 +1,20 @@
-#pragma once
+
+// MainDlg.h : header file
+//
 #pragma once
 
-#include "Signals.h"
+#include "CChartView.h"
+#include "IMainDlgView.h"
 
 class CEquationSolver;
 class IMainDlgController;
 
-class CMainDlg : public CDialogEx
+class CMainDlg
+	: public CDialogEx
+	, public IMainDlgView
 {
 public:
-	CMainDlg(CEquationSolver& solver, IMainDlgController& controller, CWnd* pParent = NULL); // standard constructor
+	CMainDlg(CWnd* pParent = NULL); // standard constructor
 
 #ifdef AFX_DESIGN_TIME
 	enum
@@ -17,6 +22,18 @@ public:
 		IDD = IDD_MODELVIEWCONTROLLER_DIALOG
 	};
 #endif
+
+	void SetCoeffs(double a, double b, double c) final;
+	void SetNoSolution() final;
+	void SetInfiniteSolutions() final;
+	void SetSingleSolution(double solution) final;
+	void SetTwoRootsSolutuion(double root1, double root2) final;
+	IChartView& GetChartView() final;
+
+	sig::connection DoOnCoeffAChange(const CoeffChangeSignal::slot_type& handler) final;
+	sig::connection DoOnCoeffBChange(const CoeffChangeSignal::slot_type& handler) final;
+	sig::connection DoOnCoeffCChange(const CoeffChangeSignal::slot_type& handler) final;
+	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
 
 protected:
 	BOOL PreTranslateMessage(MSG* msg) override;
@@ -37,9 +54,6 @@ private:
 	afx_msg void OnKillfocusCoeffB();
 	afx_msg void OnKillfocusCoeffC();
 
-	sig::scoped_connection m_solutionChangeConnection;
-	IMainDlgController& m_controller;
-	CEquationSolver& m_solver;
 	double m_coeffA = 0;
 	double m_coeffB = 0;
 	double m_coeffC = 0;
@@ -50,4 +64,12 @@ private:
 	virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
+
+	CoeffChangeSignal m_coeffAChanged;
+	CoeffChangeSignal m_coeffBChanged;
+	CoeffChangeSignal m_coeffCChanged;
+	InitSignal m_init;
+
+private:
+	CChartView m_chart;
 };

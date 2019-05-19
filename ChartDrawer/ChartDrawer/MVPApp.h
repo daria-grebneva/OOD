@@ -1,7 +1,4 @@
 
-// ModelViewController.h : main header file for the PROJECT_NAME application
-//
-
 #pragma once
 
 #ifndef __AFXWIN_H__
@@ -10,14 +7,14 @@
 
 #include "resource.h" // main symbols
 
-// CMVCApp:
+// CMVPApp:
 // See ModelViewController.cpp for the implementation of this class
 //
 
-class CMVCApp : public CWinApp
+class CMVPApp : public CWinApp
 {
 public:
-	CMVCApp();
+	CMVPApp();
 
 public:
 	virtual BOOL InitInstance();
@@ -25,4 +22,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CMVCApp theApp;
+extern CMVPApp theApp;

@@ -13,14 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Controller">
-      <UniqueIdentifier>{e742cf86-32fd-492b-b64f-aa672a7eaa8a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="View">
       <UniqueIdentifier>{45117a24-003f-4afc-8297-7999bf237c0d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model">
       <UniqueIdentifier>{8c06c745-d415-405d-846f-959591baa921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Presenter">
+      <UniqueIdentifier>{9f4b8b03-f004-43c2-a825-d73d8148cb70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,26 +30,47 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IMainDlgController.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="CMainDlgController.h">
-      <Filter>Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="CMainDlg.h">
-      <Filter>View</Filter>
-    </ClInclude>
     <ClInclude Include="CEquationSolver.h">
       <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="MVCApp.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Signals.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IHarmonicCollection.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="IHarmonic.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarmonicType.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarmonicCollection.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CHarmonic.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="MVPApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainDlgPresenter.h">
+      <Filter>Presenter</Filter>
+    </ClInclude>
+    <ClInclude Include="IChartView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="CChartView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="IMainDlgView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainDlg.h">
+      <Filter>View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,28 +80,37 @@
     <ClCompile Include="ChartDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CMainDlgController.cpp">
-      <Filter>Controller</Filter>
+    <ClCompile Include="CEquationSolver.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarmonicCollection.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CHarmonic.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainDlgPresenter.cpp">
+      <Filter>Presenter</Filter>
+    </ClCompile>
+    <ClCompile Include="CChartView.cpp">
+      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="CMainDlg.cpp">
       <Filter>View</Filter>
     </ClCompile>
-    <ClCompile Include="CEquationSolver.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ModelViewController.rc">
+    <ResourceCompile Include="ModelViewPresenter.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ModelViewController.ico">
+    <Image Include="res\ModelViewPresenter.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\ModelViewController.rc2">
+    <None Include="res\ModelViewPresenter.rc2">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -9,7 +9,7 @@ struct InfiniteNumberOfRoots
 {
 };
 
-using EquationRoots = boost::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>>;
+typedef boost::variant<NoRealRoots, InfiniteNumberOfRoots, double, std::pair<double, double>> EquationRoots;
 
 class CEquationSolver
 {
@@ -17,7 +17,9 @@ public:
 	CEquationSolver();
 	~CEquationSolver();
 
-	using SolutionChangeSignal = sig::signal<void()>;
+	double CalculateValue(double arg) const;
+
+	typedef sig::signal<void()> SolutionChangeSignal;
 	sig::connection DoOnSolutionChange(const SolutionChangeSignal::slot_type& handler);
 
 	EquationRoots GetEquationRoots() const;

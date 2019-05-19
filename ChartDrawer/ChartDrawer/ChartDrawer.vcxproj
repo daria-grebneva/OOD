@@ -157,21 +157,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CChartView.h" />
     <ClInclude Include="CEquationSolver.h" />
+    <ClInclude Include="CHarmonic.h" />
+    <ClInclude Include="CHarmonicCollection.h" />
+    <ClInclude Include="CHarmonicType.h" />
     <ClInclude Include="CMainDlg.h" />
-    <ClInclude Include="CMainDlgController.h" />
-    <ClInclude Include="IMainDlgController.h" />
-    <ClInclude Include="MVCApp.h" />
+    <ClInclude Include="CMainDlgPresenter.h" />
+    <ClInclude Include="IChartView.h" />
+    <ClInclude Include="IHarmonic.h" />
+    <ClInclude Include="IHarmonicCollection.h" />
+    <ClInclude Include="IMainDlgView.h" />
+    <ClInclude Include="MVPApp.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Signals.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CChartView.cpp" />
     <ClCompile Include="CEquationSolver.cpp" />
+    <ClCompile Include="CHarmonic.cpp" />
+    <ClCompile Include="CHarmonicCollection.cpp" />
     <ClCompile Include="ChartDrawer.cpp" />
     <ClCompile Include="CMainDlg.cpp" />
-    <ClCompile Include="CMainDlgController.cpp" />
+    <ClCompile Include="CMainDlgPresenter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -180,13 +190,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ModelViewController.rc" />
+    <ResourceCompile Include="ModelViewPresenter.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ModelViewController.ico" />
+    <Image Include="res\ModelViewPresenter.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\ModelViewController.rc2" />
+    <None Include="res\ModelViewPresenter.rc2" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,22 +1,23 @@
 #pragma once
 #include "CMainDlg.h"
+#include "IHarmonicCollection.h"
 #include "IMainDlgController.h"
 
-class CEquationSolver;
+class IHarmonicCollection;
 
 class CMainDlgController : private IMainDlgController
 {
 public:
-	CMainDlgController(CEquationSolver& solver, CWnd* parent = nullptr);
+	CMainDlgController(IHarmonicCollection& collection, CWnd* parent = nullptr);
 	CMainDlg& GetDialog();
 	void ShowDialog();
 
 private:
-	void SetCoeffA(double a) override;
-	void SetCoeffB(double b) override;
-	void SetCoeffC(double c) override;
+	void SetAmplitude(int index, double a) override;
+	void SetFrequence(int index, double b) override;
+	void SetPhase(int index, double c) override;
 
 private:
 	CMainDlg m_dlg;
-	CEquationSolver& m_solver;
+	IHarmonicCollection& m_collection;
 };
