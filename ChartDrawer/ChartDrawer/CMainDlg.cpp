@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "CMainDlg.h"
-#include "CEquationSolver.h"
+//#include "CEquationSolver.h"
 #include "afxdialogex.h"
 #include "resource.h"
 
@@ -25,17 +25,17 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 		auto focus = GetFocus();
 		if (focus == GetDlgItem(IDC_AMPLITUDE))
 		{
-			OnChangeCoeffA();
+			OnChangeAmplitude();
 			return TRUE;
 		}
 		else if (focus == GetDlgItem(IDC_FREQUENCE))
 		{
-			OnChangeCoeffB();
+			OnChangeFrequency();
 			return TRUE;
 		}
 		else if (focus == GetDlgItem(IDC_PHASE))
 		{
-			OnChangeCoeffC();
+			OnChangePhase();
 			return TRUE;
 		}
 	}
@@ -45,15 +45,15 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 void CMainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_AMPLITUDE, m_coeffA);
-	DDX_Text(pDX, IDC_FREQUENCE, m_coeffB);
-	DDX_Text(pDX, IDC_PHASE, m_coeffC);
+	DDX_Text(pDX, IDC_AMPLITUDE, m_amplitude);
+	DDX_Text(pDX, IDC_FREQUENCE, m_frequency);
+	DDX_Text(pDX, IDC_PHASE, m_phase);
 }
 
 BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
-	ON_EN_KILLFOCUS(IDC_AMPLITUDE, &CMainDlg::OnKillfocusCoeffA)
-	ON_EN_KILLFOCUS(IDC_FREQUENCE, &CMainDlg::OnKillfocusCoeffB)
-	ON_EN_KILLFOCUS(IDC_PHASE, &CMainDlg::OnKillfocusCoeffC)
+	ON_EN_KILLFOCUS(IDC_AMPLITUDE, &CMainDlg::OnKillfocusAmplitude)
+	ON_EN_KILLFOCUS(IDC_FREQUENCE, &CMainDlg::OnKillfocusFrequency)
+	ON_EN_KILLFOCUS(IDC_PHASE, &CMainDlg::OnKillfocusPhase)
 END_MESSAGE_MAP()
 
 BOOL CMainDlg::OnInitDialog()
@@ -72,11 +72,11 @@ BOOL CMainDlg::OnInitDialog()
 	return TRUE; // return TRUE  unless you set the focus to a control
 }
 
-void CMainDlg::SetCoeffs(double a, double b, double c)
+void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
 {
-	m_coeffA = a;
-	m_coeffB = b;
-	m_coeffC = c;
+	m_amplitude = amplitude;
+	m_frequency = frequency;
+	m_phase = phase;
 	if (m_hWnd)
 	{
 		UpdateData(FALSE);
@@ -113,19 +113,19 @@ void CMainDlg::SetTwoRootsSolutuion(double root1, double root2)
 	SetSolutionText((boost::wformat(L"Two roots: %1% and %2%") % root1 % root2).str());
 }
 
-sig::connection CMainDlg::DoOnCoeffAChange(const CoeffChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnAmplitudeChange(const HarmonicChangeSignal::slot_type& handler)
 {
-	return m_coeffAChanged.connect(handler);
+	return m_amplitudeChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnCoeffBChange(const CoeffChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnFrequencyChange(const HarmonicChangeSignal::slot_type& handler)
 {
-	return m_coeffBChanged.connect(handler);
+	return m_frequencyChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnCoeffCChange(const CoeffChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnPhaseChange(const HarmonicChangeSignal::slot_type& handler)
 {
-	return m_coeffCChanged.connect(handler);
+	return m_phaseChanged.connect(handler);
 }
 
 void CMainDlg::SetSolutionText(const std::wstring& text)
@@ -147,32 +147,32 @@ void CMainDlg::UpdateEquation()
 		return ((value < 0) ? L"- " : L"+ ") + strm.str();
 	};
 
-	SetEquationText((boost::wformat(L"%1%x\u00b2 %2%x %3% = 0") % m_coeffA % ToSignedString(m_coeffB) % ToSignedString(m_coeffC)).str());
+	SetEquationText((boost::wformat(L"%1%x\u00b2 %2%x %3% = 0") % m_amplitude % ToSignedString(m_frequency) % ToSignedString(m_phase)).str());
 }
 
-void CMainDlg::OnChangeCoeffA()
+void CMainDlg::OnChangeAmplitude()
 {
 	if (UpdateData())
 	{
-		m_coeffAChanged(m_coeffA);
+		m_amplitudeChanged(m_amplitude);
 		UpdateEquation();
 	}
 }
 
-void CMainDlg::OnChangeCoeffB()
+void CMainDlg::OnChangeFrequency()
 {
 	if (UpdateData())
 	{
-		m_coeffBChanged(m_coeffB);
+		m_frequencyChanged(m_frequency);
 		UpdateEquation();
 	}
 }
 
-void CMainDlg::OnChangeCoeffC()
+void CMainDlg::OnChangePhase()
 {
 	if (UpdateData())
 	{
-		m_coeffCChanged(m_coeffC);
+		m_phaseChanged(m_phase);
 		UpdateEquation();
 	}
 }
@@ -181,17 +181,17 @@ void CMainDlg::OnOK()
 {
 }
 
-void CMainDlg::OnKillfocusCoeffA()
+void CMainDlg::OnKillfocusAmplitude()
 {
-	OnChangeCoeffA();
+	OnChangeAmplitude();
 }
 
-void CMainDlg::OnKillfocusCoeffB()
+void CMainDlg::OnKillfocusFrequency()
 {
-	OnChangeCoeffB();
+	OnChangeFrequency();
 }
 
-void CMainDlg::OnKillfocusCoeffC()
+void CMainDlg::OnKillfocusPhase()
 {
-	OnChangeCoeffC();
+	OnChangePhase();
 }

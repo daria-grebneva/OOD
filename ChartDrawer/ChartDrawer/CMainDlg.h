@@ -23,16 +23,16 @@ public:
 	};
 #endif
 
-	void SetCoeffs(double a, double b, double c) final;
+	void SetHarmonicParams(double a, double b, double c) final;
 	void SetNoSolution() final;
 	void SetInfiniteSolutions() final;
 	void SetSingleSolution(double solution) final;
 	void SetTwoRootsSolutuion(double root1, double root2) final;
 	IChartView& GetChartView() final;
 
-	sig::connection DoOnCoeffAChange(const CoeffChangeSignal::slot_type& handler) final;
-	sig::connection DoOnCoeffBChange(const CoeffChangeSignal::slot_type& handler) final;
-	sig::connection DoOnCoeffCChange(const CoeffChangeSignal::slot_type& handler) final;
+	sig::connection DoOnAmplitudeChange(const HarmonicChangeSignal::slot_type& handler) final;
+	sig::connection DoOnFrequencyChange(const HarmonicChangeSignal::slot_type& handler) final;
+	sig::connection DoOnPhaseChange(const HarmonicChangeSignal::slot_type& handler) final;
 	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
 
 protected:
@@ -44,19 +44,19 @@ private:
 	void SetSolutionText(const std::wstring& text);
 	void SetEquationText(const std::wstring& text);
 	void UpdateEquation();
-	void OnChangeCoeffA();
-	void OnChangeCoeffB();
-	void OnChangeCoeffC();
+	void OnChangeAmplitude();
+	void OnChangeFrequency();
+	void OnChangePhase();
 
 	void OnOK() final;
 
-	afx_msg void OnKillfocusCoeffA();
-	afx_msg void OnKillfocusCoeffB();
-	afx_msg void OnKillfocusCoeffC();
+	afx_msg void OnKillfocusAmplitude();
+	afx_msg void OnKillfocusFrequency();
+	afx_msg void OnKillfocusPhase();
 
-	double m_coeffA = 0;
-	double m_coeffB = 0;
-	double m_coeffC = 0;
+	double m_amplitude = 0;
+	double m_frequency = 0;
+	double m_phase = 0;
 
 	HICON m_hIcon;
 
@@ -65,9 +65,9 @@ private:
 
 	DECLARE_MESSAGE_MAP()
 
-	CoeffChangeSignal m_coeffAChanged;
-	CoeffChangeSignal m_coeffBChanged;
-	CoeffChangeSignal m_coeffCChanged;
+	HarmonicChangeSignal m_amplitudeChanged;
+	HarmonicChangeSignal m_frequencyChanged;
+	HarmonicChangeSignal m_phaseChanged;
 	InitSignal m_init;
 
 private:

@@ -2,15 +2,16 @@
 #include "CMainDlgPresenter.h"
 #include "CEquationSolver.h"
 #include "IChartView.h"
+#include "IHarmonicCollection.h"
 #include "IMainDlgView.h"
 
-CMainDlgPresenter::CMainDlgPresenter(CEquationSolver& solver, IMainDlgView& view)
+CMainDlgPresenter::CMainDlgPresenter(IHarmonicCollection& solver, IMainDlgView& view)
 	: m_solver(solver)
 	, m_view(view)
 {
-	m_view.DoOnCoeffAChange(std::bind(&CEquationSolver::SetQuadraticCoeff, &m_solver, std::placeholders::_1));
-	m_view.DoOnCoeffBChange(std::bind(&CEquationSolver::SetLinearCoeff, &m_solver, std::placeholders::_1));
-	m_view.DoOnCoeffCChange(std::bind(&CEquationSolver::SetConstantCoeff, &m_solver, std::placeholders::_1));
+	m_view.DoOnAmplitudeChange(std::bind(&CEquationSolver::SetQuadraticCoeff, &m_solver, std::placeholders::_1));
+	m_view.DoOnFrequencyChange(std::bind(&CEquationSolver::SetLinearCoeff, &m_solver, std::placeholders::_1));
+	m_view.DoOnPhaseChange(std::bind(&CEquationSolver::SetConstantCoeff, &m_solver, std::placeholders::_1));
 	m_view.DoOnInit(std::bind(&CMainDlgPresenter::InitView, this));
 	m_solver.DoOnSolutionChange([this] {
 		UpdateSolution();
@@ -20,8 +21,9 @@ CMainDlgPresenter::CMainDlgPresenter(CEquationSolver& solver, IMainDlgView& view
 
 void CMainDlgPresenter::InitView()
 {
-	m_view.SetCoeffs(m_solver.GetQuadraticCoeff(), m_solver.GetLinearCoeff(), m_solver.GetConstantCoeff());
-	UpdateSolution();
+	//m_view.SetHarmonicParams(m_solver.GetQuadraticCoeff(), m_solver.GetLinearCoeff(), m_solver.GetConstantCoeff());
+	//UpdateSolution();
+	//UpdateTable(); TODO::update table
 	UpdateChart();
 }
 

@@ -1,17 +1,19 @@
 #pragma once
+#include "CHarmonicType.h"
 
-class CEquationSolver;
+class IHarmonicCollection;
 class IMainDlgView;
 
 class CMainDlgPresenter
 {
 public:
-	CMainDlgPresenter(CEquationSolver& solver, IMainDlgView& view);
+	CMainDlgPresenter(IHarmonicCollection& solver, IMainDlgView& view);
 
 private:
 	void InitView();
 	void UpdateSolution();
 	void UpdateChart();
-	CEquationSolver& m_solver;
+
+	IHarmonicCollection& m_solver;
 	IMainDlgView& m_view;
 };
