@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="View">
       <UniqueIdentifier>{45117a24-003f-4afc-8297-7999bf237c0d}</UniqueIdentifier>
     </Filter>
@@ -22,18 +18,15 @@
     <Filter Include="Presenter">
       <UniqueIdentifier>{9f4b8b03-f004-43c2-a825-d73d8148cb70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c3e77987-aed7-4710-83f6-364f59b17119}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CEquationSolver.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Signals.h">
@@ -72,6 +65,12 @@
     <ClInclude Include="CMainDlg.h">
       <Filter>View</Filter>
     </ClInclude>
+    <ClInclude Include=".h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -79,9 +78,6 @@
     </ClCompile>
     <ClCompile Include="ChartDrawer.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CEquationSolver.cpp">
-      <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="CHarmonicCollection.cpp">
       <Filter>Model</Filter>
@@ -100,18 +96,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ModelViewPresenter.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="ChartDrawer.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ModelViewPresenter.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="res\ModelViewPresenter.rc2">
-      <Filter>Resource Files</Filter>
-    </None>
+    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>

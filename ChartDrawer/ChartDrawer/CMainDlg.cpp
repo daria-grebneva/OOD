@@ -1,10 +1,5 @@
-
-// MainDlg.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "CMainDlg.h"
-//#include "CEquationSolver.h"
 #include "afxdialogex.h"
 #include "resource.h"
 
@@ -13,9 +8,9 @@
 #endif
 
 CMainDlg::CMainDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_MODELVIEWPRESENTER_DIALOG, pParent)
+	: CDialogEx(IDD_DIALOG1, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
 BOOL CMainDlg::PreTranslateMessage(MSG* msg)
@@ -46,6 +41,11 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_AMPLITUDE, m_amplitude);
+	DDX_Control(pDX, IDC_HARMONICS_LISTBOX, m_harmonicsList);
+	DDX_Control(pDX, IDC_RADIO_SIN, m_buttonSin);
+	DDX_Control(pDX, IDC_RADIO_COS, m_buttonCos);
+	DDX_Control(pDX, IDC_BUTTON_ADD, m_buttonAdd);
+	DDX_Control(pDX, IDC_BUTTON_DELETE, m_buttonDelete);
 	DDX_Text(pDX, IDC_FREQUENCE, m_frequency);
 	DDX_Text(pDX, IDC_PHASE, m_phase);
 }
@@ -54,6 +54,15 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	ON_EN_KILLFOCUS(IDC_AMPLITUDE, &CMainDlg::OnKillfocusAmplitude)
 	ON_EN_KILLFOCUS(IDC_FREQUENCE, &CMainDlg::OnKillfocusFrequency)
 	ON_EN_KILLFOCUS(IDC_PHASE, &CMainDlg::OnKillfocusPhase)
+	ON_BN_CLICKED(IDC_RADIO_SIN, &CMainDlg::OnClickedRadioSin)
+	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlg::OnClickedRadioCos)
+	ON_BN_CLICKED(IDC_BUTTON_ADD, &CMainDlg::OnClickedAddHarmonic)
+	ON_BN_CLICKED(IDC_BUTTON_DELETE, &CMainDlg::OnClickedDeleteHarmonic)
+	//ON_COMMAND(IDD_DIALOG1, &CMainDlg::OnKillFocusAmplitude)
+	//ON_CBN_SELCHANGE(IDC_COMBO1, &CMainDlg::OnCbnSelchangeCombo1)
+	//ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMainDlg::OnTcnSelchangeTab1)
+	//ON_CBN_SELCHANGE(IDC_COMBO3, &CMainDlg::OnCbnSelchangeCombo3)
+	//ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &CMainDlg::OnLbnSelchangeHarmonicsListbox)
 END_MESSAGE_MAP()
 
 BOOL CMainDlg::OnInitDialog()
@@ -67,10 +76,10 @@ BOOL CMainDlg::OnInitDialog()
 
 	m_init();
 
-	UpdateEquation();
 
 	return TRUE; // return TRUE  unless you set the focus to a control
 }
+
 
 void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
 {
@@ -86,6 +95,13 @@ void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phas
 sig::connection CMainDlg::DoOnInit(const InitSignal::slot_type& handler)
 {
 	return m_init.connect(handler);
+	GetDlgItem(IDC_CHART)->ShowWindow(true);
+}
+
+void  CMainDlg::InitDefaultHarmonic()
+{
+	int num = m_harmonicsList.GetCount() - 1;
+	m_harmonicsList.SetCurSel(num);
 }
 
 IChartView& CMainDlg::GetChartView()
@@ -93,69 +109,46 @@ IChartView& CMainDlg::GetChartView()
 	return m_chart;
 }
 
-void CMainDlg::SetNoSolution()
-{
-	SetSolutionText(L"No real roots");
-}
-
-void CMainDlg::SetInfiniteSolutions()
-{
-	SetSolutionText(L"Infinite number of roots");
-}
-
-void CMainDlg::SetSingleSolution(double solution)
-{
-	SetSolutionText((boost::wformat(L"One root: %1%") % solution).str());
-}
-
-void CMainDlg::SetTwoRootsSolutuion(double root1, double root2)
-{
-	SetSolutionText((boost::wformat(L"Two roots: %1% and %2%") % root1 % root2).str());
-}
-
-sig::connection CMainDlg::DoOnAmplitudeChange(const HarmonicChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnAmplitudeChange(const HarmonicCoeffChangeSignal::slot_type& handler)
 {
 	return m_amplitudeChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnFrequencyChange(const HarmonicChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler)
 {
 	return m_frequencyChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnPhaseChange(const HarmonicChangeSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnPhaseChange(const HarmonicCoeffChangeSignal::slot_type& handler)
 {
 	return m_phaseChanged.connect(handler);
 }
 
-void CMainDlg::SetSolutionText(const std::wstring& text)
+sig::connection CMainDlg::DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal::slot_type& handler)
 {
-	SetDlgItemText(IDC_SOLUTION, text.c_str());
+	return m_typeChanged.connect(handler);
 }
 
-void CMainDlg::SetEquationText(const std::wstring& text)
+sig::connection CMainDlg::DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler)
 {
-	SetDlgItemText(IDC_EQUATION, text.c_str());
+	return m_addHarmonic.connect(handler);
 }
 
-void CMainDlg::UpdateEquation()
+sig::connection CMainDlg::DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler)
 {
-	auto ToSignedString = [](double value) {
-		std::wostringstream strm;
-		strm << std::abs(value);
-
-		return ((value < 0) ? L"- " : L"+ ") + strm.str();
-	};
-
-	SetEquationText((boost::wformat(L"%1%x\u00b2 %2%x %3% = 0") % m_amplitude % ToSignedString(m_frequency) % ToSignedString(m_phase)).str());
+	return m_deleteHarmonic.connect(handler);
 }
 
 void CMainDlg::OnChangeAmplitude()
 {
 	if (UpdateData())
 	{
-		m_amplitudeChanged(m_amplitude);
-		UpdateEquation();
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_amplitudeChanged(index, m_amplitude);
+			m_harmonicsList.SetCurSel(index);
+		}
 	}
 }
 
@@ -163,8 +156,12 @@ void CMainDlg::OnChangeFrequency()
 {
 	if (UpdateData())
 	{
-		m_frequencyChanged(m_frequency);
-		UpdateEquation();
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_frequencyChanged(index, m_frequency);
+			m_harmonicsList.SetCurSel(index);
+		}
 	}
 }
 
@@ -172,8 +169,12 @@ void CMainDlg::OnChangePhase()
 {
 	if (UpdateData())
 	{
-		m_phaseChanged(m_phase);
-		UpdateEquation();
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_phaseChanged(index, m_phase);
+			m_harmonicsList.SetCurSel(index);
+		}
 	}
 }
 
@@ -186,6 +187,54 @@ void CMainDlg::OnKillfocusAmplitude()
 	OnChangeAmplitude();
 }
 
+void CMainDlg::OnClickedRadioSin()
+{
+	if (UpdateData())
+	{
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_typeChanged(index, CHarmonicType::Sin);
+			m_harmonicsList.SetCurSel(index);
+		}
+	}
+}
+
+void CMainDlg::OnClickedRadioCos()
+{
+	if (UpdateData())
+	{
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_typeChanged(index, CHarmonicType::Cos);
+			m_harmonicsList.SetCurSel(index);
+		}
+	}
+}
+
+void CMainDlg::OnClickedAddHarmonic()
+{
+	if (UpdateData())
+	{
+		m_addHarmonic();
+		int index = m_harmonicsList.GetCount() - 1;
+		m_harmonicsList.SetCurSel(index);
+	}
+}
+
+void CMainDlg::OnClickedDeleteHarmonic()
+{
+	if (UpdateData())
+	{
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_deleteHarmonic(index);
+		}
+	}
+}
+
 void CMainDlg::OnKillfocusFrequency()
 {
 	OnChangeFrequency();
@@ -194,4 +243,14 @@ void CMainDlg::OnKillfocusFrequency()
 void CMainDlg::OnKillfocusPhase()
 {
 	OnChangePhase();
+}
+
+void CMainDlg::AddHarmonicsToListBox(ListBox const& harmonicsList)
+{
+	m_harmonicsList.ResetContent(); 
+
+	for (auto& str : harmonicsList)
+	{
+		m_harmonicsList.AddString(str.c_str());
+	}
 }
