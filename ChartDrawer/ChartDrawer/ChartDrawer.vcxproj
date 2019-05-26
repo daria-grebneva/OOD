@@ -168,7 +168,6 @@
     <ClInclude Include="IHarmonicCollection.h" />
     <ClInclude Include="IMainDlgView.h" />
     <ClInclude Include="MVPApp.h" />
-    <ClInclude Include=".h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Signals.h" />
     <ClInclude Include="stdafx.h" />

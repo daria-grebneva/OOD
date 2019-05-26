@@ -65,9 +65,6 @@
     <ClInclude Include="CMainDlg.h">
       <Filter>View</Filter>
     </ClInclude>
-    <ClInclude Include=".h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
