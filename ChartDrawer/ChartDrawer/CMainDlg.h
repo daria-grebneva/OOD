@@ -23,6 +23,7 @@ public:
 	void SetHarmonicParams(double amplitude, double frequency, double phase) final;
 	void AddHarmonicsToListBox(ListBox const& harmonicsList) override final;
 	void InitDefaultHarmonic() override final;
+	void UpdateFields(double amplitude, double frequency, double phase, CHarmonicType type) override final;
 	IChartView& GetChartView() final;
 	CListBox m_harmonicsList;
 	CButton m_buttonSin;
@@ -37,6 +38,7 @@ public:
 	sig::connection DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler) final;
 	sig::connection DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler) final;
 	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
+	sig::connection DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler) final;
 
 protected:
 	BOOL PreTranslateMessage(MSG* msg) override;
@@ -44,7 +46,6 @@ protected:
 
 	// Implementation
 private:
-
 	void OnChangeAmplitude();
 	void OnChangeFrequency();
 	void OnChangePhase();
@@ -58,11 +59,12 @@ private:
 	afx_msg void OnClickedRadioCos();
 	afx_msg void OnClickedAddHarmonic();
 	afx_msg void OnClickedDeleteHarmonic();
+	afx_msg void OnSetFocusListBox();
 
-	double m_amplitude = 0;
 	double m_frequency = 0;
 	double m_phase = 0;
-	
+	double m_amplitude = 0;
+
 	HICON m_hIcon;
 
 	// Generated message map functions
@@ -76,6 +78,7 @@ private:
 	HarmonicTypeChangeSignal m_typeChanged;
 	HarmonicAddSignal m_addHarmonic;
 	HarmonicDeleteSignal m_deleteHarmonic;
+	HarmonicFocusListBoxChangeSignal m_setFocusList;
 	InitSignal m_init;
 
 private:

@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlg::OnClickedRadioCos)
 	ON_BN_CLICKED(IDC_BUTTON_ADD, &CMainDlg::OnClickedAddHarmonic)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE, &CMainDlg::OnClickedDeleteHarmonic)
+	ON_LBN_SETFOCUS(IDC_HARMONICS_LISTBOX, &CMainDlg::OnSetFocusListBox)
 	//ON_COMMAND(IDD_DIALOG1, &CMainDlg::OnKillFocusAmplitude)
 	//ON_CBN_SELCHANGE(IDC_COMBO1, &CMainDlg::OnCbnSelchangeCombo1)
 	//ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMainDlg::OnTcnSelchangeTab1)
@@ -76,10 +77,8 @@ BOOL CMainDlg::OnInitDialog()
 
 	m_init();
 
-
 	return TRUE; // return TRUE  unless you set the focus to a control
 }
-
 
 void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
 {
@@ -98,10 +97,21 @@ sig::connection CMainDlg::DoOnInit(const InitSignal::slot_type& handler)
 	GetDlgItem(IDC_CHART)->ShowWindow(true);
 }
 
-void  CMainDlg::InitDefaultHarmonic()
+void CMainDlg::InitDefaultHarmonic()
 {
 	int num = m_harmonicsList.GetCount() - 1;
 	m_harmonicsList.SetCurSel(num);
+	m_buttonSin.SetCheck(1);
+	m_buttonCos.SetCheck(0);
+}
+
+void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, CHarmonicType type)
+{
+	int index = m_harmonicsList.GetCurSel();
+	if (index >= 0)
+	{
+		//TODO::обновить данные гармоники
+	}
 }
 
 IChartView& CMainDlg::GetChartView()
@@ -137,6 +147,11 @@ sig::connection CMainDlg::DoOnAddHarmonic(const HarmonicAddSignal::slot_type& ha
 sig::connection CMainDlg::DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler)
 {
 	return m_deleteHarmonic.connect(handler);
+}
+
+sig::connection CMainDlg::DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler)
+{
+	return m_setFocusList.connect(handler);
 }
 
 void CMainDlg::OnChangeAmplitude()
@@ -223,6 +238,13 @@ void CMainDlg::OnClickedAddHarmonic()
 	}
 }
 
+void CMainDlg::OnSetFocusListBox()
+{
+	if (UpdateData())
+	{
+	}
+}
+
 void CMainDlg::OnClickedDeleteHarmonic()
 {
 	if (UpdateData())
@@ -247,7 +269,7 @@ void CMainDlg::OnKillfocusPhase()
 
 void CMainDlg::AddHarmonicsToListBox(ListBox const& harmonicsList)
 {
-	m_harmonicsList.ResetContent(); 
+	m_harmonicsList.ResetContent();
 
 	for (auto& str : harmonicsList)
 	{

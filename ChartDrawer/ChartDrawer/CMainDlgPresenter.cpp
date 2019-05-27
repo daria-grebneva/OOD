@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "CMainDlgPresenter.h"
+#include "CHarmonicType.h"
 #include "IChartView.h"
 #include "IHarmonicCollection.h"
-#include "CHarmonicType.h"
 #include "IMainDlgView.h"
 
 CMainDlgPresenter::CMainDlgPresenter(IHarmonicCollection& solver, IMainDlgView& view)
@@ -15,12 +15,12 @@ CMainDlgPresenter::CMainDlgPresenter(IHarmonicCollection& solver, IMainDlgView& 
 	m_view.DoOnHarmonicTypeChange(std::bind(&CMainDlgPresenter::SetHarmonicType, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnAddHarmonic(std::bind(&CMainDlgPresenter::AddHarmonic, this));
 	m_view.DoOnDeleteHarmonic(std::bind(&CMainDlgPresenter::DeleteHarmonic, this, std::placeholders::_1));
+	m_view.DoOnSetFocusListBox(std::bind(&CMainDlgPresenter::SetFocusListBox, this, std::placeholders::_1));
 	m_view.DoOnInit(std::bind(&CMainDlgPresenter::InitView, this));
 	m_collection.DoOnSolutionChange([this] {
 		Update();
 	});
 }
-
 
 void CMainDlgPresenter::SetAmplitude(int index, double value)
 {
@@ -42,7 +42,6 @@ void CMainDlgPresenter::SetHarmonicType(int index, CHarmonicType value)
 	m_collection.GetHarmonic(index)->SetHarmonicType(value);
 }
 
-
 void CMainDlgPresenter::InitView()
 {
 	Update();
@@ -53,21 +52,26 @@ void CMainDlgPresenter::Update()
 {
 	UpdateHarmonicsList();
 	//UpdateTable(); TODO::update table
-	UpdateChart(); 
+	UpdateChart();
 }
 
 void CMainDlgPresenter::AddHarmonic()
 {
-	m_collection.AddHarmonic(0, 0, 0, CHarmonicType::Sin);
+	m_collection.AddHarmonic(1, 1, 0, CHarmonicType::Sin);
 	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)
 		->DoOnSolutionChange(std::bind(&CMainDlgPresenter::Update, this));
 	m_view.InitDefaultHarmonic();
 }
 
-
 void CMainDlgPresenter::DeleteHarmonic(int index)
 {
 	m_collection.DeleteHarmonic(index);
+}
+
+void CMainDlgPresenter::SetFocusListBox(int index)
+{
+	auto harmonic = m_collection.GetHarmonic(index);
+	m_view.UpdateFields(harmonic->GetAmplitude(), harmonic->GetFrequency(), harmonic->GetPhase(), harmonic->GetHarmonicType()); //TODO:: реализовать метод, обновл€ющий пол€
 }
 
 void CMainDlgPresenter::UpdateHarmonicsList()

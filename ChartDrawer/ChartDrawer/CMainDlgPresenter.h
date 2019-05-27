@@ -17,6 +17,7 @@ private:
 	void UpdateChart();
 	void AddHarmonic();
 	void DeleteHarmonic(int index);
+	void SetFocusListBox(int index);
 	void SetAmplitude(int index, double value);
 	void SetFrequency(int index, double value);
 	void SetPhase(int index, double value);
