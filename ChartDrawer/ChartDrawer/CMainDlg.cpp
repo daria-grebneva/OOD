@@ -107,6 +107,11 @@ void CMainDlg::InitDefaultHarmonic()
 	m_buttonSin.SetCheck(1);
 	m_buttonCos.SetCheck(0);
 	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
+	GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
+	GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
+	GetDlgItem(IDC_PHASE)->EnableWindow(true);
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
 }
 
 void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, HarmonicType type)
@@ -277,6 +282,15 @@ void CMainDlg::OnClickedDeleteHarmonic()
 			if (m_harmonicsList.GetCount() == 0)
 			{
 				GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
+				GetDlgItem(IDC_AMPLITUDE)->EnableWindow(false);
+				GetDlgItem(IDC_FREQUENCE)->EnableWindow(false);
+				GetDlgItem(IDC_PHASE)->EnableWindow(false);
+				GetDlgItem(IDC_RADIO_SIN)->EnableWindow(false);
+				GetDlgItem(IDC_RADIO_COS)->EnableWindow(false);
+			}
+			else
+			{
+				m_harmonicsList.SetCurSel((m_harmonicsList.GetCount() - 1 >= index ? index : index - 1));
 			}
 		}
 	}
