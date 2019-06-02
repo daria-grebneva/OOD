@@ -19,6 +19,7 @@ public:
 
 	virtual IChartView& GetChartView() = 0;
 	virtual void AddHarmonicsToListBox(ListBox const& list) = 0;
+	virtual void AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const & table) = 0;
 	virtual void InitDefaultHarmonic() = 0;
 	virtual void UpdateFields(double amplitude, double frequency, double phase, HarmonicType type) = 0;
 

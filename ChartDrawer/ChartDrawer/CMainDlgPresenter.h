@@ -23,6 +23,7 @@ private:
 	void SetPhase(int index, double value);
 	void SetHarmonicType(int index, HarmonicType value);
 	void Update();
+	void UpdateTable();
 
 	IHarmonicCollection& m_collection;
 	IMainDlgView& m_view;

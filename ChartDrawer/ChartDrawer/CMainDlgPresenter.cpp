@@ -57,8 +57,18 @@ void CMainDlgPresenter::InitView()
 void CMainDlgPresenter::Update()
 {
 	UpdateHarmonicsList();
-	//UpdateTable(); TODO::update table
+	UpdateTable();// TODO::update table
 	UpdateChart();
+}
+
+void CMainDlgPresenter::UpdateTable()
+{
+	std::vector<std::pair<double, double>> harmonicsList;
+	for (double x = -10.0; x <= +10; x += 0.1)
+	{
+		harmonicsList.push_back({ x, m_collection.CalculateValue(x) });
+	}
+	m_view.AddHarmonicsToTableBox(harmonicsList);
 }
 
 void CMainDlgPresenter::AddHarmonic()

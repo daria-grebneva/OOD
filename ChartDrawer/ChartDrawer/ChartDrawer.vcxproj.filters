@@ -80,6 +80,9 @@
     <ClInclude Include="CAddHarmonicDlgPresenter.h">
       <Filter>Presenter</Filter>
     </ClInclude>
+    <ClInclude Include="SelectedViewType.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

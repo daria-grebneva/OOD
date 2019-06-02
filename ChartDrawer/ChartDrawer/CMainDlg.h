@@ -19,10 +19,13 @@ public:
 
 	void SetHarmonicParams(double amplitude, double frequency, double phase) final;
 	void AddHarmonicsToListBox(ListBox const& harmonicsList) override final;
+	void AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const & table) override final;
 	void InitDefaultHarmonic() override final;
 	void UpdateFields(double amplitude, double frequency, double phase, HarmonicType type) override final;
 	IChartView& GetChartView() final;
 	CListBox m_harmonicsList;
+	CListBox m_tableX;
+	CListBox m_tableY;
 	CButton m_buttonSin;
 	CButton m_buttonCos;
 	CButton m_buttonAdd;
@@ -30,6 +33,11 @@ public:
 	CEdit m_amplitude;
 	CEdit m_frequency;
 	CEdit m_phase;
+	CTabCtrl m_tabs;
+	CEdit m_x;
+	CEdit m_y;
+	//CDialog m_tabChart;
+	//CDialog m_tabTable;
 
 	sig::connection DoOnAmplitudeChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
@@ -81,4 +89,7 @@ private:
 
 private:
 	CChartView m_chart;
+public:
+	afx_msg void OnTcnSelchangeTabs(NMHDR *pNMHDR, LRESULT *pResult);
+	//afx_msg void OnStnClickedChart();
 };

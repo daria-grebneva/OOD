@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CMainDlg.h"
+#include "SelectedViewType.h"
 #include "afxdialogex.h"
 #include "resource.h"
 //#include "resource1.h"
@@ -19,7 +20,7 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 	if (msg->message == WM_KEYDOWN && msg->wParam == VK_RETURN)
 	{
 		auto focus = GetFocus();
-	/*	if (focus == GetDlgItem(IDC_AMPLITUDE))
+		if (focus == GetDlgItem(IDC_AMPLITUDE))
 		{
 			OnChangeAmplitude();
 			return TRUE;
@@ -33,7 +34,7 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 		{
 			OnChangePhase();
 			return TRUE;
-		}*/
+		}
 	}
 	return CDialogEx::PreTranslateMessage(msg);
 }
@@ -49,6 +50,11 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_DELETE, m_buttonDelete);
 	DDX_Control(pDX, IDC_FREQUENCE, m_frequency);
 	DDX_Control(pDX, IDC_PHASE, m_phase);
+	DDX_Control(pDX, IDC_TABS, m_tabs);
+	DDX_Control(pDX, IDC_LIST_TABLE_X, m_tableX);
+	DDX_Control(pDX, IDC_LIST_TABLE_Y, m_tableY);
+	//DDX_Control(pDX, IDD_TAB_CHART, m_tabChart);
+	//DDX_Control(pDX, IDD_TAB_TABLE, m_tabTable);
 }
 
 BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
@@ -66,6 +72,7 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	//ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMainDlg::OnTcnSelchangeTab1)
 	//ON_CBN_SELCHANGE(IDC_COMBO3, &CMainDlg::OnCbnSelchangeCombo3)
 	//ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &CMainDlg::OnLbnSelchangeHarmonicsListbox)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TABS, &CMainDlg::OnTcnSelchangeTabs)
 END_MESSAGE_MAP()
 
 BOOL CMainDlg::OnInitDialog()
@@ -77,10 +84,26 @@ BOOL CMainDlg::OnInitDialog()
 
 	m_chart.SubclassDlgItem(IDC_CHART, this);
 	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
+	m_tabs.InsertItem(static_cast<int>(SelectedViewType::Chart), _T("Chart View"));
+	m_tabs.InsertItem(static_cast<int>(SelectedViewType::Table), _T("Table View"));
+	m_tableX.ShowWindow(SW_HIDE);
+	m_tableY.ShowWindow(SW_HIDE);
+	m_chart.ShowWindow(SW_SHOW);
 
 	m_init();
 
 	return TRUE; // return TRUE  unless you set the focus to a control
+}
+
+void CMainDlg::AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const & table)
+{
+	m_tableX.ResetContent();
+	m_tableY.ResetContent();
+	for (auto & str : table)
+	{
+		m_tableX.AddString(std::to_wstring(str.first).c_str());
+		m_tableY.AddString(std::to_wstring(str.second).c_str());
+	}
 }
 
 void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
@@ -97,7 +120,6 @@ void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phas
 sig::connection CMainDlg::DoOnInit(const InitSignal::slot_type& handler)
 {
 	return m_init.connect(handler);
-	GetDlgItem(IDC_CHART)->ShowWindow(true);
 }
 
 void CMainDlg::InitDefaultHarmonic()
@@ -313,5 +335,25 @@ void CMainDlg::AddHarmonicsToListBox(ListBox const& harmonicsList)
 	for (auto& str : harmonicsList)
 	{
 		m_harmonicsList.AddString(str.c_str());
+	}
+}
+
+
+void CMainDlg::OnTcnSelchangeTabs(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	*pResult = 0;
+	auto selected = m_tabs.GetCurSel();
+
+	if (selected == static_cast<int>(SelectedViewType::Chart))
+	{
+		m_chart.ShowWindow(SW_SHOW);
+		m_tableX.ShowWindow(SW_HIDE);
+		m_tableY.ShowWindow(SW_HIDE);
+	} 
+	else
+	{
+		m_chart.ShowWindow(SW_HIDE);
+		m_tableX.ShowWindow(SW_SHOW);
+		m_tableY.ShowWindow(SW_SHOW);
 	}
 }
