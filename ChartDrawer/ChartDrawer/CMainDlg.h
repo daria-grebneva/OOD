@@ -3,8 +3,6 @@
 #include "CChartView.h"
 #include "IMainDlgView.h"
 
-class IMainDlgController;
-
 class CMainDlg
 	: public CDialogEx
 	, public IMainDlgView

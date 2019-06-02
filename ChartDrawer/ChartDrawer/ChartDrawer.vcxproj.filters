@@ -68,6 +68,18 @@
     <ClInclude Include="HarmonicType.h">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAddHarmonicView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="IAddHarmonicView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="CAddHarmonicDlgPresenter.h">
+      <Filter>Presenter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -91,9 +103,16 @@
     <ClCompile Include="CMainDlg.cpp">
       <Filter>View</Filter>
     </ClCompile>
+    <ClCompile Include="CAddHarmonicView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="CAddHarmonicDlgPresenter.cpp">
+      <Filter>Presenter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChartDrawer.rc" />
+    <ResourceCompile Include="AddNewHarmonic.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="icon1.ico" />

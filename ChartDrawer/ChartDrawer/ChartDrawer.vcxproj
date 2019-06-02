@@ -157,23 +157,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAddHarmonicDlgPresenter.h" />
+    <ClInclude Include="CAddHarmonicView.h" />
     <ClInclude Include="CChartView.h" />
     <ClInclude Include="CHarmonic.h" />
     <ClInclude Include="CHarmonicCollection.h" />
     <ClInclude Include="HarmonicType.h" />
     <ClInclude Include="CMainDlg.h" />
     <ClInclude Include="CMainDlgPresenter.h" />
+    <ClInclude Include="IAddHarmonicView.h" />
     <ClInclude Include="IChartView.h" />
     <ClInclude Include="IHarmonic.h" />
     <ClInclude Include="IHarmonicCollection.h" />
     <ClInclude Include="IMainDlgView.h" />
     <ClInclude Include="MVPApp.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="Signals.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAddHarmonicDlgPresenter.cpp" />
+    <ClCompile Include="CAddHarmonicView.cpp" />
     <ClCompile Include="CChartView.cpp" />
     <ClCompile Include="CHarmonic.cpp" />
     <ClCompile Include="CHarmonicCollection.cpp" />
@@ -188,6 +194,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="AddNewHarmonic.rc" />
     <ResourceCompile Include="ChartDrawer.rc" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "CMainDlg.h"
 #include "afxdialogex.h"
 #include "resource.h"
+//#include "resource1.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,6 +76,7 @@ BOOL CMainDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE); // Set small icon
 
 	m_chart.SubclassDlgItem(IDC_CHART, this);
+	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
 
 	m_init();
 
@@ -104,6 +106,7 @@ void CMainDlg::InitDefaultHarmonic()
 	m_harmonicsList.SetCurSel(num);
 	m_buttonSin.SetCheck(1);
 	m_buttonCos.SetCheck(0);
+	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
 }
 
 void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, HarmonicType type)
@@ -271,6 +274,10 @@ void CMainDlg::OnClickedDeleteHarmonic()
 		if (index >= 0)
 		{
 			m_deleteHarmonic(index);
+			if (m_harmonicsList.GetCount() == 0)
+			{
+				GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
+			}
 		}
 	}
 }

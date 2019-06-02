@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CMainDlgPresenter.h"
+#include "CAddHarmonicDlgPresenter.h"
+#include "CAddHarmonicView.h"
 #include "HarmonicType.h"
 #include "IChartView.h"
 #include "IHarmonicCollection.h"
@@ -45,7 +47,11 @@ void CMainDlgPresenter::SetHarmonicType(int index, HarmonicType value)
 void CMainDlgPresenter::InitView()
 {
 	Update();
-	AddHarmonic();
+	m_collection.AddHarmonic(1, 1, 0, HarmonicType::Sin);
+	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)
+		->DoOnHarmonicChange(std::bind(&CMainDlgPresenter::Update, this));
+	m_view.InitDefaultHarmonic();
+	m_view.UpdateFields(1, 1, 0, HarmonicType::Sin);
 }
 
 void CMainDlgPresenter::Update()
@@ -57,11 +63,15 @@ void CMainDlgPresenter::Update()
 
 void CMainDlgPresenter::AddHarmonic()
 {
+
 	m_collection.AddHarmonic(1, 1, 0, HarmonicType::Sin);
 	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)
 		->DoOnHarmonicChange(std::bind(&CMainDlgPresenter::Update, this));
 	m_view.InitDefaultHarmonic();
 	m_view.UpdateFields(1, 1, 0, HarmonicType::Sin);
+	//TODO:: вызвать новое окно
+	/*CAddHarmonicView dlg2;
+	dlg2.DoModal();*/
 }
 
 void CMainDlgPresenter::DeleteHarmonic(int index)
