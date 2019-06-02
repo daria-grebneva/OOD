@@ -53,6 +53,8 @@ void CMainDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TABS, m_tabs);
 	DDX_Control(pDX, IDC_LIST_TABLE_X, m_tableX);
 	DDX_Control(pDX, IDC_LIST_TABLE_Y, m_tableY);
+	DDX_Control(pDX, IDC_EDIT_X, m_x);
+	DDX_Control(pDX, IDC_EDIT_Y, m_y);
 	//DDX_Control(pDX, IDD_TAB_CHART, m_tabChart);
 	//DDX_Control(pDX, IDD_TAB_TABLE, m_tabTable);
 }
@@ -88,6 +90,10 @@ BOOL CMainDlg::OnInitDialog()
 	m_tabs.InsertItem(static_cast<int>(SelectedViewType::Table), _T("Table View"));
 	m_tableX.ShowWindow(SW_HIDE);
 	m_tableY.ShowWindow(SW_HIDE);
+	m_x.ShowWindow(SW_HIDE);
+	m_y.ShowWindow(SW_HIDE);
+	m_x.SetWindowTextW((boost::wformat(L"x")).str().c_str());
+	m_y.SetWindowTextW((boost::wformat(L"y")).str().c_str());
 	m_chart.ShowWindow(SW_SHOW);
 
 	m_init();
@@ -95,11 +101,11 @@ BOOL CMainDlg::OnInitDialog()
 	return TRUE; // return TRUE  unless you set the focus to a control
 }
 
-void CMainDlg::AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const & table)
+void CMainDlg::AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const& table)
 {
 	m_tableX.ResetContent();
 	m_tableY.ResetContent();
-	for (auto & str : table)
+	for (auto& str : table)
 	{
 		m_tableX.AddString(std::to_wstring(str.first).c_str());
 		m_tableY.AddString(std::to_wstring(str.second).c_str());
@@ -190,7 +196,7 @@ sig::connection CMainDlg::DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSi
 	return m_setFocusList.connect(handler);
 }
 
-double CMainDlg::GetHarmonicCoeffValue(CEdit & coef)
+double CMainDlg::GetHarmonicCoeffValue(CEdit& coef)
 {
 	CString val;
 	coef.GetWindowTextW(val);
@@ -205,7 +211,7 @@ void CMainDlg::OnChangeAmplitude()
 		if (index >= 0)
 		{
 			m_amplitudeChanged(index, GetHarmonicCoeffValue(m_amplitude));
-			m_harmonicsList.SetCurSel(index); 
+			m_harmonicsList.SetCurSel(index);
 		}
 	}
 }
@@ -338,8 +344,7 @@ void CMainDlg::AddHarmonicsToListBox(ListBox const& harmonicsList)
 	}
 }
 
-
-void CMainDlg::OnTcnSelchangeTabs(NMHDR *pNMHDR, LRESULT *pResult)
+void CMainDlg::OnTcnSelchangeTabs(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	*pResult = 0;
 	auto selected = m_tabs.GetCurSel();
@@ -349,11 +354,15 @@ void CMainDlg::OnTcnSelchangeTabs(NMHDR *pNMHDR, LRESULT *pResult)
 		m_chart.ShowWindow(SW_SHOW);
 		m_tableX.ShowWindow(SW_HIDE);
 		m_tableY.ShowWindow(SW_HIDE);
-	} 
+		m_x.ShowWindow(SW_HIDE);
+		m_y.ShowWindow(SW_HIDE);
+	}
 	else
 	{
 		m_chart.ShowWindow(SW_HIDE);
 		m_tableX.ShowWindow(SW_SHOW);
 		m_tableY.ShowWindow(SW_SHOW);
+		m_x.ShowWindow(SW_SHOW);
+		m_y.ShowWindow(SW_SHOW);
 	}
 }

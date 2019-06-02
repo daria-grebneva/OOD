@@ -57,7 +57,7 @@ void CMainDlgPresenter::InitView()
 void CMainDlgPresenter::Update()
 {
 	UpdateHarmonicsList();
-	UpdateTable();// TODO::update table
+	UpdateTable(); // TODO::update table
 	UpdateChart();
 }
 
@@ -93,7 +93,7 @@ void CMainDlgPresenter::SetFocusListBox(int index)
 {
 	auto harmonic = m_collection.GetHarmonic(index);
 	m_view.UpdateFields(harmonic->GetAmplitude(), harmonic->GetFrequency(), harmonic->GetPhase(), harmonic->GetHarmonicType()); //TODO:: реализовать метод, обновл€ющий пол€
-} 
+}
 
 void CMainDlgPresenter::UpdateHarmonicsList()
 {
