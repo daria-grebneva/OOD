@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CHarmonic.h"
 
-CHarmonic::CHarmonic(double amplitude, double frequency, double phase, CHarmonicType type)
+CHarmonic::CHarmonic(double amplitude, double frequency, double phase, HarmonicType type)
 	: m_amplitude(amplitude)
 	, m_frequency(frequency)
 	, m_phase(phase)
@@ -11,12 +11,12 @@ CHarmonic::CHarmonic(double amplitude, double frequency, double phase, CHarmonic
 
 double CHarmonic::CalculateValue(double x) const
 {
-	auto functionType = (m_harmonicType == CHarmonicType::Sin) ? std::sinl : std::cosl;
+	auto functionType = (m_harmonicType == HarmonicType::Sin) ? std::sinl : std::cosl;
 
 	return (m_amplitude * functionType(m_frequency * x + m_phase));
 }
 
-sig::connection CHarmonic::DoOnSolutionChange(const HarmonicChangeSignal::slot_type& handler)
+sig::connection CHarmonic::DoOnHarmonicChange(const HarmonicChangeSignal::slot_type& handler)
 {
 	return m_harmonicChanged.connect(handler);
 }
@@ -63,12 +63,12 @@ void CHarmonic::SetPhase(double phase)
 	}
 }
 
-CHarmonicType CHarmonic::GetHarmonicType() const
+HarmonicType CHarmonic::GetHarmonicType() const
 {
 	return m_harmonicType;
 }
 
-void CHarmonic::SetHarmonicType(CHarmonicType type)
+void CHarmonic::SetHarmonicType(HarmonicType type)
 {
 	if (m_harmonicType != type)
 	{

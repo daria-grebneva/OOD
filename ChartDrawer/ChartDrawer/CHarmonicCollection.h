@@ -9,15 +9,15 @@ public:
 	~CHarmonicCollection(){};
 
 	double CalculateValue(double x) const override final;
-	sig::connection DoOnSolutionChange(const HarmonicChangeSignal::slot_type& handler) override final;
+	sig::connection DoOnHarmonicChange(const HarmonicChangeSignal::slot_type& handler) override final;
 
-	IHarmonicCollectionPointer GetHarmonic(size_t index) const override final;
-	void AddHarmonic(double amplitude, double frequency, double phase, CHarmonicType type) override final;
+	IHarmonicPointer GetHarmonic(size_t index) const override final;
+	void AddHarmonic(double amplitude, double frequency, double phase, HarmonicType type) override final;
 	void DeleteHarmonic(size_t index) override final;
 
 	size_t GetHarmonicsCount() const override final;
 
 private:
-	std::vector<IHarmonicCollectionPointer> m_collection;
+	std::vector<IHarmonicPointer> m_collection;
 	HarmonicChangeSignal m_harmonicsUpdateSignal;
 };

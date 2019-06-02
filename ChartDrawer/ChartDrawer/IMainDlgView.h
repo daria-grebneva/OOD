@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CHarmonicType.h"
+#include "HarmonicType.h"
 #include "Signals.h"
 
 class IChartView;
@@ -9,7 +9,7 @@ class IMainDlgView
 {
 public:
 	typedef sig::signal<void(int value1, double value2)> HarmonicCoeffChangeSignal;
-	typedef sig::signal<void(int value1, CHarmonicType value2)> HarmonicTypeChangeSignal;
+	typedef sig::signal<void(int value1, HarmonicType value2)> HarmonicTypeChangeSignal;
 	typedef sig::signal<void()> HarmonicAddSignal;
 	typedef sig::signal<void(int value1)> HarmonicDeleteSignal;
 	typedef sig::signal<void(int value1)> HarmonicFocusListBoxChangeSignal;
@@ -20,7 +20,7 @@ public:
 	virtual IChartView& GetChartView() = 0;
 	virtual void AddHarmonicsToListBox(ListBox const& list) = 0;
 	virtual void InitDefaultHarmonic() = 0;
-	virtual void UpdateFields(double amplitude, double frequency, double phase, CHarmonicType type) = 0;
+	virtual void UpdateFields(double amplitude, double frequency, double phase, HarmonicType type) = 0;
 
 	virtual void SetHarmonicParams(double a, double b, double c) = 0;
 

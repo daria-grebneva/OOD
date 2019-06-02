@@ -3,7 +3,6 @@
 #include "CChartView.h"
 #include "IMainDlgView.h"
 
-class CEquationSolver;
 class IMainDlgController;
 
 class CMainDlg
@@ -23,7 +22,7 @@ public:
 	void SetHarmonicParams(double amplitude, double frequency, double phase) final;
 	void AddHarmonicsToListBox(ListBox const& harmonicsList) override final;
 	void InitDefaultHarmonic() override final;
-	void UpdateFields(double amplitude, double frequency, double phase, CHarmonicType type) override final;
+	void UpdateFields(double amplitude, double frequency, double phase, HarmonicType type) override final;
 	IChartView& GetChartView() final;
 	CListBox m_harmonicsList;
 	CButton m_buttonSin;

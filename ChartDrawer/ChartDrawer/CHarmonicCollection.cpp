@@ -14,17 +14,17 @@ double CHarmonicCollection::CalculateValue(double x) const
 	return sum;
 }
 
-sig::connection CHarmonicCollection::DoOnSolutionChange(const HarmonicChangeSignal::slot_type& handler)
+sig::connection CHarmonicCollection::DoOnHarmonicChange(const HarmonicChangeSignal::slot_type& handler)
 {
 	for (auto & harmonic : m_collection)
 	{
-		harmonic->DoOnSolutionChange(handler);
+		harmonic->DoOnHarmonicChange(handler);
 	}
 
 	return m_harmonicsUpdateSignal.connect(handler);
 }
 
-IHarmonicCollectionPointer CHarmonicCollection::GetHarmonic(size_t index) const
+IHarmonicPointer CHarmonicCollection::GetHarmonic(size_t index) const
 {
 	if (index >= m_collection.size())
 	{
@@ -41,7 +41,7 @@ size_t CHarmonicCollection::GetHarmonicsCount() const
 	return m_collection.size();
 }
 
-void CHarmonicCollection::AddHarmonic(double amplitude, double frequency, double phase, CHarmonicType type)
+void CHarmonicCollection::AddHarmonic(double amplitude, double frequency, double phase, HarmonicType type)
 {
 	auto harmonic = std::make_shared<CHarmonic>(amplitude, frequency, phase, type);
 	m_collection.push_back(harmonic);

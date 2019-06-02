@@ -38,9 +38,6 @@
     <ClInclude Include="IHarmonic.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="CHarmonicType.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="CHarmonicCollection.h">
       <Filter>Model</Filter>
     </ClInclude>
@@ -67,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HarmonicType.h">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

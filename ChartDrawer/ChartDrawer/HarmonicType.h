@@ -1,6 +1,6 @@
 #pragma once
 
-enum class CHarmonicType
+enum class HarmonicType
 {
 	Sin,
 	Cos,

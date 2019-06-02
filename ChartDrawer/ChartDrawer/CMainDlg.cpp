@@ -105,7 +105,7 @@ void CMainDlg::InitDefaultHarmonic()
 	m_buttonCos.SetCheck(0);
 }
 
-void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, CHarmonicType type)
+void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, HarmonicType type)
 {
 	int index = m_harmonicsList.GetCurSel();
 	if (index >= 0)
@@ -209,7 +209,7 @@ void CMainDlg::OnClickedRadioSin()
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
-			m_typeChanged(index, CHarmonicType::Sin);
+			m_typeChanged(index, HarmonicType::Sin);
 			m_harmonicsList.SetCurSel(index);
 		}
 	}
@@ -222,7 +222,7 @@ void CMainDlg::OnClickedRadioCos()
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
-			m_typeChanged(index, CHarmonicType::Cos);
+			m_typeChanged(index, HarmonicType::Cos);
 			m_harmonicsList.SetCurSel(index);
 		}
 	}

@@ -160,7 +160,7 @@
     <ClInclude Include="CChartView.h" />
     <ClInclude Include="CHarmonic.h" />
     <ClInclude Include="CHarmonicCollection.h" />
-    <ClInclude Include="CHarmonicType.h" />
+    <ClInclude Include="HarmonicType.h" />
     <ClInclude Include="CMainDlg.h" />
     <ClInclude Include="CMainDlgPresenter.h" />
     <ClInclude Include="IChartView.h" />

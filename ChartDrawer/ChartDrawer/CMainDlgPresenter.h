@@ -1,5 +1,5 @@
 #pragma once
-#include "CHarmonicType.h"
+#include "HarmonicType.h"
 
 class IHarmonicCollection;
 class IMainDlgView;
@@ -9,7 +9,7 @@ class CMainDlgPresenter
 public:
 	typedef std::vector<std::wstring> ListBox;
 
-	CMainDlgPresenter(IHarmonicCollection& solver, IMainDlgView& view);
+	CMainDlgPresenter(IHarmonicCollection& harmonicCollection, IMainDlgView& view);
 
 private:
 	void InitView();
@@ -21,7 +21,7 @@ private:
 	void SetAmplitude(int index, double value);
 	void SetFrequency(int index, double value);
 	void SetPhase(int index, double value);
-	void SetHarmonicType(int index, CHarmonicType value);
+	void SetHarmonicType(int index, HarmonicType value);
 	void Update();
 
 	IHarmonicCollection& m_collection;

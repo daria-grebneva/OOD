@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "CHarmonicType.h"
+#include "HarmonicType.h"
 #include "Signals.h"
 
 class IHarmonic
@@ -12,7 +12,7 @@ public:
 
 	typedef sig::signal<void()> HarmonicChangeSignal;
 
-	virtual sig::connection DoOnSolutionChange(const HarmonicChangeSignal::slot_type& handler) = 0;
+	virtual sig::connection DoOnHarmonicChange(const HarmonicChangeSignal::slot_type& handler) = 0;
 
 	virtual double GetAmplitude() const = 0;
 	virtual void SetAmplitude(double amplitude) = 0;
@@ -23,6 +23,6 @@ public:
 	virtual double GetPhase() const = 0;
 	virtual void SetPhase(double phase) = 0;
 
-	virtual CHarmonicType GetHarmonicType() const = 0;
-	virtual void SetHarmonicType(CHarmonicType type) = 0;	
+	virtual HarmonicType GetHarmonicType() const = 0;
+	virtual void SetHarmonicType(HarmonicType type) = 0;	
 };
