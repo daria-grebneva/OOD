@@ -61,6 +61,7 @@ void CMainDlgPresenter::AddHarmonic()
 	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)
 		->DoOnHarmonicChange(std::bind(&CMainDlgPresenter::Update, this));
 	m_view.InitDefaultHarmonic();
+	m_view.UpdateFields(1, 1, 0, HarmonicType::Sin);
 }
 
 void CMainDlgPresenter::DeleteHarmonic(int index)
@@ -72,7 +73,7 @@ void CMainDlgPresenter::SetFocusListBox(int index)
 {
 	auto harmonic = m_collection.GetHarmonic(index);
 	m_view.UpdateFields(harmonic->GetAmplitude(), harmonic->GetFrequency(), harmonic->GetPhase(), harmonic->GetHarmonicType()); //TODO:: реализовать метод, обновл€ющий пол€
-}
+} 
 
 void CMainDlgPresenter::UpdateHarmonicsList()
 {

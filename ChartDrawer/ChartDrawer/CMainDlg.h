@@ -29,6 +29,9 @@ public:
 	CButton m_buttonCos;
 	CButton m_buttonAdd;
 	CButton m_buttonDelete;
+	CEdit m_amplitude;
+	CEdit m_frequency;
+	CEdit m_phase;
 
 	sig::connection DoOnAmplitudeChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
@@ -60,10 +63,6 @@ private:
 	afx_msg void OnClickedDeleteHarmonic();
 	afx_msg void OnSetFocusListBox();
 
-	double m_frequency = 0;
-	double m_phase = 0;
-	double m_amplitude = 0;
-
 	HICON m_hIcon;
 
 	// Generated message map functions
@@ -79,6 +78,8 @@ private:
 	HarmonicDeleteSignal m_deleteHarmonic;
 	HarmonicFocusListBoxChangeSignal m_setFocusList;
 	InitSignal m_init;
+
+	double GetHarmonicCoeffValue(CEdit & coef);
 
 private:
 	CChartView m_chart;

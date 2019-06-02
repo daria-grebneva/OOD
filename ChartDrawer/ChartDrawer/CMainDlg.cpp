@@ -18,7 +18,7 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 	if (msg->message == WM_KEYDOWN && msg->wParam == VK_RETURN)
 	{
 		auto focus = GetFocus();
-		if (focus == GetDlgItem(IDC_AMPLITUDE))
+	/*	if (focus == GetDlgItem(IDC_AMPLITUDE))
 		{
 			OnChangeAmplitude();
 			return TRUE;
@@ -32,7 +32,7 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 		{
 			OnChangePhase();
 			return TRUE;
-		}
+		}*/
 	}
 	return CDialogEx::PreTranslateMessage(msg);
 }
@@ -40,14 +40,14 @@ BOOL CMainDlg::PreTranslateMessage(MSG* msg)
 void CMainDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_AMPLITUDE, m_amplitude);
+	DDX_Control(pDX, IDC_AMPLITUDE, m_amplitude);
 	DDX_Control(pDX, IDC_HARMONICS_LISTBOX, m_harmonicsList);
 	DDX_Control(pDX, IDC_RADIO_SIN, m_buttonSin);
 	DDX_Control(pDX, IDC_RADIO_COS, m_buttonCos);
 	DDX_Control(pDX, IDC_BUTTON_ADD, m_buttonAdd);
 	DDX_Control(pDX, IDC_BUTTON_DELETE, m_buttonDelete);
-	DDX_Text(pDX, IDC_FREQUENCE, m_frequency);
-	DDX_Text(pDX, IDC_PHASE, m_phase);
+	DDX_Control(pDX, IDC_FREQUENCE, m_frequency);
+	DDX_Control(pDX, IDC_PHASE, m_phase);
 }
 
 BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
@@ -58,7 +58,8 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlg::OnClickedRadioCos)
 	ON_BN_CLICKED(IDC_BUTTON_ADD, &CMainDlg::OnClickedAddHarmonic)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE, &CMainDlg::OnClickedDeleteHarmonic)
-	ON_LBN_SETFOCUS(IDC_HARMONICS_LISTBOX, &CMainDlg::OnSetFocusListBox)
+	ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &CMainDlg::OnSetFocusListBox)
+
 	//ON_COMMAND(IDD_DIALOG1, &CMainDlg::OnKillFocusAmplitude)
 	//ON_CBN_SELCHANGE(IDC_COMBO1, &CMainDlg::OnCbnSelchangeCombo1)
 	//ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMainDlg::OnTcnSelchangeTab1)
@@ -82,9 +83,9 @@ BOOL CMainDlg::OnInitDialog()
 
 void CMainDlg::SetHarmonicParams(double amplitude, double frequency, double phase)
 {
-	m_amplitude = amplitude;
-	m_frequency = frequency;
-	m_phase = phase;
+	m_amplitude.SetWindowTextW((boost::wformat(L"%1%") % amplitude).str().c_str());
+	m_frequency.SetWindowTextW((boost::wformat(L"%1%") % frequency).str().c_str());
+	m_phase.SetWindowTextW((boost::wformat(L"%1%") % phase).str().c_str());
 	if (m_hWnd)
 	{
 		UpdateData(FALSE);
@@ -110,7 +111,12 @@ void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, Ha
 	int index = m_harmonicsList.GetCurSel();
 	if (index >= 0)
 	{
-		//TODO::обновить данные гармоники
+		m_amplitude.SetWindowTextW((boost::wformat(L"%1%") % amplitude).str().c_str());
+		m_frequency.SetWindowTextW((boost::wformat(L"%1%") % frequency).str().c_str());
+		m_phase.SetWindowTextW((boost::wformat(L"%1%") % phase).str().c_str());
+
+		auto functionType = (type == HarmonicType::Sin) ? IDC_RADIO_SIN : IDC_RADIO_COS;
+		CheckRadioButton(IDC_RADIO_SIN, IDC_RADIO_COS, functionType);
 	}
 }
 
@@ -154,6 +160,13 @@ sig::connection CMainDlg::DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSi
 	return m_setFocusList.connect(handler);
 }
 
+double CMainDlg::GetHarmonicCoeffValue(CEdit & coef)
+{
+	CString val;
+	coef.GetWindowTextW(val);
+	return boost::lexical_cast<double>(val.GetBuffer());
+}
+
 void CMainDlg::OnChangeAmplitude()
 {
 	if (UpdateData())
@@ -161,8 +174,8 @@ void CMainDlg::OnChangeAmplitude()
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
-			m_amplitudeChanged(index, m_amplitude);
-			m_harmonicsList.SetCurSel(index);
+			m_amplitudeChanged(index, GetHarmonicCoeffValue(m_amplitude));
+			m_harmonicsList.SetCurSel(index); 
 		}
 	}
 }
@@ -174,7 +187,7 @@ void CMainDlg::OnChangeFrequency()
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
-			m_frequencyChanged(index, m_frequency);
+			m_frequencyChanged(index, GetHarmonicCoeffValue(m_frequency));
 			m_harmonicsList.SetCurSel(index);
 		}
 	}
@@ -187,7 +200,7 @@ void CMainDlg::OnChangePhase()
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
-			m_phaseChanged(index, m_phase);
+			m_phaseChanged(index, GetHarmonicCoeffValue(m_phase));
 			m_harmonicsList.SetCurSel(index);
 		}
 	}
@@ -242,6 +255,11 @@ void CMainDlg::OnSetFocusListBox()
 {
 	if (UpdateData())
 	{
+		int index = m_harmonicsList.GetCurSel();
+		if (index >= 0)
+		{
+			m_setFocusList(index);
+		}
 	}
 }
 
