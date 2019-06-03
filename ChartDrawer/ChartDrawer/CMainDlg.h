@@ -19,9 +19,10 @@ public:
 
 	void SetHarmonicParams(double amplitude, double frequency, double phase) final;
 	void AddHarmonicsToListBox(ListBox const& harmonicsList) override final;
-	void AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const & table) override final;
+	void AddHarmonicsToTableBox(std::vector<std::pair<double, double>> const& table) override final;
 	void InitDefaultHarmonic() override final;
 	void UpdateFields(double amplitude, double frequency, double phase, HarmonicType type) override final;
+	void UpdateAddingInfo() override final;
 	IChartView& GetChartView() final;
 	CListBox m_harmonicsList;
 	CListBox m_tableX;
@@ -47,6 +48,7 @@ public:
 	sig::connection DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler) final;
 	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
 	sig::connection DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler) final;
+	sig::connection DoOnAddHarmonicSolution(const HarmonicAddSolutionSignal::slot_type& handler) final;
 
 protected:
 	BOOL PreTranslateMessage(MSG* msg) override;
@@ -81,15 +83,17 @@ private:
 	HarmonicCoeffChangeSignal m_phaseChanged;
 	HarmonicTypeChangeSignal m_typeChanged;
 	HarmonicAddSignal m_addHarmonic;
+	HarmonicAddSolutionSignal m_addHarmonicSolution;
 	HarmonicDeleteSignal m_deleteHarmonic;
 	HarmonicFocusListBoxChangeSignal m_setFocusList;
 	InitSignal m_init;
 
-	double GetHarmonicCoeffValue(CEdit & coef);
+	double GetHarmonicCoeffValue(CEdit& coef);
 
 private:
 	CChartView m_chart;
+
 public:
-	afx_msg void OnTcnSelchangeTabs(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTcnSelchangeTabs(NMHDR* pNMHDR, LRESULT* pResult);
 	//afx_msg void OnStnClickedChart();
 };

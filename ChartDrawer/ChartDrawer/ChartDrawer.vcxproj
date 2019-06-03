@@ -169,6 +169,7 @@
     <ClInclude Include="IChartView.h" />
     <ClInclude Include="IHarmonic.h" />
     <ClInclude Include="IHarmonicCollection.h" />
+    <ClInclude Include="IMainDlgPresenter.h" />
     <ClInclude Include="IMainDlgView.h" />
     <ClInclude Include="MVPApp.h" />
     <ClInclude Include="resource.h" />
