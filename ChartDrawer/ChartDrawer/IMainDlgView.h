@@ -33,10 +33,10 @@ public:
 	virtual sig::connection DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler) = 0;
 	virtual sig::connection DoOnPhaseChange(const HarmonicCoeffChangeSignal::slot_type& handler) = 0;
 	virtual sig::connection DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal::slot_type& handler) = 0;
-	virtual sig::connection DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler) = 0;
+	virtual sig::connection DoOnAddHarmonicButtonClicked(const HarmonicAddSignal::slot_type& handler) = 0;
 	virtual sig::connection DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler) = 0;
 	virtual sig::connection DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler) = 0;
-	virtual sig::connection DoOnAddHarmonicSolution(const HarmonicAddSolutionSignal::slot_type& handler) = 0;
+	virtual sig::connection DoOnAddHarmonic(const HarmonicAddSolutionSignal::slot_type& handler) = 0;
 
 	virtual ~IMainDlgView() = default;
 };

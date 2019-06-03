@@ -8,8 +8,6 @@ class IMainDlgView;
 class CAddHarmonicDlgPresenter
 {
 public:
-	//typedef std::vector<std::wstring> ListBox;
-
 	CAddHarmonicDlgPresenter(IHarmonicCollection& harmonicCollection, IAddHarmonicView& view, IMainDlgView& mainView);
 
 private:
@@ -24,16 +22,11 @@ private:
 	Harmonic m_harmonic;
 
 	void InitView();
-	/*void UpdateHarmonicsList();
-	void UpdateChart();*/
 	void AddHarmonic();
-	/*void DeleteHarmonic(int index);
-	void SetFocusListBox(int index);*/
 	void SetAmplitude(double value);
 	void SetFrequency(double value);
 	void SetPhase(double value);
 	void SetHarmonicType(HarmonicType value);
-	void Update();
 
 	IAddHarmonicView& m_view;
 	IHarmonicCollection& m_collection;

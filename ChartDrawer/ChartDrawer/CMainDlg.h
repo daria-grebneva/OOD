@@ -37,18 +37,16 @@ public:
 	CTabCtrl m_tabs;
 	CEdit m_x;
 	CEdit m_y;
-	//CDialog m_tabChart;
-	//CDialog m_tabTable;
 
 	sig::connection DoOnAmplitudeChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnFrequencyChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnPhaseChange(const HarmonicCoeffChangeSignal::slot_type& handler) final;
 	sig::connection DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal::slot_type& handler) final;
-	sig::connection DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler) final;
+	sig::connection DoOnAddHarmonicButtonClicked(const HarmonicAddSignal::slot_type& handler) final;
 	sig::connection DoOnDeleteHarmonic(const HarmonicDeleteSignal::slot_type& handler) final;
 	sig::connection DoOnInit(const InitSignal::slot_type& handler) final;
 	sig::connection DoOnSetFocusListBox(const HarmonicFocusListBoxChangeSignal::slot_type& handler) final;
-	sig::connection DoOnAddHarmonicSolution(const HarmonicAddSolutionSignal::slot_type& handler) final;
+	sig::connection DoOnAddHarmonic(const HarmonicAddSolutionSignal::slot_type& handler) final;
 
 protected:
 	BOOL PreTranslateMessage(MSG* msg) override;
@@ -59,6 +57,7 @@ private:
 	void OnChangeAmplitude();
 	void OnChangeFrequency();
 	void OnChangePhase();
+	void SetEnable(bool enable);
 
 	void OnOK() final;
 
@@ -70,6 +69,7 @@ private:
 	afx_msg void OnClickedAddHarmonic();
 	afx_msg void OnClickedDeleteHarmonic();
 	afx_msg void OnSetFocusListBox();
+	afx_msg void OnKillFocusListBox();
 
 	HICON m_hIcon;
 
@@ -95,5 +95,4 @@ private:
 
 public:
 	afx_msg void OnTcnSelchangeTabs(NMHDR* pNMHDR, LRESULT* pResult);
-	//afx_msg void OnStnClickedChart();
 };

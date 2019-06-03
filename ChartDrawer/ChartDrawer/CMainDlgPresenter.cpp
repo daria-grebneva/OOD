@@ -15,8 +15,8 @@ CMainDlgPresenter::CMainDlgPresenter(IHarmonicCollection& harmonicCollection, IM
 	m_view.DoOnFrequencyChange(std::bind(&CMainDlgPresenter::SetFrequency, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnPhaseChange(std::bind(&CMainDlgPresenter::SetPhase, this, std::placeholders::_1, std::placeholders::_2));
 	m_view.DoOnHarmonicTypeChange(std::bind(&CMainDlgPresenter::SetHarmonicType, this, std::placeholders::_1, std::placeholders::_2));
+	m_view.DoOnAddHarmonicButtonClicked(std::bind(&CMainDlgPresenter::AddHarmonicButtonClicked, this));
 	m_view.DoOnAddHarmonic(std::bind(&CMainDlgPresenter::AddHarmonic, this));
-	m_view.DoOnAddHarmonicSolution(std::bind(&CMainDlgPresenter::AddHarmonicSolution, this));
 	m_view.DoOnDeleteHarmonic(std::bind(&CMainDlgPresenter::DeleteHarmonic, this, std::placeholders::_1));
 	m_view.DoOnSetFocusListBox(std::bind(&CMainDlgPresenter::SetFocusListBox, this, std::placeholders::_1));
 	m_view.DoOnInit(std::bind(&CMainDlgPresenter::InitView, this));
@@ -58,15 +58,9 @@ void CMainDlgPresenter::InitView()
 void CMainDlgPresenter::Update()
 {
 	UpdateHarmonicsList();
-	UpdateTable(); // TODO::update table
+	UpdateTable();
 	UpdateChart();
 }
-
-//void CMainDlgPresenter::UpdateAddingInfo()
-//{
-//
-//	std::cout << "Notify";
-//}
 
 void CMainDlgPresenter::UpdateTable()
 {
@@ -78,21 +72,13 @@ void CMainDlgPresenter::UpdateTable()
 	m_view.AddHarmonicsToTableBox(harmonicsList);
 }
 
-void CMainDlgPresenter::AddHarmonic()
+void CMainDlgPresenter::AddHarmonicButtonClicked()
 {
-
-	/*m_collection.AddHarmonic(1, 1, 0, HarmonicType::Sin);
-	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)
-		->DoOnHarmonicChange(std::bind(&CMainDlgPresenter::Update, this));
-	m_view.InitDefaultHarmonic();
-	m_view.UpdateFields(1, 1, 0, HarmonicType::Sin);*/
-
-	//TODO:: вызывает презентер, который вызывает вьюшку при инициализации
 	CAddHarmonicView m_addView;
 	auto addHarmonicDlg = new CAddHarmonicDlgPresenter(m_collection, m_addView, m_view);
 	m_addView.DoModal();
 }
-void CMainDlgPresenter::AddHarmonicSolution()
+void CMainDlgPresenter::AddHarmonic()
 {
 	auto count = m_collection.GetHarmonicsCount();
 	m_collection.GetHarmonic(m_collection.GetHarmonicsCount() - 1)

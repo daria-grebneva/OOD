@@ -3,7 +3,6 @@
 #include "SelectedViewType.h"
 #include "afxdialogex.h"
 #include "resource.h"
-//#include "resource1.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -64,14 +63,9 @@ BEGIN_MESSAGE_MAP(CMainDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO_SIN, &CMainDlg::OnClickedRadioSin)
 	ON_BN_CLICKED(IDC_RADIO_COS, &CMainDlg::OnClickedRadioCos)
 	ON_BN_CLICKED(IDC_BUTTON_ADD, &CMainDlg::OnClickedAddHarmonic)
-	ON_BN_CLICKED(IDC_BUTTON_DELETE, &CMainDlg::OnClickedDeleteHarmonic, &CMainDlg::OnSetFocusListBox)
+	ON_BN_CLICKED(IDC_BUTTON_DELETE, &CMainDlg::OnClickedDeleteHarmonic)
 	ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &CMainDlg::OnSetFocusListBox)
-
-	//ON_COMMAND(IDD_DIALOG1, &CMainDlg::OnKillFocusAmplitude)
-	//ON_CBN_SELCHANGE(IDC_COMBO1, &CMainDlg::OnCbnSelchangeCombo1)
-	//ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMainDlg::OnTcnSelchangeTab1)
-	//ON_CBN_SELCHANGE(IDC_COMBO3, &CMainDlg::OnCbnSelchangeCombo3)
-	//ON_LBN_SELCHANGE(IDC_HARMONICS_LISTBOX, &CMainDlg::OnLbnSelchangeHarmonicsListbox)
+	ON_LBN_KILLFOCUS(IDC_HARMONICS_LISTBOX, &CMainDlg::OnKillFocusListBox)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TABS, &CMainDlg::OnTcnSelchangeTabs)
 END_MESSAGE_MAP()
 
@@ -132,12 +126,7 @@ void CMainDlg::InitDefaultHarmonic()
 	m_harmonicsList.SetCurSel(num);
 	m_buttonSin.SetCheck(1);
 	m_buttonCos.SetCheck(0);
-	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
-	GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
-	GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
-	GetDlgItem(IDC_PHASE)->EnableWindow(true);
-	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
-	GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
+	SetEnable(true);
 }
 
 void CMainDlg::UpdateFields(double amplitude, double frequency, double phase, HarmonicType type)
@@ -179,12 +168,12 @@ sig::connection CMainDlg::DoOnHarmonicTypeChange(const HarmonicTypeChangeSignal:
 	return m_typeChanged.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnAddHarmonic(const HarmonicAddSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnAddHarmonicButtonClicked(const HarmonicAddSignal::slot_type& handler)
 {
 	return m_addHarmonic.connect(handler);
 }
 
-sig::connection CMainDlg::DoOnAddHarmonicSolution(const HarmonicAddSolutionSignal::slot_type& handler)
+sig::connection CMainDlg::DoOnAddHarmonic(const HarmonicAddSolutionSignal::slot_type& handler)
 {
 	return m_addHarmonicSolution.connect(handler);
 }
@@ -249,6 +238,16 @@ void CMainDlg::OnOK()
 {
 }
 
+void CMainDlg::SetEnable(bool enable)
+{
+	GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(enable);
+	GetDlgItem(IDC_AMPLITUDE)->EnableWindow(enable);
+	GetDlgItem(IDC_FREQUENCE)->EnableWindow(enable);
+	GetDlgItem(IDC_PHASE)->EnableWindow(enable);
+	GetDlgItem(IDC_RADIO_SIN)->EnableWindow(enable);
+	GetDlgItem(IDC_RADIO_COS)->EnableWindow(enable);
+}
+
 void CMainDlg::OnKillfocusAmplitude()
 {
 	OnChangeAmplitude();
@@ -284,6 +283,7 @@ void CMainDlg::OnClickedAddHarmonic()
 {
 	if (UpdateData())
 	{
+		SetEnable(false);
 		m_addHarmonic();
 	}
 }
@@ -292,11 +292,24 @@ void CMainDlg::OnSetFocusListBox()
 {
 	if (UpdateData())
 	{
+		GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
+		GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
+		GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
+		GetDlgItem(IDC_PHASE)->EnableWindow(true);
+		GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
+		GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
 			m_setFocusList(index);
 		}
+	}
+}
+
+void CMainDlg::OnKillFocusListBox()
+{
+	if (UpdateData())
+	{
 	}
 }
 
@@ -310,12 +323,7 @@ void CMainDlg::OnClickedDeleteHarmonic()
 			m_deleteHarmonic(index);
 			if (m_harmonicsList.GetCount() == 0)
 			{
-				GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(false);
-				GetDlgItem(IDC_AMPLITUDE)->EnableWindow(false);
-				GetDlgItem(IDC_FREQUENCE)->EnableWindow(false);
-				GetDlgItem(IDC_PHASE)->EnableWindow(false);
-				GetDlgItem(IDC_RADIO_SIN)->EnableWindow(false);
-				GetDlgItem(IDC_RADIO_COS)->EnableWindow(false);
+				SetEnable(false);
 			}
 			else
 			{
@@ -343,12 +351,7 @@ void CMainDlg::UpdateAddingInfo()
 		m_addHarmonicSolution();
 		int index = m_harmonicsList.GetCount() - 1;
 		m_harmonicsList.SetCurSel(index);
-		GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
-		GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
-		GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
-		GetDlgItem(IDC_PHASE)->EnableWindow(true);
-		GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
-		GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
+		SetEnable(true);
 	}
 }
 

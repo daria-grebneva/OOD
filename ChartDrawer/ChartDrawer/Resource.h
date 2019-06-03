@@ -4,8 +4,6 @@
 //
 #define IDD_DIALOG1                     101
 #define IDI_ICON1                       103
-#define IDD_TAB_CHART                   105
-#define IDD_TAB_TABLE                   106
 #define IDC_TABS                        1003
 #define IDC_AMPLITUDE                   1004
 #define IDC_PHASE                       1005

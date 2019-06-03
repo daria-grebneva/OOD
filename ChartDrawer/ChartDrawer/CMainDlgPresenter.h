@@ -1,24 +1,22 @@
 #pragma once
 #include "HarmonicType.h"
-#include "IMainDlgPresenter.h"
 
 class IHarmonicCollection;
 class IMainDlgView;
 
-class CMainDlgPresenter : public IMainDlgPresenter
+class CMainDlgPresenter
 {
 public:
 	typedef std::vector<std::wstring> ListBox;
 
 	CMainDlgPresenter(IHarmonicCollection& harmonicCollection, IMainDlgView& view);
-	//void UpdateAddingInfo() override final;
 
 private:
 	void InitView();
 	void UpdateHarmonicsList();
 	void UpdateChart();
+	void AddHarmonicButtonClicked();
 	void AddHarmonic();
-	void AddHarmonicSolution();
 	void DeleteHarmonic(int index);
 	void SetFocusListBox(int index);
 	void SetAmplitude(int index, double value);
