@@ -99,8 +99,8 @@ void CMainDlg::AddHarmonicsToTableBox(std::vector<std::pair<double, double>> con
 	m_tableY.ResetContent();
 	for (auto& str : table)
 	{
-		m_tableX.AddString(std::to_wstring(str.first).c_str());
-		m_tableY.AddString(std::to_wstring(str.second).c_str());
+		m_tableX.AddString((boost::wformat(L"%1%") % str.first).str().c_str());
+		m_tableY.AddString((boost::wformat(L"%1%") % str.second).str().c_str());
 	}
 }
 
@@ -283,8 +283,9 @@ void CMainDlg::OnClickedAddHarmonic()
 {
 	if (UpdateData())
 	{
-		SetEnable(false);
 		m_addHarmonic();
+		m_harmonicsList.SetCurSel(-1);
+		SetEnable(false);
 	}
 }
 
@@ -292,12 +293,7 @@ void CMainDlg::OnSetFocusListBox()
 {
 	if (UpdateData())
 	{
-		GetDlgItem(IDC_BUTTON_DELETE)->EnableWindow(true);
-		GetDlgItem(IDC_AMPLITUDE)->EnableWindow(true);
-		GetDlgItem(IDC_FREQUENCE)->EnableWindow(true);
-		GetDlgItem(IDC_PHASE)->EnableWindow(true);
-		GetDlgItem(IDC_RADIO_SIN)->EnableWindow(true);
-		GetDlgItem(IDC_RADIO_COS)->EnableWindow(true);
+		SetEnable(true);
 		int index = m_harmonicsList.GetCurSel();
 		if (index >= 0)
 		{
@@ -327,8 +323,8 @@ void CMainDlg::OnClickedDeleteHarmonic()
 			}
 			else
 			{
-				int position = (index == 0) ? 0 : (index - 1);
-				m_harmonicsList.SetCurSel(position);
+				m_harmonicsList.SetCurSel(-1);
+				SetEnable(false);
 			}
 		}
 	}
