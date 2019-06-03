@@ -250,7 +250,14 @@ void CMainDlg::SetEnable(bool enable)
 
 void CMainDlg::OnKillfocusAmplitude()
 {
-	OnChangeAmplitude();
+	try
+	{
+		OnChangeAmplitude();
+	}
+	catch (std::exception& e)
+	{
+		MessageBox(L"Entered wrong data");
+	}
 }
 
 void CMainDlg::OnClickedRadioSin()
@@ -304,9 +311,6 @@ void CMainDlg::OnSetFocusListBox()
 
 void CMainDlg::OnKillFocusListBox()
 {
-	if (UpdateData())
-	{
-	}
 }
 
 void CMainDlg::OnClickedDeleteHarmonic()
@@ -332,12 +336,26 @@ void CMainDlg::OnClickedDeleteHarmonic()
 
 void CMainDlg::OnKillfocusFrequency()
 {
-	OnChangeFrequency();
+	try
+	{
+		OnChangeFrequency();
+	}
+	catch (std::exception& e)
+	{
+		MessageBox(L"Entered wrong data");
+	}
 }
 
 void CMainDlg::OnKillfocusPhase()
 {
-	OnChangePhase();
+	try
+	{
+		OnChangePhase();
+	}
+	catch (std::exception& e)
+	{
+		MessageBox(L"Entered wrong data");
+	}
 }
 
 void CMainDlg::UpdateAddingInfo()
